@@ -1,0 +1,15 @@
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\bin\Debug\net7.0\SistemaParaDesktop.exe
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\bin\Debug\net7.0\SistemaParaDesktop.deps.json
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\bin\Debug\net7.0\SistemaParaDesktop.runtimeconfig.json
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\bin\Debug\net7.0\SistemaParaDesktop.dll
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\bin\Debug\net7.0\SistemaParaDesktop.pdb
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\obj\Debug\net7.0\SistemaParaDesktop.csproj.AssemblyReference.cache
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\obj\Debug\net7.0\SistemaParaDesktop.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\obj\Debug\net7.0\SistemaParaDesktop.AssemblyInfoInputs.cache
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\obj\Debug\net7.0\SistemaParaDesktop.AssemblyInfo.cs
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\obj\Debug\net7.0\SistemaParaDesktop.csproj.CoreCompileInputs.cache
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\obj\Debug\net7.0\SistemaParaDesktop.dll
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\obj\Debug\net7.0\refint\SistemaParaDesktop.dll
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\obj\Debug\net7.0\SistemaParaDesktop.pdb
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\obj\Debug\net7.0\SistemaParaDesktop.genruntimeconfig.cache
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\SistemaParaDesktop\obj\Debug\net7.0\ref\SistemaParaDesktop.dll
