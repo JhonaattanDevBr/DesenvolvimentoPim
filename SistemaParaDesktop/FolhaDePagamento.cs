@@ -69,5 +69,29 @@ namespace SistemaParaDesktop
                 return ValorPassagem;
             }
         }
+
+        public double CalcularValeAlimentacao()
+        {
+            int DiasUteis;
+            double Percentual, ValorDoVale, DescontoDoVale;
+
+            Console.WriteLine("---Vale Refeição/Alimentação---");
+            Console.WriteLine();
+            Console.Write("-Informe o valor do vale refeição diario: R$ ");
+            ValorDoVale = double.Parse(Console.ReadLine());
+            Console.Write("-Informe a quantidade de dias uteis do mês: ");
+            DiasUteis = int.Parse(Console.ReadLine());
+            Console.Write("-Informe o percentual de desconto do vale: ");
+            Percentual = double.Parse(Console.ReadLine());
+            DescontoDoVale = ValorDoVale * (double) DiasUteis * (Percentual / 100);
+            Console.WriteLine();
+            Console.WriteLine("-----------------------------------------------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine($"-Valor a se descontado de vale refeição/alimentação: R$ {DescontoDoVale:f2}");
+            Console.ReadKey();
+                    
+            return DescontoDoVale;
+            
+        }
     }
 }
