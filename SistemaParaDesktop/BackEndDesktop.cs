@@ -12,7 +12,7 @@ namespace SistemaParaDesktop
         {
             FolhaDePagamento ObjetofolhaDePagamento = new FolhaDePagamento();
 
-            
+            /*
             Console.WriteLine("---Calculando o Vale Transporte--");
             Console.WriteLine();
             Console.WriteLine();
@@ -26,7 +26,11 @@ namespace SistemaParaDesktop
             Console.WriteLine();
             ObjetofolhaDePagamento.CalcularValeAlimentacao();
             Console.WriteLine("-Dígite qualquer tecla para continuar.");
-            Console.ReadKey();
+            Console.ReadKey();*/
+            Console.WriteLine("---Calculando o INSS---");
+            Console.WriteLine();
+            Console.WriteLine();
+            ObjetofolhaDePagamento.CalcularInss();
         }
     }
 }

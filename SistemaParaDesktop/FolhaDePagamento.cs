@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace SistemaParaDesktop
 {
@@ -92,6 +93,68 @@ namespace SistemaParaDesktop
                     
             return DescontoDoVale;
             
+        }
+
+        public double CalcularInss()
+        {
+            double Proventos, SalarioBase, PercentualInss, DescontoInss = 0;
+            double Parcela1 = 0;
+            double Parcela2 = 19.53;
+            double Parcela3 = 96.00;
+            double Parcela4 = 173.81;
+            double Parcela5 = 877.24;
+            // O sistema estava retornando o valor errado pois havia esquecido de dizer que o percentual era um número double. Sonso.
+
+            Console.WriteLine("---Calculo do INSS---");
+            Console.WriteLine();
+            Console.Write("- Informe o valor sobre o qual será gerado o desconto de INSS: R$ ");
+            Proventos = double.Parse(Console.ReadLine());
+            Console.WriteLine("--------------------------------------------------------");
+
+            if (Proventos <= 1302.00) {
+                Console.WriteLine("---Desconto feito com base na aliquota de 7,5%---");
+                Console.WriteLine();
+                PercentualInss = 7.5 / 100;
+                DescontoInss = (Proventos * PercentualInss) - Parcela1;
+                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoInss:f2}");
+                Console.ReadKey();
+            }
+
+            else if (Proventos <= 2571.29) {
+                Console.WriteLine("---Desconto feito com base na aliquota de 9%---");
+                Console.WriteLine();
+                PercentualInss = 9.0 / 100;
+                DescontoInss = (Proventos * PercentualInss) - Parcela2;
+                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoInss:f2}");
+                Console.ReadKey();
+            }
+
+            else if (Proventos <= 3856.94) {
+                Console.WriteLine("---Desconto feito com base na aliquota de 12%---");
+                Console.WriteLine();
+                PercentualInss = 12.0 / 100;
+                DescontoInss = (Proventos * PercentualInss) - Parcela3;
+                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoInss:f2}");
+                Console.ReadKey();
+            }
+
+            else if (Proventos <= 7507.49) {
+                Console.WriteLine("---Desconto feito com base na aliquota de 14%---");
+                Console.WriteLine();
+                PercentualInss = 14.0 / 100;
+                DescontoInss = (Proventos * PercentualInss) - Parcela4;
+                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoInss:f2}");
+                Console.ReadKey();
+            }
+
+            else {
+                Console.WriteLine("---Valores acima de 7.507.49 R$ possuem um desconto fixo de 877.24 R$---");
+                Console.WriteLine();
+                DescontoInss = Proventos - Parcela5;
+                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoInss:f2}");
+                Console.ReadKey();
+            }
+            return DescontoInss;
         }
     }
 }
