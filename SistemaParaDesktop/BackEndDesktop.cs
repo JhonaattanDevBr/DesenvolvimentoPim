@@ -29,8 +29,16 @@ namespace SistemaParaDesktop
             Console.ReadKey();*/
             Console.WriteLine("---Calculando o INSS---");
             Console.WriteLine();
-            Console.WriteLine();
             ObjetofolhaDePagamento.CalcularInss();
+            Console.WriteLine();
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine();
+
+            Console.WriteLine("---Calculando o IR---");
+            Console.WriteLine();
+            ObjetofolhaDePagamento.CalcularIr();
+            Console.WriteLine();
+            Console.WriteLine("-------------------------------------------");
         }
     }
 }

@@ -14,6 +14,7 @@ namespace SistemaParaDesktop
         private double _desconto { get; set; }
         private string _quantidadeHoras { get; set; }
         private double _resultado { get; set; }
+        private double _DescontoInss { get; set; }
 
         public double CalcularValeTransporte()
         {
@@ -115,8 +116,8 @@ namespace SistemaParaDesktop
                 Console.WriteLine("---Desconto feito com base na aliquota de 7,5%---");
                 Console.WriteLine();
                 PercentualInss = 7.5 / 100;
-                DescontoInss = (Proventos * PercentualInss) - Parcela1;
-                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoInss:f2}");
+                _DescontoInss = (Proventos * PercentualInss) - Parcela1;
+                Console.Write($"- Valor de Desconto do INSS: R$ {_DescontoInss:f2}");
                 Console.ReadKey();
             }
 
@@ -124,8 +125,8 @@ namespace SistemaParaDesktop
                 Console.WriteLine("---Desconto feito com base na aliquota de 9%---");
                 Console.WriteLine();
                 PercentualInss = 9.0 / 100;
-                DescontoInss = (Proventos * PercentualInss) - Parcela2;
-                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoInss:f2}");
+                _DescontoInss = (Proventos * PercentualInss) - Parcela2;
+                Console.Write($"- Valor de Desconto do INSS: R$ {_DescontoInss:f2}");
                 Console.ReadKey();
             }
 
@@ -133,8 +134,8 @@ namespace SistemaParaDesktop
                 Console.WriteLine("---Desconto feito com base na aliquota de 12%---");
                 Console.WriteLine();
                 PercentualInss = 12.0 / 100;
-                DescontoInss = (Proventos * PercentualInss) - Parcela3;
-                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoInss:f2}");
+                _DescontoInss = (Proventos * PercentualInss) - Parcela3;
+                Console.Write($"- Valor de Desconto do INSS: R$ {_DescontoInss:f2}");
                 Console.ReadKey();
             }
 
@@ -142,19 +143,93 @@ namespace SistemaParaDesktop
                 Console.WriteLine("---Desconto feito com base na aliquota de 14%---");
                 Console.WriteLine();
                 PercentualInss = 14.0 / 100;
-                DescontoInss = (Proventos * PercentualInss) - Parcela4;
-                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoInss:f2}");
+                _DescontoInss = (Proventos * PercentualInss) - Parcela4;
+                Console.Write($"- Valor de Desconto do INSS: R$ {_DescontoInss:f2}");
                 Console.ReadKey();
             }
 
             else {
                 Console.WriteLine("---Valores acima de 7.507.49 R$ possuem um desconto fixo de 877.24 R$---");
                 Console.WriteLine();
-                DescontoInss = Proventos - Parcela5;
-                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoInss:f2}");
+                _DescontoInss = Proventos - Parcela5;
+                Console.Write($"- Valor de Desconto do INSS: R$ {_DescontoInss:f2}");
                 Console.ReadKey();
             }
-            return DescontoInss;
+            return _DescontoInss;
+        }
+
+        public double CalcularIr()
+        {
+            double SalarioBruto, BaseIr, Inss, Pensao = 0, Dependente = 0, Percentual, DescontoIr = 0;
+            double Parcela2 = 142.80;
+            double Parcela3 = 354.80;
+            double Parcela4 = 636.13;
+            double Parcela5 = 869.69;
+
+            Console.WriteLine("---Calculo do IR---");
+            Console.WriteLine();
+            /* A formula para calcular o IR é: Proventos (entradas) - INSS - Pensão - Dependentes. O valor obtido desse calculo vai ser atribuido a porcentagem de acordo
+             com a tabela de desconto do IR.
+            O valor por dependentes é de R$ 189,59 */
+
+            Console.Write("- Informe o salário bruto do funcionário: R$ ");
+            SalarioBruto = double.Parse(Console.ReadLine());
+            Inss = _DescontoInss;
+           // Pensao = this.CalcularPensao(); Ainda irei incluir este método.
+           // Dependente = this.CalcularDependencia(); Ainda irei incluir este método.
+            BaseIr = SalarioBruto - Inss - Pensao - Dependente;
+            Console.WriteLine();
+
+            if ( BaseIr <= 1903.98)
+            {
+                Console.WriteLine($"- Base de cálculo para IR de: R$ {BaseIr:f2}");
+                Console.WriteLine("- Desconto feito com base na aliquota de: 0,00%.");
+                Console.WriteLine();
+                Console.WriteLine("- Isento do desconto de IR, parcela a deduzir: R$ 0,00.");
+                Console.ReadKey();
+            }
+            else if(BaseIr <= 2826.65)
+            {
+                Console.WriteLine($"- Base de cálculo para IR de: R$ {BaseIr:f2}");
+                Console.WriteLine("- Desconto feito com base na aliquota de: 7,50%.");
+                Console.WriteLine();
+                Percentual = 7.50 / 100;
+                DescontoIr = (BaseIr * Percentual) - Parcela2;
+                Console.Write($"- Valor de Desconto do IR: R$ {DescontoIr:f2}");
+                Console.ReadKey();
+            }
+            else if (BaseIr <= 3751.05)
+            {
+                Console.WriteLine($"- Base de cálculo para IR de: R$ {BaseIr:f2}");
+                Console.WriteLine("- Desconto feito com base na aliquota de: 15,00%.");
+                Console.WriteLine();
+                Percentual = 15.00 / 100;
+                DescontoIr = (BaseIr * Percentual) - Parcela3;
+                Console.Write($"- Valor de Desconto do IR: R$ {DescontoIr:f2}");
+                Console.ReadKey();
+            }
+            else if( BaseIr <= 4664.68)
+            {
+                Console.WriteLine($"- Base de cálculo para IR de: R$ {BaseIr:f2}");
+                Console.WriteLine("- Desconto feito com base na aliquota de: 22,50%.");
+                Console.WriteLine();
+                Percentual = 22.50 / 100;
+                DescontoIr = (BaseIr * Percentual) - Parcela4;
+                Console.Write($"- Valor de Desconto do IR: R$ {DescontoIr:f2}");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine($"- Base de cálculo para IR de: R$ {BaseIr:f2}");
+                Console.WriteLine("- Base de cálculo de IR maior que 4.664,687 o desconto feito com base na aliquota de: 27,50%.");
+                Console.WriteLine();
+                Percentual = 27.50 / 100;
+                DescontoIr = (BaseIr * Percentual) - Parcela5;
+                Console.Write($"- Valor de Desconto do IR: R$ {DescontoIr:f2}");
+                Console.ReadKey();
+            }
+            return DescontoIr;
+            
         }
     }
 }
