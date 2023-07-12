@@ -247,5 +247,32 @@ namespace SistemaParaDesktop
 
             return AdiantamentoQuinzenal;
         }
+
+        public double CalcularHoraExtra()
+        {
+            double ValorHora, Porcentagem = 0.5, ValorHoraExtra, Hora, ValorTotalHoraExtra = 0;
+            //double HoraMes; - Vou utilizar esta forma quando tiver os métodos todos feitos.
+            //double PorcentagemVariavel; vai ser utilizado mais a frente para as Org decidirem qual a porcentagem de Hora Extra deve ser somada.
+            //double PorcentagemDeCemPorCento = 1; 
+
+            Console.Write("- Informe seu salario bruto: R$ ");
+            _salarioBruto = double.Parse(Console.ReadLine());
+            //Console.Write("- Informe  quantidade de horas trabalhadas ao mes: "); - Vou utilizar esta forma quando tiver os métodos todos feitos.
+            
+            ValorHora = _salarioBruto / 220;
+            ValorHoraExtra = ValorHora + (ValorHora * Porcentagem);
+
+            Console.Write("- Informe a quantidade de horas feita de extra: ");
+            Hora = double.Parse(Console.ReadLine());
+            ValorTotalHoraExtra = Hora * ValorHoraExtra;
+            Console.WriteLine();
+
+            Console.WriteLine($"- Valor da hora: R${ValorHora:f2}");
+            Console.WriteLine($"- Valor da hora extra: R${ValorHoraExtra:f2}");
+            Console.WriteLine($"- Valor total hora extra: R$ {ValorTotalHoraExtra:f2}");
+
+            return ValorHoraExtra;
+            
+        }
     }
 }
