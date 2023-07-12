@@ -26,7 +26,7 @@ namespace SistemaParaDesktop
             Console.WriteLine();
             ObjetofolhaDePagamento.CalcularValeAlimentacao();
             Console.WriteLine("-Dígite qualquer tecla para continuar.");
-            Console.ReadKey();*/
+            Console.ReadKey();
             Console.WriteLine("---Calculando o INSS---");
             Console.WriteLine();
             ObjetofolhaDePagamento.CalcularInss();
@@ -38,7 +38,12 @@ namespace SistemaParaDesktop
             Console.WriteLine();
             ObjetofolhaDePagamento.CalcularIr();
             Console.WriteLine();
-            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("-------------------------------------------");*/
+
+            Console.WriteLine("--Calculando o adiantamento quinzenal--");
+            Console.WriteLine();
+            ObjetofolhaDePagamento.CalcularAdiantamentoQuinzenal();
+
         }
     }
 }

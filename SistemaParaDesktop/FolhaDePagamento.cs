@@ -15,6 +15,7 @@ namespace SistemaParaDesktop
         private string _quantidadeHoras { get; set; }
         private double _resultado { get; set; }
         private double _DescontoInss { get; set; }
+        private double AdiantamentoQuinzenal { get; set; }
 
         public double CalcularValeTransporte()
         {
@@ -230,6 +231,21 @@ namespace SistemaParaDesktop
             }
             return DescontoIr;
             
+        }
+
+        public double CalcularAdiantamentoQuinzenal()
+        {
+            Console.Write("Informe o Salario bruo: R$ ");
+            _salarioBruto = double.Parse(Console.ReadLine());
+            Console.WriteLine();
+
+            double Porcentagem = 0.4;
+
+            AdiantamentoQuinzenal = _salarioBruto * Porcentagem;
+            Console.WriteLine($"Valor do Salário bruto: R$ {_salarioBruto:f2}");
+            Console.WriteLine($"Valor do Adiantamento: R$ {AdiantamentoQuinzenal:f2}");
+
+            return AdiantamentoQuinzenal;
         }
     }
 }
