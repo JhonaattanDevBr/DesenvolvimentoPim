@@ -42,11 +42,15 @@ namespace SistemaParaDesktop
 
             Console.WriteLine("--Calculando o adiantamento quinzenal--");
             Console.WriteLine();
-            ObjetofolhaDePagamento.CalcularAdiantamentoQuinzenal();*/
+            ObjetofolhaDePagamento.CalcularAdiantamentoQuinzenal();
 
             Console.WriteLine("---Calculando hora extra---");
             Console.WriteLine();
-            ObjetofolhaDePagamento.CalcularHoraExtra();
+            ObjetofolhaDePagamento.CalcularHoraExtra();*/
+
+            Console.WriteLine("---Calculando---");
+            ObjetofolhaDePagamento.CalcularPericulosidadeEInsalubridade();
+            
         }
     }
 }
