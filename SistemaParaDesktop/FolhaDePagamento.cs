@@ -18,6 +18,9 @@ namespace SistemaParaDesktop
         private double AdiantamentoQuinzenal { get; set; }
         private double ValorTotalDePericulosidadeEInsalubridade { get; set; }
         private double ValorDoAdicionalNoturno { get; set; }
+        private double DescontoDoConvenioMedico { get; set; }
+        private double DescontoDoConvenioOdontologico { get; set; }
+        private double DescontoTotalDeDependentes { get; set; }
 
         public double CalcularValeTransporte()
         {
@@ -393,6 +396,68 @@ namespace SistemaParaDesktop
             
             Console.ReadKey();
             return ValorDoAdicionalNoturno;
+        }
+
+        public double CalcularConvenioMedico()
+        {
+            double SalarioBruto, ValorDoConvenioMedico;
+
+            Console.WriteLine("---Calcular Convenio Médico---");
+            Console.WriteLine();
+            Console.Write("- Informe o salário bruto do funcionario: R$ ");
+            SalarioBruto = double.Parse(Console.ReadLine());
+
+            //Console.WriteLine("- Selecione qual a empresa que fornece o plano de saúde: "); Só vou utilizar isso depois que ficar o BD com as empresas e seus valores.
+            Console.Write("- Informe o valor cobrado pela empresa que fornece o serviço: R$ ");
+            ValorDoConvenioMedico = double.Parse(Console.ReadLine());
+            DescontoDoConvenioMedico = SalarioBruto - ValorDoConvenioMedico;
+            Console.WriteLine();
+
+            Console.WriteLine($"- O valor do convenio médico descontado do funcionarios é de: R$ {ValorDoConvenioMedico:f2}");
+            Console.WriteLine($"- Salario alterado para: R$ {DescontoDoConvenioMedico:f2}"); // Depois não vou precisar disso então vou retirar fazer o retorno do ValorDoConvenioMedico e tornalo um atributo ao invés de uma variavel. 
+            Console.ReadKey();
+            return DescontoDoConvenioMedico;
+        }
+
+        public double CalcularConvenioOdontologico()
+        {
+            double SalarioBruto, ValorDoConvenioOdontologico;
+
+            Console.WriteLine("---Calcular Convenio Odontológico---");
+            Console.WriteLine();
+            Console.Write("- Informe o salário bruto do funcionario: R$ ");
+            SalarioBruto = double.Parse(Console.ReadLine());
+
+            //Console.WriteLine("- Selecione qual a empresa que fornece o plano odontológico: "); Só vou utilizar isso depois que ficar o BD com as empresas e seus valores.
+            Console.Write("- Informe o valor cobrado pela empresa que fornece o serviço: R$ ");
+            ValorDoConvenioOdontologico = double.Parse(Console.ReadLine());
+            DescontoDoConvenioOdontologico = SalarioBruto - ValorDoConvenioOdontologico;
+            Console.WriteLine();
+
+            Console.WriteLine($"- O valor do convenio odontológico descontado do funcionarios é de: R$ {ValorDoConvenioOdontologico:f2}");
+            Console.WriteLine($"- Salario alterado para: R$ {DescontoDoConvenioOdontologico:f2}"); // Depois não vou precisar disso então vou retirar fazer o retorno do ValorDoConvenioOdontologico e tornalo um atributo ao invés de uma variavel. 
+            Console.ReadKey();
+            return DescontoDoConvenioOdontologico;
+        }
+
+        public double CalcularDependencia()
+        {
+            double SalarioBruto;
+            double Dependente = 189.59;
+            int QuantidadeDeDependentes;
+
+            Console.WriteLine("---Calculando Dependencia---");
+            Console.WriteLine();
+
+            Console.Write("- Informe o salário bruto: R$ ");
+            SalarioBruto = double.Parse(Console.ReadLine());
+            Console.Write("- Informe a quantidade de dependentes: R$ ");
+            QuantidadeDeDependentes = int.Parse(Console.ReadLine());
+            DescontoTotalDeDependentes = (double) QuantidadeDeDependentes * Dependente;
+
+            Console.WriteLine($"- O valor total a ser descontado de dependentes é de: R$ {DescontoTotalDeDependentes:f2}");
+            Console.ReadKey();
+            return DescontoTotalDeDependentes;
         }
     }
 }

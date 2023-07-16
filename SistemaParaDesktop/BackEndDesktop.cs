@@ -49,11 +49,21 @@ namespace SistemaParaDesktop
             ObjetofolhaDePagamento.CalcularHoraExtra();
 
             Console.WriteLine("---Calculando---");
-            ObjetofolhaDePagamento.CalcularPericulosidadeEInsalubridade();*/
+            ObjetofolhaDePagamento.CalcularPericulosidadeEInsalubridade();
 
             Console.WriteLine("---Adicional Noturno---");
             ObjetofolhaDePagamento.CalcularAdicionalNoturno();
-            
+
+            Console.WriteLine("---Convenio Médico---");
+            ObjetofolhaDePagamento.CalcularConvenioMedico();
+
+            Console.WriteLine("---Convenio Odontológico---");
+            ObjetofolhaDePagamento.CalcularConvenioOdontologico()*/
+
+            Console.WriteLine("---Dependetes---");
+            ObjetofolhaDePagamento.CalcularDependencia();
+
+
         }
     }
 }
