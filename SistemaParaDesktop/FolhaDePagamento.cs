@@ -17,7 +17,7 @@ namespace SistemaParaDesktop
         private double _DescontoInss { get; set; }
         private double AdiantamentoQuinzenal { get; set; }
         private double ValorTotalDePericulosidadeEInsalubridade { get; set; }
-        //private double ValorTotalDeInsalubridade { get; set; }
+        private double ValorDoAdicionalNoturno { get; set; }
 
         public double CalcularValeTransporte()
         {
@@ -366,6 +366,33 @@ namespace SistemaParaDesktop
             return ValorTotalDePericulosidadeEInsalubridade;
 
 
+        }
+
+        public double CalcularAdicionalNoturno()
+        {
+            double SalarioBruto, ValorDaHoraNormal, ValorDoAdicionalNoturnoHora, Acrescimo;
+            int QuantidadeDeHoras;
+
+            Console.WriteLine("---Calculando Adicional Noturno---");
+            Console.WriteLine();
+
+            Console.Write("- Informe o salário bruto do funcionário: R$ ");
+            SalarioBruto = double.Parse(Console.ReadLine());
+            ValorDaHoraNormal = SalarioBruto / (double) 220;
+            Acrescimo = ValorDaHoraNormal * 0.2;
+            ValorDoAdicionalNoturnoHora = ValorDaHoraNormal + Acrescimo;
+
+            Console.Write("- Informe a quantidade de horas trabalhadas como adicional noturno: ");
+            QuantidadeDeHoras = int.Parse(Console.ReadLine());
+            ValorDoAdicionalNoturno = (double) QuantidadeDeHoras * ValorDoAdicionalNoturnoHora;
+            Console.WriteLine();
+
+            Console.WriteLine($"- O valor da hora no adicional noturno do funcionário é de: R$ {ValorDoAdicionalNoturnoHora:f2}");
+            Console.WriteLine($"- O valor total do adicional noturno do funcionario é de: R$ {ValorDoAdicionalNoturno:f2}");
+            Console.WriteLine("- Dígite qualquer coisa para continuar.");
+            
+            Console.ReadKey();
+            return ValorDoAdicionalNoturno;
         }
     }
 }

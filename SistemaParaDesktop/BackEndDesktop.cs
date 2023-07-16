@@ -46,10 +46,13 @@ namespace SistemaParaDesktop
 
             Console.WriteLine("---Calculando hora extra---");
             Console.WriteLine();
-            ObjetofolhaDePagamento.CalcularHoraExtra();*/
+            ObjetofolhaDePagamento.CalcularHoraExtra();
 
             Console.WriteLine("---Calculando---");
-            ObjetofolhaDePagamento.CalcularPericulosidadeEInsalubridade();
+            ObjetofolhaDePagamento.CalcularPericulosidadeEInsalubridade();*/
+
+            Console.WriteLine("---Adicional Noturno---");
+            ObjetofolhaDePagamento.CalcularAdicionalNoturno();
             
         }
     }
