@@ -22,6 +22,9 @@ namespace SistemaParaDesktop
         private double DescontoDoConvenioOdontologico { get; set; }
         private double DescontoTotalDeDependentes { get; set; }
         private double DescontoTotalDePensao { get; set; }
+        private double DescontoDeAtrasos { get; set; }
+        private double TotalDeHorasConvertidas { get; set; }
+        private double TotalDeAtrasos { get; set; }
 
         public double CalcularValeTransporte()
         {
@@ -512,6 +515,114 @@ namespace SistemaParaDesktop
             Console.ReadKey();
             return DescontoTotalDePensao;
 
+        }
+
+        public double CalcularAtrasos()
+        {
+            double HorasConvertidas, TotalDeAtrasoComum;
+            int Converter, TipoDeDesconto;
+
+            Console.WriteLine("---Atrasos--");
+            Console.WriteLine();
+
+            Console.WriteLine("- Se for necessario fazer a conversão de minutos em horas para as proximas formulas digite [1], caso contrario digite [2].");
+            Console.Write("- Converter...: ");
+            Converter = int.Parse(Console.ReadLine());
+
+            if(Converter == 1)
+            {
+                Console.WriteLine();
+                Console.WriteLine("---------------------------------------------------");
+                Console.WriteLine();
+                HorasConvertidas = this.ConversorDeMinutosEmHoras();
+            }
+            else{ }
+            Console.WriteLine("---------------------------------------------------");
+            Console.WriteLine();
+
+            Console.WriteLine("- Selecione qual o tipo de atraso deseja calcular.");
+            Console.WriteLine();
+            Console.WriteLine("- Para desconto de atraso comum dígite [1].");
+            Console.WriteLine("- Para desconto de falta ao trabalho dígite [2].");
+            Console.WriteLine("- Para desconto de falta ao trabalho com DSR dígite [3]");
+            Console.WriteLine("- Para sair dígite [4]");
+            Console.Write("- Tipo de desconto...: ");
+            TipoDeDesconto = int.Parse(Console.ReadLine());
+            Console.Clear();
+
+
+            switch (TipoDeDesconto)
+            {
+                case 1:
+                    Console.WriteLine("---Atraso Comum---");
+                    Console.WriteLine();
+                    TotalDeAtrasos = this.AtrasoComum();
+                    Console.ReadKey();
+                    break;
+
+                case 2:
+                    Console.WriteLine("---Falta ao Trabalho---");
+                    Console.WriteLine();
+                    break;
+
+                case 3:
+                    Console.WriteLine("---Falta ao Tabalho com DSR---");
+                    Console.WriteLine();
+                    break;
+
+                case 4:
+                    Console.WriteLine("---Saindo---");
+                    break;
+
+                default:
+                    break;
+            }
+            return TotalDeAtrasos;
+
+
+        }
+
+        private double ConversorDeMinutosEmHoras()
+        {
+            int QuantidadeDehorasFechadas, QuantidadeDeMinutos;
+            double TotalDeMinutos;
+            //double QuantidadeDehoras;
+
+            Console.WriteLine("---Conversor de Horas Para Minutos---");
+            Console.WriteLine();
+
+            Console.Write("- Informe a quantidade de horas fechadas: ");
+            QuantidadeDehorasFechadas = int.Parse(Console.ReadLine());
+
+            Console.Write("- Informe a quantidade de minutos: ");
+            QuantidadeDeMinutos = int.Parse(Console.ReadLine());
+            TotalDeMinutos = (double) QuantidadeDeMinutos / 60.0;
+
+            TotalDeHorasConvertidas = (double) QuantidadeDehorasFechadas + TotalDeMinutos;
+            Console.WriteLine();
+            Console.WriteLine($"- Total de Horas: {TotalDeHorasConvertidas}");
+            return TotalDeHorasConvertidas;
+        }
+
+        private double AtrasoComum()
+        {
+            double SalarioBruto;
+            int Jornada, HorasEmAtraso;
+
+            Console.Write("- Informe o salario bruto do funcionario: R$ ");
+            SalarioBruto = double.Parse(Console.ReadLine());
+            Console.Write("- Informe a quantidade de atrasos em horas: ");
+            HorasEmAtraso = int.Parse(Console.ReadLine());
+            Console.Write("- Informe as horas da jornada de trabalho: ");
+            Jornada = int.Parse(Console.ReadLine());
+
+            DescontoDeAtrasos = (SalarioBruto * (double)HorasEmAtraso) / (double) Jornada;
+            Console.WriteLine();
+
+            Console.WriteLine($"- O valor de desconto devido a atrasos é de: R$ {DescontoDeAtrasos:f2}");
+            Console.WriteLine($"- Total de horas em atraso: {HorasEmAtraso}");
+            Console.ReadKey();
+            return DescontoDeAtrasos;
         }
     }
 }
