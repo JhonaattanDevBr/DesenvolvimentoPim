@@ -58,10 +58,13 @@ namespace SistemaParaDesktop
             ObjetofolhaDePagamento.CalcularConvenioMedico();
 
             Console.WriteLine("---Convenio Odontológico---");
-            ObjetofolhaDePagamento.CalcularConvenioOdontologico()*/
+            ObjetofolhaDePagamento.CalcularConvenioOdontologico()
 
             Console.WriteLine("---Dependetes---");
-            ObjetofolhaDePagamento.CalcularDependencia();
+            ObjetofolhaDePagamento.CalcularDependencia();*/
+
+            Console.WriteLine("---Calculo da Pensão---");
+            ObjetofolhaDePagamento.CalcularPensao();
 
 
         }

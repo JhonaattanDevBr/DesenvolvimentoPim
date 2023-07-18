@@ -21,6 +21,7 @@ namespace SistemaParaDesktop
         private double DescontoDoConvenioMedico { get; set; }
         private double DescontoDoConvenioOdontologico { get; set; }
         private double DescontoTotalDeDependentes { get; set; }
+        private double DescontoTotalDePensao { get; set; }
 
         public double CalcularValeTransporte()
         {
@@ -458,6 +459,59 @@ namespace SistemaParaDesktop
             Console.WriteLine($"- O valor total a ser descontado de dependentes é de: R$ {DescontoTotalDeDependentes:f2}");
             Console.ReadKey();
             return DescontoTotalDeDependentes;
+        }
+
+        public double CalcularPensao()
+        {
+            int Porcento;
+            double Porcentagem;
+            double SalarioBruto; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do SalarioBase.
+            double HoraExtra; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do TotalDaHoraExtra.
+            double PericulosidadeEInsalubridade; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do ValorTotalDePericulosidadeEInsalubridade.
+            double AdicionalNoturno; //Vou Fazer essa variavel receber o valor que foi calculado no atributo ValorDoAdicionalNoturno.
+            double Ferias; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do TotalDaFerias que vai estar na classe de férias.
+            double Inss; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do DescontoDoInss.
+            double Ir; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do DescontoDoIr.
+            double BaseDeCalculoDeDescontoDePensao;
+
+
+            Console.WriteLine("---Pensão----");
+            Console.WriteLine();
+
+            Console.Write("- Informe qual a porcentagem que deverá ser descontado do funcionario: R$ ");
+            Porcento = int.Parse(Console.ReadLine());
+            Porcentagem = (double) Porcento / 100.0;
+            Console.WriteLine();
+
+            Console.WriteLine("- Informe todos proventos obtidos. Caso haja a ausencia de algum deles digite [0].");
+            Console.WriteLine();
+            Console.Write("- Informe o salário bruto: R$ ");
+            SalarioBruto = double.Parse(Console.ReadLine());
+            Console.Write("- Informe o total obtido de horas extras: R$ ");
+            HoraExtra = double.Parse(Console.ReadLine());
+            Console.Write("- Informe o total obtido de periculosidade ou insalubridade: R$ ");
+            PericulosidadeEInsalubridade = double.Parse(Console.ReadLine());
+            Console.Write("- Informe o total obtido de adicional noturno: R$ ");
+            AdicionalNoturno = double.Parse(Console.ReadLine());
+            Console.Write("- Informe o valor obtido de férias: R$ ");
+            Ferias = double.Parse(Console.ReadLine());
+            Console.WriteLine();
+
+            Console.WriteLine("- Agora informe os descontos legais do funcionario.");
+            Console.WriteLine();
+            Console.Write("- Informe o valor de desconto do INSS: R$ ");
+            Inss = double.Parse(Console.ReadLine());
+            Console.Write("- Informe o valor de desconto do IR: R$ ");
+            Ir = double.Parse(Console.ReadLine());
+            Console.WriteLine();
+
+            BaseDeCalculoDeDescontoDePensao = (SalarioBruto + HoraExtra + PericulosidadeEInsalubridade + AdicionalNoturno + Ferias) - (Inss + Ir);
+            DescontoTotalDePensao = BaseDeCalculoDeDescontoDePensao * Porcentagem;
+            Console.WriteLine($"- A base para o calculo de desconto da pensão foi de: R$ {BaseDeCalculoDeDescontoDePensao:f2}");
+            Console.WriteLine($"- O Desconto a ser retirado de pensão é de: R$ {DescontoTotalDePensao:f2}");
+            Console.ReadKey();
+            return DescontoTotalDePensao;
+
         }
     }
 }
