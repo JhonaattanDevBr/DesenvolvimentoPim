@@ -26,6 +26,8 @@ namespace SistemaParaDesktop
         private double TotalDeHorasConvertidas { get; set; }
         private double TotalDeAtrasos { get; set; }
 
+        private double DescontoDeFaltasInjustificadas { get; set; }
+
         public double CalcularValeTransporte()
         {
             double Porcentagem, Passagem, ValorPorcentagem,ValorPassagem;
@@ -542,10 +544,10 @@ namespace SistemaParaDesktop
 
             Console.WriteLine("- Selecione qual o tipo de atraso deseja calcular.");
             Console.WriteLine();
-            Console.WriteLine("- Para desconto de atraso comum dígite [1].");
-            Console.WriteLine("- Para desconto de falta ao trabalho dígite [2].");
-            Console.WriteLine("- Para desconto de falta ao trabalho com DSR dígite [3]");
-            Console.WriteLine("- Para sair dígite [4]");
+            Console.WriteLine("- Para desconto de atraso comum dígite............................[1]");
+            Console.WriteLine("- Para desconto de falta injustifícada ao trabalho dígite.........[2]");
+            Console.WriteLine("- Para desconto de falta ao trabalho com DSR dígite...............[3]");
+            Console.WriteLine("- Para sair dígite................................................[4]");
             Console.Write("- Tipo de desconto...: ");
             TipoDeDesconto = int.Parse(Console.ReadLine());
             Console.Clear();
@@ -561,8 +563,10 @@ namespace SistemaParaDesktop
                     break;
 
                 case 2:
-                    Console.WriteLine("---Falta ao Trabalho---");
+                    Console.WriteLine("---Falta ao Trabalho Injustifícada---");
                     Console.WriteLine();
+                    TotalDeAtrasos = this.FaltaInjustificada();
+                    Console.ReadKey();
                     break;
 
                 case 3:
@@ -623,6 +627,22 @@ namespace SistemaParaDesktop
             Console.WriteLine($"- Total de horas em atraso: {HorasEmAtraso}");
             Console.ReadKey();
             return DescontoDeAtrasos;
+        }
+
+        private double FaltaInjustificada()
+        {
+            double SalarioBruto;
+            int Faltas;
+
+            Console.Write("- Informe o salário bruto do funcionario: R$ ");
+            SalarioBruto = double.Parse(Console.ReadLine());
+            Console.Write("- Informe a quantidade de faltas do funcionario: ");
+            Faltas = int.Parse(Console.ReadLine());
+            DescontoDeFaltasInjustificadas = (SalarioBruto * (double) Faltas) / (double) 30;
+            Console.WriteLine();
+            Console.WriteLine($"- O valor de desconto devido a faltas injustificadas é de: R$ {DescontoDeFaltasInjustificadas:f2}");
+            Console.ReadKey();
+            return DescontoDeFaltasInjustificadas;
         }
     }
 }
