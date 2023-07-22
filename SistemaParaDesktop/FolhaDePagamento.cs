@@ -25,8 +25,9 @@ namespace SistemaParaDesktop
         private double DescontoDeAtrasos { get; set; }
         private double TotalDeHorasConvertidas { get; set; }
         private double TotalDeAtrasos { get; set; }
-
+        private double FaltasInjustificadasComDsr { get; set; }
         private double DescontoDeFaltasInjustificadas { get; set; }
+        private double Fgts { get; set; }
 
         public double CalcularValeTransporte()
         {
@@ -521,7 +522,7 @@ namespace SistemaParaDesktop
 
         public double CalcularAtrasos()
         {
-            double HorasConvertidas, TotalDeAtrasoComum;
+            double HorasConvertidas;
             int Converter, TipoDeDesconto;
 
             Console.WriteLine("---Atrasos--");
@@ -572,6 +573,8 @@ namespace SistemaParaDesktop
                 case 3:
                     Console.WriteLine("---Falta ao Tabalho com DSR---");
                     Console.WriteLine();
+                    TotalDeAtrasos = this.FaltaInjustificadaComDsr();
+                    Console.ReadKey();
                     break;
 
                 case 4:
@@ -579,11 +582,10 @@ namespace SistemaParaDesktop
                     break;
 
                 default:
+                    Console.WriteLine("-Error, Valor Invalido");
                     break;
             }
             return TotalDeAtrasos;
-
-
         }
 
         private double ConversorDeMinutosEmHoras()
@@ -643,6 +645,88 @@ namespace SistemaParaDesktop
             Console.WriteLine($"- O valor de desconto devido a faltas injustificadas é de: R$ {DescontoDeFaltasInjustificadas:f2}");
             Console.ReadKey();
             return DescontoDeFaltasInjustificadas;
+        }
+
+        private double FaltaInjustificadaComDsr()
+        {
+            double SalarioBruto, ValorDoDsr, HoraExtra, ValorDoReflexo;
+            int Faltas, Dsr, ReflexoDoDsr, DiasUteis, DsrDoMes;
+
+            Console.WriteLine("--- Falta Injustificada com DSR---");
+            Console.WriteLine();
+
+            Console.WriteLine("- Primeiro vamos calcular o valor do dsr do funcionario.");
+            Console.WriteLine();
+            Console.Write("- Informe o salário bruto do funcionario: ");
+            SalarioBruto = double.Parse(Console.ReadLine());
+            ValorDoDsr = SalarioBruto / 30;
+            Console.WriteLine($"- O valor do DSR do funcionario é de: R$ {ValorDoDsr:f2}");
+            Console.WriteLine("----------------------------------------------------------------");
+            Console.WriteLine();
+
+            Console.WriteLine("- Segundo, vamos calcular o desconto por falta ao trabalho com DSR.");
+            Console.WriteLine();
+            Console.Write("- Informe a quantidade de faltas do funcionario: ");
+            Faltas = int.Parse(Console.ReadLine());
+            Console.Write("- informe a quantidade de DSR´s que deve ser descontado: ");
+            Dsr = int.Parse(Console.ReadLine());
+            FaltasInjustificadasComDsr = ((SalarioBruto * (double) Faltas) / (double) 30) + ((double) Dsr * ValorDoDsr) ;
+            Console.WriteLine();
+            Console.WriteLine($"- O valor total de desconto de faltas + DSR é de: R$ {FaltasInjustificadasComDsr:f2}");
+            Console.ReadKey();
+            Console.WriteLine("----------------------------------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine("- O funcionario realizou horas extras ou teve algum acrescimo ao salário no mes? Caso sim o reflexo do DSR deverá ser calculado.");
+            Console.WriteLine();
+            Console.WriteLine("- Para sim dígite [1]");
+            Console.WriteLine("- Para não dígite [2]");
+            Console.Write("- Reflexo...: ");
+            ReflexoDoDsr = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+
+            if( ReflexoDoDsr == 1)
+            {
+                Console.Write("- Informe o valor da hora extra/comissão obtido pelo funcionario no mês: R$ ");
+                HoraExtra = double.Parse(Console.ReadLine());
+                Console.Write("- Informe a quantidade de dias uteis do mes: ");
+                DiasUteis = int.Parse(Console.ReadLine());
+                Console.Write("- Informe a quantidade de DSR do mes: ");
+                DsrDoMes = int.Parse(Console.ReadLine());
+                ValorDoReflexo = (HoraExtra / (double) DiasUteis) * (double) DsrDoMes;
+                FaltasInjustificadasComDsr += ValorDoReflexo;
+                Console.WriteLine();
+                Console.WriteLine($"- O valor do reflexo é de: R$ {ValorDoReflexo:f2}");
+                Console.WriteLine($"- O valor a ser descontado por falta ao trabalho + DSR + reflexo do DSR é de: R$ {FaltasInjustificadasComDsr:f2}");
+                Console.ReadKey();
+            }
+            else if( ReflexoDoDsr == 2)
+            {
+                Console.WriteLine("- Dígite qualquer coisa para retornar");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("- ERROR, Valor invalida selecione entre as opções [1] ou [2].");
+                Console.WriteLine("- Dígite qualquer coisa para retornar");
+                Console.ReadKey(); // Aqui eu vou fazer um laço para repetir o processo quando um valor invalido for digitado.
+            }
+            return FaltasInjustificadasComDsr;
+        }
+
+        public double CalcularFgts()
+        {
+            double SalarioBruto;
+
+            Console.WriteLine("---Calcular o FGTS---");
+            Console.WriteLine();
+
+            Console.Write("- Informe o salário bruto do funcionario: R$ ");
+            SalarioBruto = double.Parse(Console.ReadLine());
+            Fgts = SalarioBruto * 0.08;
+            Console.WriteLine();
+            Console.WriteLine($"- O valor do FGTS a ser depositado é de: R$ {Fgts:f2}");
+            Console.ReadKey();
+            return Fgts;
         }
     }
 }

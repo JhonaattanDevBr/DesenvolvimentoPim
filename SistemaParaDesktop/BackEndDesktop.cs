@@ -64,10 +64,13 @@ namespace SistemaParaDesktop
             ObjetofolhaDePagamento.CalcularDependencia();
 
             Console.WriteLine("---Calculo da Pensão---");
-            ObjetofolhaDePagamento.CalcularPensao();*/
+            ObjetofolhaDePagamento.CalcularPensao();
 
             Console.WriteLine("---Atrasos---");
-            ObjetofolhaDePagamento.CalcularAtrasos();
+            ObjetofolhaDePagamento.CalcularAtrasos();*/
+
+            Console.WriteLine("---FGTS---");
+            ObjetofolhaDePagamento.CalcularFgts();
         }
     }
 }
