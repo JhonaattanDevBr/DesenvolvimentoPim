@@ -9,12 +9,15 @@ namespace SistemaParaDesktop
 {
     public class FolhaDePagamento
     {
-        private double _salarioBruto { get; set; }
-        private double _salarioLiquido { get; set; }
-        private double _desconto { get; set; }
-        private string _quantidadeHoras { get; set; }
-        private double _resultado { get; set; }
-        private double _DescontoInss { get; set; }
+        // Terei que refatoras todo o código inserindo tratamento de erros, laços de repetição etc a todos os metodos. 
+        private double SalarioBase { get; set; }
+        private double SalarioLiquido { get; set; }
+        private double Descontos { get; set; }
+        //private string _quantidadeHoras { get; set; }
+        //private double _resultado { get; set; }
+        private double DescontoDoValeTransporte { get; set; }
+        private double DescontoDoValeRefeicaoAlimentacao { get; set; }
+        private double DescontoDoInss { get; set; }
         private double AdiantamentoQuinzenal { get; set; }
         private double ValorTotalDePericulosidadeEInsalubridade { get; set; }
         private double ValorDoAdicionalNoturno { get; set; }
@@ -31,7 +34,7 @@ namespace SistemaParaDesktop
 
         public double CalcularValeTransporte()
         {
-            double Porcentagem, Passagem, ValorPorcentagem,ValorPassagem;
+            double Porcentagem, Passagem, ValorPorcentagem,ValorPassagem, SalarioBruto;
             int DiasUteis;
 
             Console.WriteLine("-Vamos verificar qual o menor valor para desconto do VT.");
@@ -39,14 +42,14 @@ namespace SistemaParaDesktop
 
             Console.WriteLine("-Primeiro passo:");
             Console.Write("-Ensira o Sálario bruto do funcionario: R$ ");
-            _salarioBruto = double.Parse(Console.ReadLine());
+            SalarioBruto = double.Parse(Console.ReadLine());
             Console.WriteLine("--------------------------------------------------------------------------");
             Console.WriteLine();
 
             Console.WriteLine("-Segundo passo:");
             Console.Write("-Ensira a porcentagem correspondente ao vale transporte: ");
             Porcentagem = double.Parse(Console.ReadLine());
-            ValorPorcentagem = _salarioBruto * (Porcentagem / 100); // O erro estava no calculo a operação de precedencia deveria ser de divisão.. 
+            ValorPorcentagem = SalarioBruto * (Porcentagem / 100);
             Console.WriteLine("--------------------------------------------------------------------------");
             Console.WriteLine();
 
@@ -69,7 +72,8 @@ namespace SistemaParaDesktop
                 Console.Write($"-Valor a ser descontado por dias uteis: R$ {ValorPassagem:f2}");
                 Console.ReadKey();
                 Console.WriteLine();
-                return ValorPorcentagem;
+                DescontoDoValeTransporte = ValorPorcentagem;
+                return DescontoDoValeTransporte;
             }
             else
             {
@@ -81,9 +85,10 @@ namespace SistemaParaDesktop
                 Console.Write($"-Valor a ser descontado por porcentagem: R$ {ValorPorcentagem:f2}");
                 Console.ReadKey();
                 Console.WriteLine();
-                return ValorPassagem;
+                DescontoDoValeTransporte = ValorPassagem;
+                return DescontoDoValeTransporte;
             }
-        }
+        } 
 
         public double CalcularValeAlimentacao()
         {
@@ -104,72 +109,71 @@ namespace SistemaParaDesktop
             Console.WriteLine();
             Console.WriteLine($"-Valor a se descontado de vale refeição/alimentação: R$ {DescontoDoVale:f2}");
             Console.ReadKey();
-                    
-            return DescontoDoVale;
-            
-        }
+            DescontoDoValeRefeicaoAlimentacao = DescontoDoVale;
+            return DescontoDoValeRefeicaoAlimentacao;
+        } 
 
         public double CalcularInss()
         {
-            double Proventos, SalarioBase, PercentualInss, DescontoInss = 0;
+            double SalarioBruto, PercentualInss;
             double Parcela1 = 0;
             double Parcela2 = 19.53;
             double Parcela3 = 96.00;
             double Parcela4 = 173.81;
             double Parcela5 = 877.24;
-            // O sistema estava retornando o valor errado pois havia esquecido de dizer que o percentual era um número double. Sonso.
 
             Console.WriteLine("---Calculo do INSS---");
             Console.WriteLine();
-            Console.Write("- Informe o valor sobre o qual será gerado o desconto de INSS: R$ ");
-            Proventos = double.Parse(Console.ReadLine());
+            Console.Write("- Informe o salario bruto do funcionario sobre o qual será gerado o desconto de INSS: R$ ");
+            SalarioBruto = double.Parse(Console.ReadLine());
             Console.WriteLine("--------------------------------------------------------");
 
-            if (Proventos <= 1302.00) {
+            if (SalarioBruto <= 1302.00) {
                 Console.WriteLine("---Desconto feito com base na aliquota de 7,5%---");
                 Console.WriteLine();
                 PercentualInss = 7.5 / 100;
-                _DescontoInss = (Proventos * PercentualInss) - Parcela1;
-                Console.Write($"- Valor de Desconto do INSS: R$ {_DescontoInss:f2}");
+                DescontoDoInss = (SalarioBruto * PercentualInss) - Parcela1;
+                Console.WriteLine("- Funcionario isento do desconto de INSS.");
+                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
                 Console.ReadKey();
             }
 
-            else if (Proventos <= 2571.29) {
+            else if (SalarioBruto <= 2571.29) {
                 Console.WriteLine("---Desconto feito com base na aliquota de 9%---");
                 Console.WriteLine();
                 PercentualInss = 9.0 / 100;
-                _DescontoInss = (Proventos * PercentualInss) - Parcela2;
-                Console.Write($"- Valor de Desconto do INSS: R$ {_DescontoInss:f2}");
+                DescontoDoInss = (SalarioBruto * PercentualInss) - Parcela2;
+                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
                 Console.ReadKey();
             }
 
-            else if (Proventos <= 3856.94) {
+            else if (SalarioBruto <= 3856.94) {
                 Console.WriteLine("---Desconto feito com base na aliquota de 12%---");
                 Console.WriteLine();
                 PercentualInss = 12.0 / 100;
-                _DescontoInss = (Proventos * PercentualInss) - Parcela3;
-                Console.Write($"- Valor de Desconto do INSS: R$ {_DescontoInss:f2}");
+                DescontoDoInss = (SalarioBruto * PercentualInss) - Parcela3;
+                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
                 Console.ReadKey();
             }
 
-            else if (Proventos <= 7507.49) {
+            else if (SalarioBruto <= 7507.49) {
                 Console.WriteLine("---Desconto feito com base na aliquota de 14%---");
                 Console.WriteLine();
                 PercentualInss = 14.0 / 100;
-                _DescontoInss = (Proventos * PercentualInss) - Parcela4;
-                Console.Write($"- Valor de Desconto do INSS: R$ {_DescontoInss:f2}");
+                DescontoDoInss = (SalarioBruto * PercentualInss) - Parcela4;
+                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
                 Console.ReadKey();
             }
 
             else {
                 Console.WriteLine("---Valores acima de 7.507.49 R$ possuem um desconto fixo de 877.24 R$---");
                 Console.WriteLine();
-                _DescontoInss = Proventos - Parcela5;
-                Console.Write($"- Valor de Desconto do INSS: R$ {_DescontoInss:f2}");
+                DescontoDoInss = SalarioBruto - Parcela5;
+                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
                 Console.ReadKey();
             }
-            return _DescontoInss;
-        }
+            return DescontoDoInss;
+        } 
 
         public double CalcularIr()
         {
@@ -187,7 +191,7 @@ namespace SistemaParaDesktop
 
             Console.Write("- Informe o salário bruto do funcionário: R$ ");
             SalarioBruto = double.Parse(Console.ReadLine());
-            Inss = _DescontoInss;
+            Inss = DescontoDoInss;
            // Pensao = this.CalcularPensao(); Ainda irei incluir este método.
            // Dependente = this.CalcularDependencia(); Ainda irei incluir este método.
             BaseIr = SalarioBruto - Inss - Pensao - Dependente;
@@ -242,36 +246,36 @@ namespace SistemaParaDesktop
                 Console.ReadKey();
             }
             return DescontoIr;
-            
-        }
+
+        } 
 
         public double CalcularAdiantamentoQuinzenal()
         {
+            double SalarioBruto;
             Console.Write("Informe o Salario bruo: R$ ");
-            _salarioBruto = double.Parse(Console.ReadLine());
+            SalarioBruto = double.Parse(Console.ReadLine());
             Console.WriteLine();
 
             double Porcentagem = 0.4;
 
-            AdiantamentoQuinzenal = _salarioBruto * Porcentagem;
-            Console.WriteLine($"Valor do Salário bruto: R$ {_salarioBruto:f2}");
+            AdiantamentoQuinzenal = SalarioBruto * Porcentagem;
+            Console.WriteLine($"Valor do Salário bruto: R$ {SalarioBruto:f2}");
             Console.WriteLine($"Valor do Adiantamento: R$ {AdiantamentoQuinzenal:f2}");
 
             return AdiantamentoQuinzenal;
-        }
-
+        } 
         public double CalcularHoraExtra()
         {
-            double ValorHora, Porcentagem = 0.5, ValorHoraExtra, Hora, ValorTotalHoraExtra = 0;
+            double ValorHora, Porcentagem = 0.5, ValorHoraExtra, Hora, ValorTotalHoraExtra = 0, SalarioBruto;
             //double HoraMes; - Vou utilizar esta forma quando tiver os métodos todos feitos.
             //double PorcentagemVariavel; vai ser utilizado mais a frente para as Org decidirem qual a porcentagem de Hora Extra deve ser somada.
             //double PorcentagemDeCemPorCento = 1; 
 
             Console.Write("- Informe seu salario bruto: R$ ");
-            _salarioBruto = double.Parse(Console.ReadLine());
+            SalarioBruto = double.Parse(Console.ReadLine());
             //Console.Write("- Informe  quantidade de horas trabalhadas ao mes: "); - Vou utilizar esta forma quando tiver os métodos todos feitos.
             
-            ValorHora = _salarioBruto / 220;
+            ValorHora = SalarioBruto / 220;
             ValorHoraExtra = ValorHora + (ValorHora * Porcentagem);
 
             Console.Write("- Informe a quantidade de horas feita de extra: ");
@@ -284,20 +288,20 @@ namespace SistemaParaDesktop
             Console.WriteLine($"- Valor total hora extra: R$ {ValorTotalHoraExtra:f2}");
 
             return ValorHoraExtra;
-            
-        }
+
+        } 
 
         public double CalcularPericulosidadeEInsalubridade()
         {
             
-            double ValorDaPorcentagem;
+            double ValorDaPorcentagem, SalarioBruto;
             int Beneficio;
 
             Console.WriteLine("---Calculando periculosidade e insalubridade---");
             Console.WriteLine();
             Console.Write("- Informe o salário bruto do funcionario: ");
-            _salarioBruto = double.Parse(Console.ReadLine());
-            double SalarioBruto = _salarioBruto;
+            SalarioBruto = double.Parse(Console.ReadLine());
+           // double SalarioBruto = _salarioBruto;
             Console.WriteLine();
             Console.WriteLine("- Informe qual o tipo de benefício do funcionário.");
             Console.WriteLine();
@@ -376,7 +380,7 @@ namespace SistemaParaDesktop
             return ValorTotalDePericulosidadeEInsalubridade;
 
 
-        }
+        } 
 
         public double CalcularAdicionalNoturno()
         {
@@ -403,7 +407,7 @@ namespace SistemaParaDesktop
             
             Console.ReadKey();
             return ValorDoAdicionalNoturno;
-        }
+        } 
 
         public double CalcularConvenioMedico()
         {
@@ -424,7 +428,7 @@ namespace SistemaParaDesktop
             Console.WriteLine($"- Salario alterado para: R$ {DescontoDoConvenioMedico:f2}"); // Depois não vou precisar disso então vou retirar fazer o retorno do ValorDoConvenioMedico e tornalo um atributo ao invés de uma variavel. 
             Console.ReadKey();
             return DescontoDoConvenioMedico;
-        }
+        } 
 
         public double CalcularConvenioOdontologico()
         {
@@ -445,7 +449,7 @@ namespace SistemaParaDesktop
             Console.WriteLine($"- Salario alterado para: R$ {DescontoDoConvenioOdontologico:f2}"); // Depois não vou precisar disso então vou retirar fazer o retorno do ValorDoConvenioOdontologico e tornalo um atributo ao invés de uma variavel. 
             Console.ReadKey();
             return DescontoDoConvenioOdontologico;
-        }
+        } 
 
         public double CalcularDependencia()
         {
@@ -465,7 +469,7 @@ namespace SistemaParaDesktop
             Console.WriteLine($"- O valor total a ser descontado de dependentes é de: R$ {DescontoTotalDeDependentes:f2}");
             Console.ReadKey();
             return DescontoTotalDeDependentes;
-        }
+        } 
 
         public double CalcularPensao()
         {
@@ -518,7 +522,7 @@ namespace SistemaParaDesktop
             Console.ReadKey();
             return DescontoTotalDePensao;
 
-        }
+        } 
 
         public double CalcularAtrasos()
         {
@@ -586,7 +590,7 @@ namespace SistemaParaDesktop
                     break;
             }
             return TotalDeAtrasos;
-        }
+        } 
 
         private double ConversorDeMinutosEmHoras()
         {
@@ -629,7 +633,7 @@ namespace SistemaParaDesktop
             Console.WriteLine($"- Total de horas em atraso: {HorasEmAtraso}");
             Console.ReadKey();
             return DescontoDeAtrasos;
-        }
+        } 
 
         private double FaltaInjustificada()
         {
@@ -645,7 +649,7 @@ namespace SistemaParaDesktop
             Console.WriteLine($"- O valor de desconto devido a faltas injustificadas é de: R$ {DescontoDeFaltasInjustificadas:f2}");
             Console.ReadKey();
             return DescontoDeFaltasInjustificadas;
-        }
+        } 
 
         private double FaltaInjustificadaComDsr()
         {
@@ -711,7 +715,7 @@ namespace SistemaParaDesktop
                 Console.ReadKey(); // Aqui eu vou fazer um laço para repetir o processo quando um valor invalido for digitado.
             }
             return FaltasInjustificadasComDsr;
-        }
+        } 
 
         public double CalcularFgts()
         {
@@ -728,5 +732,34 @@ namespace SistemaParaDesktop
             Console.ReadKey();
             return Fgts;
         }
+
+      /*  public double GerarHolerite()
+        {
+            int []FormulasDoHolerite = new FormulasDoHolerite[13]; // Preciso ver como declarar vetores.
+
+
+            Console.WriteLine("---Gerando o Holerite---");
+            Console.WriteLine();
+
+            Console.WriteLine("- Informe quais os atributos serão utilizados para gerar o holerite.");
+            Console.WriteLine();
+            Console.WriteLine("- Vale Transporte...........................[1]");
+            Console.WriteLine("- Vale alimentação..........................[2]");
+            Console.WriteLine("- Adiantamento Quinzenal....................[3]");
+            Console.WriteLine("- Horas Extras..............................[4]");
+            Console.WriteLine("- Periculosidade ou Insalubridade...........[5]");
+            Console.WriteLine("- Adicional Noturno.........................[6]");
+            Console.WriteLine("- Convenio Médico...........................[7]");
+            Console.WriteLine("- Convenio Odontológico.....................[8]");
+            Console.WriteLine("- Atrasos...................................[9]");
+            Console.WriteLine("- Dependencia...............................[10]");
+            Console.WriteLine("- Pensão....................................[11]");
+            Console.WriteLine("- INSS......................................[12]");
+            Console.WriteLine("- IR........................................[13]");
+            Console.WriteLine("- FGTS......................................[14]");
+            
+
+        }
+      */
     }
 }
