@@ -294,95 +294,97 @@ namespace SistemaParaDesktop
 
         } 
 
-        public double CalcularPericulosidadeEInsalubridade()
+        public double CalcularPericulosidadeInsalubridade()
         {
-            
             double valorDaPorcentagem, salarioBruto;
             int beneficio;
 
-            Console.WriteLine("---Calculando periculosidade e insalubridade---");
             Console.WriteLine();
             Console.Write("- Informe o salário bruto do funcionario: ");
             salarioBruto = double.Parse(Console.ReadLine());
-           // double SalarioBruto = _salarioBruto;
             Console.WriteLine();
-            Console.WriteLine("- Informe qual o tipo de benefício do funcionário.");
-            Console.WriteLine();
-            Console.WriteLine("- Dígite [1] para Periculosidade.");
-            Console.WriteLine("- Dígite [2] para Insalubridade.");
-            Console.Write("- Benefício..: ");
-            beneficio = int.Parse(Console.ReadLine());
-            Console.WriteLine();
-
-            switch (beneficio)
+            do
             {
-                case 1:
-                    Console.WriteLine("---Cálculo de Periculosidade---");
-                    Console.WriteLine();
-                    
-                    valorDaPorcentagem = salarioBruto * 0.3;
-                    ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
-                    Console.WriteLine($"- Valor de acréscimo devido a periculosidade é de 30% que corresponde a: R$ {valorDaPorcentagem:f2}");
-                    Console.WriteLine($"- Valor do salário base acrescido do percentual de periculosidade: R$ {ValorTotalDePericulosidadeInsalubridade:f2}"); //Depois vou tirar essa linha porque eu não vou precisar retornar o valor ja acrescido, somento o valor que vai ser acrescido.
-                    Console.ReadKey();
-                    break;
+                Console.WriteLine("- Informe qual o tipo de benefício do funcionário.");
+                Console.WriteLine();
+                Console.WriteLine("- Dígite [1] para Periculosidade.");
+                Console.WriteLine("- Dígite [2] para Insalubridade.");
+                Console.Write("- Benefício..: ");
+                beneficio = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
-                case 2:
-                    Console.WriteLine("---Cálculo da Insalubridade---");
-                    Console.WriteLine();
-                    
-                    int grau;
+                switch (beneficio)
+                {
+                    case 1:
+                        Console.WriteLine("---Cálculo de Periculosidade---");
+                        Console.WriteLine();
 
-                    Console.WriteLine("- Informe qual o grau de insalubridade sobre o qual o funcionario exerce sua função.");
-                    Console.WriteLine();
-                    Console.WriteLine("- Dígite [1] para leve/10%.");
-                    Console.WriteLine("- Dígite [2] para médio/20%");
-                    Console.WriteLine("- Dígite [3] para gráve/40%");
-                    Console.Write("- Grau...: ");
-                    grau = int.Parse(Console.ReadLine());
-                    Console.WriteLine();
+                        valorDaPorcentagem = salarioBruto * 0.3;
+                        ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
+                        Console.WriteLine($"- Valor de acréscimo devido a periculosidade é de 30% que corresponde a: R$ {valorDaPorcentagem:f2}");
+                        //Console.WriteLine($"- Valor do salário base acrescido do percentual de periculosidade: R$ {ValorTotalDePericulosidadeInsalubridade:f2}"); //Depois vou tirar essa linha porque eu não vou precisar retornar o valor ja acrescido, somento o valor que vai ser acrescido.
+                        Console.ReadKey();
+                        break;
 
-                    if( grau == 1 )
-                    {
-                        valorDaPorcentagem = salarioBruto * 0.1;
-                        ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
-                        Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 10% correspodente a: R$ {valorDaPorcentagem:f2}");
-                        Console.WriteLine($"- Valor do salário acrescido do percentual de insalubridade de 10% correspode a: R$ {ValorTotalDePericulosidadeInsalubridade:f2}");
-                        Console.ReadKey();
-                    }
-                    else if( grau == 2)
-                    {
-                        valorDaPorcentagem = salarioBruto * 0.2;
-                        ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
-                        Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 20% correspodente a: R$ {valorDaPorcentagem:f2}");
-                        Console.WriteLine($"- Valor do salário acrescido do percentual de insalubridade de 20% correspode a: R$ {ValorTotalDePericulosidadeInsalubridade:f2}");
-                        Console.ReadKey();
-                    }
-                    else if( grau == 3)
-                    {
-                        valorDaPorcentagem = salarioBruto * 0.4;
-                        ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
-                        Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 40% correspodente a: R$ {valorDaPorcentagem:f2}");
-                        Console.WriteLine($"- Valor do salário acrescido do percentual de insalubridade de 40% correspode a: R$ {ValorTotalDePericulosidadeInsalubridade:f2}");
-                        Console.ReadKey();
-                    }
-                    else
-                    {
+                    case 2:
+                            Console.WriteLine("---Cálculo da Insalubridade---");
+                            Console.WriteLine();
+                            int grau;
+                        do
+                        {
+                            Console.WriteLine("- Informe qual o grau de insalubridade sobre o qual o funcionario exerce sua função.");
+                            Console.WriteLine();
+                            Console.WriteLine("- Dígite [1] para leve/10%.");
+                            Console.WriteLine("- Dígite [2] para médio/20%");
+                            Console.WriteLine("- Dígite [3] para gráve/40%");
+                            Console.Write("- Grau...: ");
+                            grau = int.Parse(Console.ReadLine());
+                            Console.WriteLine();
+
+                            if (grau == 1)
+                            {
+                                valorDaPorcentagem = salarioBruto * 0.1;
+                                ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
+                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 10% correspodente a: R$ {valorDaPorcentagem:f2}");
+                                //Console.WriteLine($"- Valor do salário acrescido do percentual de insalubridade de 10% correspode a: R$ {ValorTotalDePericulosidadeInsalubridade:f2}");
+                                Console.ReadKey();
+                            }
+                            else if (grau == 2)
+                            {
+                                valorDaPorcentagem = salarioBruto * 0.2;
+                                ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
+                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 20% correspodente a: R$ {valorDaPorcentagem:f2}");
+                                //Console.WriteLine($"- Valor do salário acrescido do percentual de insalubridade de 20% correspode a: R$ {ValorTotalDePericulosidadeInsalubridade:f2}");
+                                Console.ReadKey();
+                            }
+                            else if (grau == 3)
+                            {
+                                valorDaPorcentagem = salarioBruto * 0.4;
+                                ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
+                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 40% correspodente a: R$ {valorDaPorcentagem:f2}");
+                                //Console.WriteLine($"- Valor do salário acrescido do percentual de insalubridade de 40% correspode a: R$ {ValorTotalDePericulosidadeInsalubridade:f2}");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                Console.WriteLine("- ERRO! Opção inválida, selecione entre [1] ou [2].");
+                                Console.WriteLine("- Dígite qualquer coisa para retornar.");
+                                Console.ReadKey();
+                                Console.WriteLine();
+                            }
+                        }while (grau != 1 && grau != 2 && grau != 3);
+                        break;
+
+                    default:
                         Console.WriteLine("- ERRO! Opção inválida, selecione entre [1] ou [2].");
                         Console.WriteLine("- Dígite qualquer coisa para retornar.");
                         Console.ReadKey();
-                    }
-                    break;
-
-                default:
-                    Console.WriteLine("- ERRO! Opção inválida, selecione entre [1] ou [2].");
-                    Console.WriteLine("- Dígite qualquer coisa para retornar.");
-                    Console.ReadKey();
-                    break;
-            }
+                        Console.WriteLine();
+                        break;
+                }
+            } while (beneficio != 1 && beneficio != 2);
             return ValorTotalDePericulosidadeInsalubridade;
-
-
+            
         } 
 
         public double CalcularAdicionalNoturno()
@@ -425,7 +427,7 @@ namespace SistemaParaDesktop
             Console.WriteLine($"- Salario alterado para: R$ {DescontoDoConvenioMedico:f2}"); // Depois não vou precisar disso então vou retirar fazer o retorno do ValorDoConvenioMedico e tornalo um atributo ao invés de uma variavel. 
             Console.ReadKey();
             return DescontoDoConvenioMedico;
-        } 
+        }  
 
         public double CalcularConvenioOdontologico()
         {
@@ -771,12 +773,13 @@ namespace SistemaParaDesktop
                             case 1:
                                 CalcularAdiantamentoQuinzenal();
                                 Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
                                 break;
 
                             case 2:
-                                Console.WriteLine("- Preseguindo para a próxima etapa.");
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
                                 break;
@@ -804,13 +807,49 @@ namespace SistemaParaDesktop
                             case 1:
                                 CalcularAdicionalNoturno();
                                 Console.WriteLine();
-                                Console.WriteLine("- Preseguindo para a próxima etapa.");
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
                                 break;
 
                             case 2:
-                                Console.WriteLine("- Preseguindo para a próxima etapa.");
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            default:
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine();
+                                break;
+                        }
+                    } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+
+
+                    do
+                    {
+                        Console.WriteLine("- Etapa 4");
+                        Console.WriteLine("- O funcionario atua sobre periculosidade ou insalubridade? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.Write("- Escolha...: ");
+                        simNao = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        switch (simNao)
+                        {
+                            case 1:
+                                CalcularPericulosidadeInsalubridade();
+                                Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            case 2:
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
                                 break;
