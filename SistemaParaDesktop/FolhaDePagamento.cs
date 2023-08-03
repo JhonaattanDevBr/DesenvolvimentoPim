@@ -37,39 +37,39 @@ namespace SistemaParaDesktop
             double porcentagem, passagem, valorPorcentagem,valorPassagem, salarioBruto;
             int diasUteis;
 
-            Console.WriteLine("-Vamos verificar qual o menor valor para desconto do VT.");
+            Console.WriteLine("- Vamos verificar qual o menor valor para desconto do VT.");
             Console.WriteLine();
 
-            Console.WriteLine("-Primeiro passo:");
-            Console.Write("-Ensira o Sálario bruto do funcionario: R$ ");
+            Console.WriteLine("- Primeiro passo:");
+            Console.Write("- Informe o salário bruto do funcionario: R$ ");
             salarioBruto = double.Parse(Console.ReadLine());
-            Console.WriteLine("--------------------------------------------------------------------------");
+            //Console.WriteLine("--------------------------------------------------------------------------");
             Console.WriteLine();
 
-            Console.WriteLine("-Segundo passo:");
-            Console.Write("-Ensira a porcentagem correspondente ao vale transporte: ");
+            Console.WriteLine("- Segundo passo:");
+            Console.Write("- Informe a porcentagem correspondente ao vale transporte: ");
             porcentagem = double.Parse(Console.ReadLine());
             valorPorcentagem = salarioBruto * (porcentagem / 100);
-            Console.WriteLine("--------------------------------------------------------------------------");
+            //Console.WriteLine("--------------------------------------------------------------------------");
             Console.WriteLine();
 
-            Console.WriteLine("-Terceiro passo:");
-            Console.Write("-Ensira o valor da passagem somando ida e volta: R$ ");
+            Console.WriteLine("- Terceiro passo:");
+            Console.Write("- Informe o valor da passagem somando ida e volta: R$ ");
             passagem = double.Parse(Console.ReadLine());
-            Console.Write("-Ensira a quantidade de dias uteis: ");
+            Console.Write("- Informe a quantidade de dias uteis: ");
             diasUteis = int.Parse(Console.ReadLine());
             valorPassagem =  passagem * (double) diasUteis;
-            Console.WriteLine("--------------------------------------------------------------------------");
+            //Console.WriteLine("--------------------------------------------------------------------------");
             Console.WriteLine();
 
             if(valorPorcentagem < valorPassagem)
             {
-                Console.WriteLine("\t-Menor Valor.");
-                Console.Write($"-Valor a ser descontado por porcentagem: R$ {valorPorcentagem:f2}");
+                Console.WriteLine("\t- Menor Valor.");
+                Console.Write($"- Valor a ser descontado por porcentagem: R$ {valorPorcentagem:f2}");
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("\t-Maior valor.");
-                Console.Write($"-Valor a ser descontado por dias uteis: R$ {valorPassagem:f2}");
+                Console.WriteLine("\t- Maior valor.");
+                Console.Write($"- Valor a ser descontado por dias uteis: R$ {valorPassagem:f2}");
                 Console.ReadKey();
                 Console.WriteLine();
                 DescontoDoValeTransporte = valorPorcentagem;
@@ -77,12 +77,12 @@ namespace SistemaParaDesktop
             }
             else
             {
-                Console.WriteLine("\t-Menor valor.");
-                Console.Write($"-Valor a ser descontado por dias uteis: R$ {valorPassagem:f2}");
+                Console.WriteLine("\t- Menor valor.");
+                Console.Write($"- Valor a ser descontado por dias uteis: R$ {valorPassagem:f2}");
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("\t-Maior valor.");
-                Console.Write($"-Valor a ser descontado por porcentagem: R$ {valorPorcentagem:f2}");
+                Console.WriteLine("\t- Maior valor.");
+                Console.Write($"- Valor a ser descontado por porcentagem: R$ {valorPorcentagem:f2}");
                 Console.ReadKey();
                 Console.WriteLine();
                 DescontoDoValeTransporte = valorPassagem;
@@ -268,28 +268,76 @@ namespace SistemaParaDesktop
 
         public double CalcularHoraExtra()
         {
-            double valorHora, porcentagem = 0.5, valorHoraExtra, hora, valorTotalHoraExtra = 0, salarioBruto;
-            //double HoraMes; - Vou utilizar esta forma quando tiver os métodos todos feitos.
-            //double PorcentagemVariavel; vai ser utilizado mais a frente para as Org decidirem qual a porcentagem de Hora Extra deve ser somada.
-            //double PorcentagemDeCemPorCento = 1; 
+            double valorHora, valorDaHoraExtra, hora, valorTotalDaHoraExtra, salarioBruto, horaConvertida = 0, indicadorDsr, percentualDoDsr, valorDoDsr;
+            int converter, porcentagem, diasUteis, repousosFeriados;
 
-            Console.Write("- Informe seu salario bruto: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            //Console.Write("- Informe  quantidade de horas trabalhadas ao mes: "); - Vou utilizar esta forma quando tiver os métodos todos feitos.
-            
-            valorHora = salarioBruto / 220;
-            valorHoraExtra = valorHora + (valorHora * porcentagem);
+            do {
+                Console.WriteLine("- Horas com minutos não são calculadas pois é necessario converte-las em horas.");
+                Console.WriteLine("- É necesario fazer converção de minutos em horas ?");
+                Console.WriteLine();
+                Console.WriteLine("- Para SIM dígite [1]");
+                Console.WriteLine("- Para NÃO dígite [2]");
+                Console.Write("- Converter...: ");
+                converter = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
-            Console.Write("- Informe a quantidade de horas feita de extra: ");
-            hora = double.Parse(Console.ReadLine());
-            valorTotalHoraExtra = hora * valorHoraExtra;
+                if (converter == 1)
+                {
+                    horaConvertida = ConversorDeMinutosEmHoras();
+                    Console.WriteLine();
+                    Console.WriteLine("- Minutos convertidos em horas!");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                }
+                else if (converter == 2)
+                {
+                    Console.WriteLine("- Proseguindo para a próxima etapa.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                    Console.WriteLine();
+                }
+            }while(converter != 1 && converter != 2);
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
             Console.WriteLine();
 
-            Console.WriteLine($"- Valor da hora: R${valorHora:f2}");
-            Console.WriteLine($"- Valor da hora extra: R${valorHoraExtra:f2}");
-            Console.WriteLine($"- Valor total hora extra: R$ {valorTotalHoraExtra:f2}");
+            Console.Write("- Informe o salário bruto do funcionário: R$ ");
+            salarioBruto = double.Parse(Console.ReadLine());
+            Console.Write("- Informe a quantidade de horas realizadas: ");
+            hora = double.Parse(Console.ReadLine());
+            Console.Write("- Informe a porcentagem incedida sobre as horas extras: ");
+            porcentagem = int.Parse(Console.ReadLine());
+            Console.WriteLine();
 
-            TotalDeHorasExtras = valorHoraExtra;
+            valorHora = salarioBruto / 220;
+            porcentagem = porcentagem / 100;
+            valorDaHoraExtra = valorHora + (valorHora * (double) porcentagem);
+            valorTotalDaHoraExtra = hora * valorDaHoraExtra;
+
+            Console.WriteLine("- Agora é preciso calcular o DSR sobre as horas extras.");
+            Console.WriteLine();
+            Console.Write("- Informe a quantidade de dias uteis do mes: ");
+            diasUteis = int.Parse(Console.ReadLine());
+            Console.Write("- Informe a quantidade de dias de repouso e feriados do mes: ");
+            repousosFeriados = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+
+            indicadorDsr = (double) repousosFeriados / diasUteis;
+            percentualDoDsr = indicadorDsr * porcentagem;
+            valorDoDsr = valorDaHoraExtra * percentualDoDsr;
+            valorTotalDaHoraExtra = horaConvertida * (valorDaHoraExtra + valorDoDsr);
+
+            Console.WriteLine($"- Valor da hora normal: R$ {valorHora:f2}");
+            Console.WriteLine($"- Valor da hora extra: R$ {valorDaHoraExtra:f2}");
+            Console.WriteLine($"- Valor do DSR incedido sobre as horas extras: R$ {valorDoDsr:f2}");
+            Console.WriteLine($"- Valor total da hora extra incedida sobre o DSR: R$ {valorTotalDaHoraExtra:f2}");
+
+            TotalDeHorasExtras = valorTotalDaHoraExtra;
             return TotalDeHorasExtras;
 
         } 
@@ -322,7 +370,6 @@ namespace SistemaParaDesktop
                         valorDaPorcentagem = salarioBruto * 0.3;
                         ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
                         Console.WriteLine($"- Valor de acréscimo devido a periculosidade é de 30% que corresponde a: R$ {valorDaPorcentagem:f2}");
-                        //Console.WriteLine($"- Valor do salário base acrescido do percentual de periculosidade: R$ {ValorTotalDePericulosidadeInsalubridade:f2}"); //Depois vou tirar essa linha porque eu não vou precisar retornar o valor ja acrescido, somento o valor que vai ser acrescido.
                         Console.ReadKey();
                         break;
 
@@ -346,7 +393,6 @@ namespace SistemaParaDesktop
                                 valorDaPorcentagem = salarioBruto * 0.1;
                                 ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
                                 Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 10% correspodente a: R$ {valorDaPorcentagem:f2}");
-                                //Console.WriteLine($"- Valor do salário acrescido do percentual de insalubridade de 10% correspode a: R$ {ValorTotalDePericulosidadeInsalubridade:f2}");
                                 Console.ReadKey();
                             }
                             else if (grau == 2)
@@ -354,7 +400,6 @@ namespace SistemaParaDesktop
                                 valorDaPorcentagem = salarioBruto * 0.2;
                                 ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
                                 Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 20% correspodente a: R$ {valorDaPorcentagem:f2}");
-                                //Console.WriteLine($"- Valor do salário acrescido do percentual de insalubridade de 20% correspode a: R$ {ValorTotalDePericulosidadeInsalubridade:f2}");
                                 Console.ReadKey();
                             }
                             else if (grau == 3)
@@ -362,7 +407,6 @@ namespace SistemaParaDesktop
                                 valorDaPorcentagem = salarioBruto * 0.4;
                                 ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
                                 Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 40% correspodente a: R$ {valorDaPorcentagem:f2}");
-                                //Console.WriteLine($"- Valor do salário acrescido do percentual de insalubridade de 40% correspode a: R$ {ValorTotalDePericulosidadeInsalubridade:f2}");
                                 Console.ReadKey();
                             }
                             else
@@ -608,7 +652,7 @@ namespace SistemaParaDesktop
 
             TotalDeHorasConvertidas = (double) quantidadeDehorasFechadas + totalDeMinutos;
             Console.WriteLine();
-            Console.WriteLine($"- Total de Horas: {TotalDeHorasConvertidas}");
+            Console.WriteLine($"- Total de Horas: {TotalDeHorasConvertidas:f2}");
             return TotalDeHorasConvertidas;
         }
 
@@ -862,6 +906,83 @@ namespace SistemaParaDesktop
                                 break;
                         }
                     } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+
+                    do
+                    {
+                        Console.WriteLine("- Etapa 5");
+                        Console.WriteLine("- O funcionario realizou horas extras este mês? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.Write("- Escolha...: ");
+                        simNao = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        switch(simNao)
+                        {
+                            case 1:
+                                CalcularHoraExtra();
+                                Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            case 2:
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            default:
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine();
+                                break;
+                        }
+                    } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+
+                    // Vou deixar esta parte comentada porque será o espaço destinado para a etapa de férias.
+                    /*Console.WriteLine("- Etapa 6");
+                    Console.WriteLine("- O funcionario irá tirar férias este mês? Para SIM dígite [1], para NÃO dígite [2]");
+                    Console.Write("- Escolha...: ");
+                    simNao = int.Parse(Console.ReadLine());
+                    Console.WriteLine();*/
+
+                    do
+                    {
+                        Console.WriteLine("- Etapa 6");
+                        Console.WriteLine("- O funcionario possui vale transporte? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.Write("- Escolha...: ");
+                        simNao = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        switch (simNao)
+                        {
+                            case 1:
+                                CalcularValeTransporte();
+                                Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            case 2:
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            default:
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine();
+                                break;
+                        }
+                    }while (simNao != 1 && simNao != 2);
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine();
 

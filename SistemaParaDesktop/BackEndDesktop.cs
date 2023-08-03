@@ -15,7 +15,7 @@ namespace SistemaParaDesktop
             Console.WriteLine("Vamos gerar a folha de pagamento");
             Console.WriteLine();
             Console.WriteLine();
-            ObjetofolhaDePagamento.GerarFolhaDePagamento();
+             ObjetofolhaDePagamento.GerarFolhaDePagamento();
         }
     }
 }
