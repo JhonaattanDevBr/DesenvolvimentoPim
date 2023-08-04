@@ -37,54 +37,34 @@ namespace SistemaParaDesktop
             double porcentagem, passagem, valorPorcentagem,valorPassagem, salarioBruto;
             int diasUteis;
 
-            Console.WriteLine("- Vamos verificar qual o menor valor para desconto do VT.");
+            Console.WriteLine("- Vamos verificar qual o menor valor para desconto do vale transporte.");
             Console.WriteLine();
 
-            Console.WriteLine("- Primeiro passo:");
-            Console.Write("- Informe o salário bruto do funcionario: R$ ");
+            Console.Write("- Primeiro informe o salário bruto do funcionario: R$ ");
             salarioBruto = double.Parse(Console.ReadLine());
-            //Console.WriteLine("--------------------------------------------------------------------------");
-            Console.WriteLine();
-
-            Console.WriteLine("- Segundo passo:");
-            Console.Write("- Informe a porcentagem correspondente ao vale transporte: ");
+            Console.Write("- Segundo informe a porcentagem correspondente ao vale transporte: ");
             porcentagem = double.Parse(Console.ReadLine());
             valorPorcentagem = salarioBruto * (porcentagem / 100);
-            //Console.WriteLine("--------------------------------------------------------------------------");
-            Console.WriteLine();
-
-            Console.WriteLine("- Terceiro passo:");
-            Console.Write("- Informe o valor da passagem somando ida e volta: R$ ");
+            Console.Write("- Terceiro informe o valor da passagem somando ida e volta: R$ ");
             passagem = double.Parse(Console.ReadLine());
-            Console.Write("- Informe a quantidade de dias uteis: ");
+            Console.Write("- Quarto informe a quantidade de dias uteis: ");
             diasUteis = int.Parse(Console.ReadLine());
             valorPassagem =  passagem * (double) diasUteis;
-            //Console.WriteLine("--------------------------------------------------------------------------");
             Console.WriteLine();
 
             if(valorPorcentagem < valorPassagem)
             {
-                Console.WriteLine("\t- Menor Valor.");
-                Console.Write($"- Valor a ser descontado por porcentagem: R$ {valorPorcentagem:f2}");
+                Console.Write($"- Menor valor: Valor a ser descontado por porcentagem R$ {valorPorcentagem:f2}");
                 Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine("\t- Maior valor.");
-                Console.Write($"- Valor a ser descontado por dias uteis: R$ {valorPassagem:f2}");
                 Console.ReadKey();
-                Console.WriteLine();
                 DescontoDoValeTransporte = valorPorcentagem;
                 return DescontoDoValeTransporte;
             }
             else
             {
-                Console.WriteLine("\t- Menor valor.");
-                Console.Write($"- Valor a ser descontado por dias uteis: R$ {valorPassagem:f2}");
+                Console.Write($"- Menor valor: Valor a ser descontado por dias uteis R$ {valorPassagem:f2}");
                 Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine("\t- Maior valor.");
-                Console.Write($"- Valor a ser descontado por porcentagem: R$ {valorPorcentagem:f2}");
                 Console.ReadKey();
-                Console.WriteLine();
                 DescontoDoValeTransporte = valorPassagem;
                 return DescontoDoValeTransporte;
             }
@@ -95,19 +75,15 @@ namespace SistemaParaDesktop
             int diasUteis;
             double percentual, valorDoVale, descontoDoVale;
 
-            Console.WriteLine("---Vale Refeição/Alimentação---");
-            Console.WriteLine();
-            Console.Write("-Informe o valor do vale refeição diario: R$ ");
+            Console.Write("- Informe o valor do vale refeição/alimentação diario: R$ ");
             valorDoVale = double.Parse(Console.ReadLine());
-            Console.Write("-Informe a quantidade de dias uteis do mês: ");
+            Console.Write("- Informe a quantidade de dias uteis do mês: ");
             diasUteis = int.Parse(Console.ReadLine());
-            Console.Write("-Informe o percentual de desconto do vale: ");
+            Console.Write("- Informe o percentual de desconto do vale: ");
             percentual = double.Parse(Console.ReadLine());
             descontoDoVale = valorDoVale * (double) diasUteis * (percentual / 100);
             Console.WriteLine();
-            Console.WriteLine("-----------------------------------------------------------------------------");
-            Console.WriteLine();
-            Console.WriteLine($"-Valor a se descontado de vale refeição/alimentação: R$ {descontoDoVale:f2}");
+            Console.WriteLine($"- Valor a se descontado de vale refeição/alimentação: R$ {descontoDoVale:f2}");
             Console.ReadKey();
             DescontoDoValeRefeicaoAlimentacao = descontoDoVale;
             return DescontoDoValeRefeicaoAlimentacao;
@@ -411,7 +387,7 @@ namespace SistemaParaDesktop
                             }
                             else
                             {
-                                Console.WriteLine("- ERRO! Opção inválida, selecione entre [1] ou [2].");
+                                Console.WriteLine("- ERRO! Opção inválida, selecione entre [1], [2] ou [3].");
                                 Console.WriteLine("- Dígite qualquer coisa para retornar.");
                                 Console.ReadKey();
                                 Console.WriteLine();
@@ -433,9 +409,46 @@ namespace SistemaParaDesktop
 
         public double CalcularAdicionalNoturno()
         {
-            double salarioBruto, valorDaHoraNormal, valorDoAdicionalNoturnoHora, acrescimo;
-            int quantidadeDeHoras;
+            double salarioBruto, valorDaHoraNormal, valorDoAdicionalNoturnoHora, acrescimo, horaConvertida, quantidadeDeHoras;
+            int converter;
 
+            do
+            {
+                Console.WriteLine("- Horas com minutos não são calculadas pois é necessario converte-las em horas.");
+                Console.WriteLine("- É necesario fazer converção de minutos em horas ?");
+                Console.WriteLine();
+                Console.WriteLine("- Para SIM dígite [1]");
+                Console.WriteLine("- Para NÃO dígite [2]");
+                Console.Write("- Converter...: ");
+                converter = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                if (converter == 1)
+                {
+                    horaConvertida = ConversorDeMinutosEmHoras();
+                    Console.WriteLine();
+                    Console.WriteLine("- Minutos convertidos em horas!");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                }
+                else if (converter == 2)
+                {
+                    Console.WriteLine("- Proseguindo para a próxima etapa.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                    Console.WriteLine();
+                }
+            } while (converter != 1 && converter != 2);
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+            Console.WriteLine();
+
+            Console.WriteLine("- Agora vamos calcular o adcional noturno do funcionário.");
             Console.Write("- Informe o salário bruto do funcionário: R$ ");
             salarioBruto = double.Parse(Console.ReadLine());
             valorDaHoraNormal = salarioBruto / (double) 220;
@@ -443,8 +456,8 @@ namespace SistemaParaDesktop
             valorDoAdicionalNoturnoHora = valorDaHoraNormal + acrescimo;
 
             Console.Write("- Informe a quantidade de horas trabalhadas como adicional noturno: ");
-            quantidadeDeHoras = int.Parse(Console.ReadLine());
-            ValorDoAdicionalNoturno = (double) quantidadeDeHoras * valorDoAdicionalNoturnoHora;
+            quantidadeDeHoras = double.Parse(Console.ReadLine());
+            ValorDoAdicionalNoturno = quantidadeDeHoras * valorDoAdicionalNoturnoHora;
             Console.WriteLine();
 
             Console.WriteLine($"- O valor hora de adicional noturno do funcionário é de: R$ {valorDoAdicionalNoturnoHora:f2}");
@@ -454,57 +467,41 @@ namespace SistemaParaDesktop
 
         public double CalcularConvenioMedico()
         {
-            double salarioBruto, valorDoConvenioMedico;
-
-            Console.WriteLine("---Calcular Convenio Médico---");
-            Console.WriteLine();
-            Console.Write("- Informe o salário bruto do funcionario: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
+            double valorDoConvenioMedico;
 
             //Console.WriteLine("- Selecione qual a empresa que fornece o plano de saúde: "); Só vou utilizar isso depois que ficar o BD com as empresas e seus valores.
+            // Vou precisar fazer um acesso ao BD e fazer uma pesquisa das empresas e buscar o valor cobrado por ela, depois armazenar na variavel abaixo.
             Console.Write("- Informe o valor cobrado pela empresa que fornece o serviço: R$ ");
             valorDoConvenioMedico = double.Parse(Console.ReadLine());
-            DescontoDoConvenioMedico = salarioBruto - valorDoConvenioMedico;
+            DescontoDoConvenioMedico = valorDoConvenioMedico;
             Console.WriteLine();
 
             Console.WriteLine($"- O valor do convenio médico descontado do funcionarios é de: R$ {valorDoConvenioMedico:f2}");
-            Console.WriteLine($"- Salario alterado para: R$ {DescontoDoConvenioMedico:f2}"); // Depois não vou precisar disso então vou retirar fazer o retorno do ValorDoConvenioMedico e tornalo um atributo ao invés de uma variavel. 
             Console.ReadKey();
             return DescontoDoConvenioMedico;
         }  
 
         public double CalcularConvenioOdontologico()
         {
-            double salarioBruto, valorDoConvenioOdontologico;
-
-            Console.WriteLine("---Calcular Convenio Odontológico---");
-            Console.WriteLine();
-            Console.Write("- Informe o salário bruto do funcionario: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
+            double valorDoConvenioOdontologico;
 
             //Console.WriteLine("- Selecione qual a empresa que fornece o plano odontológico: "); Só vou utilizar isso depois que ficar o BD com as empresas e seus valores.
+            // Vou precisar fazer um acesso ao BD e fazer uma pesquisa das empresas e buscar o valor cobrado por ela, depois armazenar na variavel abaixo.
             Console.Write("- Informe o valor cobrado pela empresa que fornece o serviço: R$ ");
             valorDoConvenioOdontologico = double.Parse(Console.ReadLine());
-            DescontoDoConvenioOdontologico = salarioBruto - valorDoConvenioOdontologico;
+            DescontoDoConvenioOdontologico = valorDoConvenioOdontologico;
             Console.WriteLine();
 
             Console.WriteLine($"- O valor do convenio odontológico descontado do funcionarios é de: R$ {valorDoConvenioOdontologico:f2}");
-            Console.WriteLine($"- Salario alterado para: R$ {DescontoDoConvenioOdontologico:f2}"); // Depois não vou precisar disso então vou retirar fazer o retorno do ValorDoConvenioOdontologico e tornalo um atributo ao invés de uma variavel. 
             Console.ReadKey();
             return DescontoDoConvenioOdontologico;
         } 
 
         public double CalcularDependencia()
         {
-            double salarioBruto;
             double dependente = 189.59;
-            int quantidadeDeDependentes;
+            int quantidadeDeDependentes; 
 
-            Console.WriteLine("---Calculando Dependencia---");
-            Console.WriteLine();
-
-            Console.Write("- Informe o salário bruto: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
             Console.Write("- Informe a quantidade de dependentes: R$ ");
             quantidadeDeDependentes = int.Parse(Console.ReadLine());
             DescontoTotalDeDependentes = (double) quantidadeDeDependentes * dependente;
@@ -571,66 +568,90 @@ namespace SistemaParaDesktop
             double horasConvertidas;
             int converter, tipoDeDesconto;
 
-            Console.WriteLine("---Atrasos--");
-            Console.WriteLine();
-
-            Console.WriteLine("- Se for necessario fazer a conversão de minutos em horas para as proximas formulas digite [1], caso contrario digite [2].");
-            Console.Write("- Converter...: ");
-            converter = int.Parse(Console.ReadLine());
-
-            if(converter == 1)
-            {
+            //Console.WriteLine("---Atrasos--");
+            //Console.WriteLine();
+            do {
+                Console.WriteLine("- Se for necessario fazer a conversão de minutos em horas para as proximas formulas digite [1], caso contrario digite [2].");
+                Console.Write("- Converter...: ");
+                converter = int.Parse(Console.ReadLine());
                 Console.WriteLine();
-                Console.WriteLine("---------------------------------------------------");
-                Console.WriteLine();
-                horasConvertidas = this.ConversorDeMinutosEmHoras();
-            }
-            else{ }
+
+                if (converter == 1)
+                {
+                    //Console.WriteLine();
+                    //Console.WriteLine("---------------------------------------------------");
+                   // Console.WriteLine();
+                    horasConvertidas = this.ConversorDeMinutosEmHoras();
+                    Console.WriteLine();
+                    Console.WriteLine("- Proseguindo para a próxima etapa.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                }
+                else if (converter == 2)
+                {
+                    //Console.WriteLine("- Proseguindo para a próxima etapa.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                    Console.WriteLine();
+                }
+            }while (converter != 1 && converter != 2);
+
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine();
 
-            Console.WriteLine("- Selecione qual o tipo de atraso deseja calcular.");
-            Console.WriteLine();
-            Console.WriteLine("- Para desconto de atraso comum dígite............................[1]");
-            Console.WriteLine("- Para desconto de falta injustifícada ao trabalho dígite.........[2]");
-            Console.WriteLine("- Para desconto de falta ao trabalho com DSR dígite...............[3]");
-            Console.WriteLine("- Para sair dígite................................................[4]");
-            Console.Write("- Tipo de desconto...: ");
-            tipoDeDesconto = int.Parse(Console.ReadLine());
-            Console.Clear();
-
-
-            switch (tipoDeDesconto)
+            do
             {
-                case 1:
-                    Console.WriteLine("---Atraso Comum---");
-                    Console.WriteLine();
-                    TotalDeAtrasos = this.AtrasoComum();
-                    Console.ReadKey();
-                    break;
+                Console.WriteLine("- Selecione qual o tipo de atraso deseja calcular.");
+                Console.WriteLine();
+                Console.WriteLine("- Para desconto de atraso comum dígite............................[1]");
+                Console.WriteLine("- Para desconto de falta injustifícada ao trabalho dígite.........[2]");
+                Console.WriteLine("- Para desconto de falta ao trabalho com DSR dígite...............[3]");
+                Console.WriteLine("- Para sair dígite................................................[4]");
+                Console.Write("- Tipo de desconto...: ");
+                tipoDeDesconto = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
-                case 2:
-                    Console.WriteLine("---Falta ao Trabalho Injustifícada---");
-                    Console.WriteLine();
-                    TotalDeAtrasos = this.FaltaInjustificada();
-                    Console.ReadKey();
-                    break;
+                switch (tipoDeDesconto)
+                {
+                    case 1:
+                        Console.WriteLine("---Atraso Comum---");
+                        Console.WriteLine();
+                        TotalDeAtrasos = this.AtrasoComum();
+                        Console.ReadKey();
+                        break;
 
-                case 3:
-                    Console.WriteLine("---Falta ao Tabalho com DSR---");
-                    Console.WriteLine();
-                    TotalDeAtrasos = this.FaltaInjustificadaComDsr();
-                    Console.ReadKey();
-                    break;
+                    case 2:
+                        Console.WriteLine("---Falta ao Trabalho Injustifícada---");
+                        Console.WriteLine();
+                        TotalDeAtrasos = this.FaltaInjustificada();
+                        Console.ReadKey();
+                        break;
 
-                case 4:
-                    Console.WriteLine("---Saindo---");
-                    break;
+                    case 3:
+                        Console.WriteLine("---Falta ao Tabalho com DSR---");
+                        Console.WriteLine();
+                        TotalDeAtrasos = this.FaltaInjustificadaComDsr();
+                        Console.ReadKey();
+                        break;
 
-                default:
-                    Console.WriteLine("-Error, Valor Invalido");
-                    break;
-            }
+                    case 4:
+                        Console.WriteLine("---Saindo---");
+                        break;
+
+                    default:
+                        Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                        Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                        Console.ReadKey();
+                        Console.WriteLine();
+                        break;
+                }
+            } while (tipoDeDesconto != 1 &&  tipoDeDesconto != 2 && tipoDeDesconto != 3 && tipoDeDesconto != 4);
             return TotalDeAtrasos;
         } 
 
@@ -658,22 +679,21 @@ namespace SistemaParaDesktop
 
         private double AtrasoComum()
         {
-            double salarioBruto;
-            int jornada, horasEmAtraso;
+            double salarioBruto, horasEmAtraso;
+            int jornada;
 
             Console.Write("- Informe o salario bruto do funcionario: R$ ");
             salarioBruto = double.Parse(Console.ReadLine());
             Console.Write("- Informe a quantidade de atrasos em horas: ");
-            horasEmAtraso = int.Parse(Console.ReadLine());
+            horasEmAtraso = double.Parse(Console.ReadLine());
             Console.Write("- Informe as horas da jornada de trabalho: ");
             jornada = int.Parse(Console.ReadLine());
 
-            DescontoDeAtrasos = (salarioBruto * (double) horasEmAtraso) / (double) jornada;
+            DescontoDeAtrasos = (salarioBruto * horasEmAtraso) / (double) jornada;
             Console.WriteLine();
 
-            Console.WriteLine($"- O valor de desconto devido a atrasos é de: R$ {DescontoDeAtrasos:f2}");
+            Console.WriteLine($"- O valor de desconto devido a tempo de atrasos é de: R$ {DescontoDeAtrasos:f2}");
             Console.WriteLine($"- Total de horas em atraso: {horasEmAtraso}");
-            Console.ReadKey();
             return DescontoDeAtrasos;
         } 
 
@@ -953,7 +973,7 @@ namespace SistemaParaDesktop
 
                     do
                     {
-                        Console.WriteLine("- Etapa 6");
+                        Console.WriteLine("- Etapa 7");
                         Console.WriteLine("- O funcionario possui vale transporte? Para SIM dígite [1], para NÃO dígite [2]");
                         Console.Write("- Escolha...: ");
                         simNao = int.Parse(Console.ReadLine());
@@ -986,6 +1006,180 @@ namespace SistemaParaDesktop
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine();
 
+                    do
+                    {
+                        Console.WriteLine("- Etapa 8");
+                        Console.WriteLine("- O funcionario possui vale refeição ou alimentação? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.Write("- Escolha...: ");
+                        simNao = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        switch (simNao)
+                        {
+                            case 1:
+                                CalcularValeAlimentacao();
+                                Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            case 2:
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            default:
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine();
+                                break;
+                        }
+                    } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+
+                    do
+                    {
+                        Console.WriteLine("- Etapa 9");
+                        Console.WriteLine("- O funcionario possui convênio médico? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.Write("- Escolha...: ");
+                        simNao = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        switch (simNao)
+                        {
+                            case 1:
+                                CalcularConvenioMedico();
+                                Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            case 2:
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            default:
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine();
+                                break;
+                        }
+                    } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+
+                    do
+                    {
+                        Console.WriteLine("- Etapa 10");
+                        Console.WriteLine("- O funcionario possui convênio odontológico? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.Write("- Escolha...: ");
+                        simNao = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        switch (simNao)
+                        {
+                            case 1:
+                                CalcularConvenioOdontologico();
+                                Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            case 2:
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            default:
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine();
+                                break;
+                        }
+                    } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+
+                    do
+                    {
+                        Console.WriteLine("- Etapa 11");
+                        Console.WriteLine("- O funcionario possui dependentes? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.Write("- Escolha...: ");
+                        simNao = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        switch (simNao)
+                        {
+                            case 1:
+                                CalcularDependencia();
+                                Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            case 2:
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            default:
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine();
+                                break;
+                        }
+                    } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+
+                    do
+                    {
+                        Console.WriteLine("- Etapa 12");
+                        Console.WriteLine("- O funcionario atrasos? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.Write("- Escolha...: ");
+                        simNao = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        switch (simNao)
+                        {
+                            case 1:
+                                CalcularAtrasos();
+                                Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            case 2:
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            default:
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine();
+                                break;
+                        }
+                    } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
 
                 }
                 else if (escolha == 2)
