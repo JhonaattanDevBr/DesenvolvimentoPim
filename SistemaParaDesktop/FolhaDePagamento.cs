@@ -11,6 +11,7 @@ namespace SistemaParaDesktop
     {
         // Terei que refatoras todo o código inserindo tratamento de erros, laços de repetição etc a todos os metodos. 
         private double SalarioBase { get; set; }
+        private double Vencimentos { get; set; }
         private double SalarioLiquido { get; set; }
         private double Descontos { get; set; }
         private double DescontoDoValeTransporte { get; set; }
@@ -91,62 +92,68 @@ namespace SistemaParaDesktop
 
         public double CalcularInss()
         {
-            double salarioBruto, percentualInss;
-            double parcela1 = 0;
-            double parcela2 = 19.53;
-            double parcela3 = 96.00;
-            double parcela4 = 173.81;
-            double parcela5 = 877.24;
+            // o descontro do INSS é aplicado sobre a soma de todos os proventos/entradas que o funcionario tiver.
+            // Vou precisar pegar todos os valores de entrada que o funcionario tiver, soma-los e depois aplicar a formula do INSS.
+            // Posso setar pra sempre que o usuario não solicitar um dos métodos de calculo ser atribuido o valor zero para o atributo e assim poder utilizar o seu valor nas formulas do INSS, IRRF e Pensão.
+            
+            double percentualInss, valorParaCalculoDoInss;
+            double parcela1 = 0, parcela2 = 19.53, parcela3 = 96.00, parcela4 = 173.81, parcela5 = 877.24;
+            double salarioBruto = SalarioBase;
+            double horasExtras = TotalDeHorasExtras;
+            double periculosidadeInsalubridade = ValorTotalDePericulosidadeInsalubridade;
+            double adicionalNoturno = ValorDoAdicionalNoturno;
+            // double ferias =  Ainda não tenho este método então vou deixar esta linha comentada e liga-la ao código depois de criar o método.
+            // double adiantamentoDecimoTerceiro = Ainda não tenho este método então vou deixar esta linha comentada e liga-la ao código depois de criar o método.
+            valorParaCalculoDoInss = salarioBruto + horasExtras + periculosidadeInsalubridade + adicionalNoturno;
 
-            Console.WriteLine("---Calculo do INSS---");
+            
+            Console.WriteLine("- IMPORTANTE: O desconto do INSS é cálculado sobre a soma de todos os proventos que o funcionario obteve ao mês");
             Console.WriteLine();
-            Console.Write("- Informe o salario bruto do funcionario sobre o qual será gerado o desconto de INSS: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            Console.WriteLine("--------------------------------------------------------");
+            Console.WriteLine($"- Valor obtido para calculo do INSS: R$ {valorParaCalculoDoInss:f2}");
+            Console.WriteLine();
+            Console.WriteLine("- Agora vejamos sobre qual índice sa tabela do INSS sera aplicado o calculo.");
+            Console.WriteLine("- Dígite qualquer coisa para continuar.");
+            Console.ReadKey();
+            Console.WriteLine();
 
-            if (salarioBruto <= 1302.00) {
-                Console.WriteLine("---Desconto feito com base na aliquota de 7,5%---");
+            if (valorParaCalculoDoInss <= 1302.00) {
+                Console.WriteLine("- Desconto feito com base na aliquota de 7,5%");
                 Console.WriteLine();
                 percentualInss = 7.5 / 100;
-                DescontoDoInss = (salarioBruto * percentualInss) - parcela1;
+                DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela1;
                 Console.WriteLine("- Funcionario isento do desconto de INSS.");
                 Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
-                Console.ReadKey();
             }
 
-            else if (salarioBruto <= 2571.29) {
-                Console.WriteLine("---Desconto feito com base na aliquota de 9%---");
+            else if (valorParaCalculoDoInss <= 2571.29) {
+                Console.WriteLine("- Desconto feito com base na aliquota de 9%");
                 Console.WriteLine();
                 percentualInss = 9.0 / 100;
-                DescontoDoInss = (salarioBruto * percentualInss) - parcela2;
+                DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela2;
                 Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
-                Console.ReadKey();
             }
 
-            else if (salarioBruto <= 3856.94) {
-                Console.WriteLine("---Desconto feito com base na aliquota de 12%---");
+            else if (valorParaCalculoDoInss <= 3856.94) {
+                Console.WriteLine("- Desconto feito com base na aliquota de 12%");
                 Console.WriteLine();
                 percentualInss = 12.0 / 100;
-                DescontoDoInss = (salarioBruto * percentualInss) - parcela3;
+                DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela3;
                 Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
-                Console.ReadKey();
             }
 
-            else if (salarioBruto <= 7507.49) {
-                Console.WriteLine("---Desconto feito com base na aliquota de 14%---");
+            else if (valorParaCalculoDoInss <= 7507.49) {
+                Console.WriteLine("- Desconto feito com base na aliquota de 14%");
                 Console.WriteLine();
                 percentualInss = 14.0 / 100;
-                DescontoDoInss = (salarioBruto * percentualInss) - parcela4;
+                DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela4;
                 Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
-                Console.ReadKey();
             }
 
             else {
-                Console.WriteLine("---Valores acima de 7.507.49 R$ possuem um desconto fixo de 877.24 R$---");
+                Console.WriteLine("- Valores acima de 7.507.49 R$ possuem um desconto fixo de 877.24 R$");
                 Console.WriteLine();
-                DescontoDoInss = salarioBruto - parcela5;
+                DescontoDoInss = valorParaCalculoDoInss - parcela5;
                 Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
-                Console.ReadKey();
             }
             return DescontoDoInss;
         } 
@@ -231,14 +238,13 @@ namespace SistemaParaDesktop
             double salarioBruto;
             double porcentagem = 0.4;
 
-            Console.Write("- Informe o Salario bruto: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            Console.WriteLine();
-
+            //Console.Write("- Informe o Salario bruto: R$ ");
+            //salarioBruto = double.Parse(Console.ReadLine());
+            //Console.WriteLine();
+            salarioBruto = SalarioBase;
             AdiantamentoQuinzenal = salarioBruto * porcentagem;
             Console.WriteLine($"- Valor do Salário bruto: R$ {salarioBruto:f2}");
             Console.WriteLine($"- Valor do Adiantamento: R$ {AdiantamentoQuinzenal:f2}");
-
             return AdiantamentoQuinzenal;
         } 
 
@@ -276,6 +282,7 @@ namespace SistemaParaDesktop
                     Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                     Console.WriteLine("- Dígite qualquer coisa para continuar.");
                     Console.ReadKey();
+                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                     Console.WriteLine();
                 }
             }while(converter != 1 && converter != 2);
@@ -323,7 +330,7 @@ namespace SistemaParaDesktop
             double valorDaPorcentagem, salarioBruto;
             int beneficio;
 
-            Console.WriteLine();
+           // Console.WriteLine();
             Console.Write("- Informe o salário bruto do funcionario: ");
             salarioBruto = double.Parse(Console.ReadLine());
             Console.WriteLine();
@@ -352,9 +359,38 @@ namespace SistemaParaDesktop
                     case 2:
                             Console.WriteLine("---Cálculo da Insalubridade---");
                             Console.WriteLine();
-                            int grau;
-                        do
-                        {
+                            int grau, escolha;
+                            double salarioMinimo = 1320.00, valorDeCalculo = 0, percentual = 0;
+
+                        do {
+                            Console.WriteLine("- ATENÇÂO: O cálculo de insalubridade é aplicado sobre o sálario mínimo, exceto em acordo entre o funcionário e o empregador.");
+                            Console.WriteLine("- Sendo assim, para prosseguir selecione.");
+                            Console.WriteLine();
+                            Console.WriteLine("- Para salário mínimo dígite [1]");
+                            Console.WriteLine("- Para salário base dígite [2]");
+                            Console.Write("- Escolha...: ");
+                            escolha = int.Parse(Console.ReadLine());
+                            Console.WriteLine();
+
+                            if (escolha == 1)
+                            {
+                                valorDeCalculo = salarioMinimo;
+                            }
+                            else if (escolha == 2)
+                            {
+                                valorDeCalculo = salarioBruto;
+                            }
+                            else
+                            {
+                                Console.WriteLine("- ERRO! Opção inválida, selecione entre [1] ou [2].");
+                                Console.WriteLine("- Dígite qualquer coisa para retornar.");
+                                Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                                Console.WriteLine();
+                            }
+                        } while(escolha != 1 && escolha != 2);
+
+                        do { 
                             Console.WriteLine("- Informe qual o grau de insalubridade sobre o qual o funcionario exerce sua função.");
                             Console.WriteLine();
                             Console.WriteLine("- Dígite [1] para leve/10%.");
@@ -366,23 +402,23 @@ namespace SistemaParaDesktop
 
                             if (grau == 1)
                             {
-                                valorDaPorcentagem = salarioBruto * 0.1;
-                                ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
-                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 10% correspodente a: R$ {valorDaPorcentagem:f2}");
+                                percentual = valorDeCalculo * 0.1;
+                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 10% correspodente a: R$ {percentual:f2}");
+                                ValorTotalDePericulosidadeInsalubridade = percentual;
                                 Console.ReadKey();
                             }
                             else if (grau == 2)
                             {
-                                valorDaPorcentagem = salarioBruto * 0.2;
-                                ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
-                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 20% correspodente a: R$ {valorDaPorcentagem:f2}");
+                                percentual = valorDeCalculo * 0.2;
+                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 20% correspodente a: R$ {percentual:f2}");
+                                ValorTotalDePericulosidadeInsalubridade = percentual;
                                 Console.ReadKey();
                             }
                             else if (grau == 3)
                             {
-                                valorDaPorcentagem = salarioBruto * 0.4;
-                                ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
-                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 40% correspodente a: R$ {valorDaPorcentagem:f2}");
+                                percentual = valorDeCalculo * 0.4;
+                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 40% correspodente a: R$ {percentual:f2}");
+                                ValorTotalDePericulosidadeInsalubridade = percentual;
                                 Console.ReadKey();
                             }
                             else
@@ -390,6 +426,7 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- ERRO! Opção inválida, selecione entre [1], [2] ou [3].");
                                 Console.WriteLine("- Dígite qualquer coisa para retornar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                             }
                         }while (grau != 1 && grau != 2 && grau != 3);
@@ -399,12 +436,12 @@ namespace SistemaParaDesktop
                         Console.WriteLine("- ERRO! Opção inválida, selecione entre [1] ou [2].");
                         Console.WriteLine("- Dígite qualquer coisa para retornar.");
                         Console.ReadKey();
+                        Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                         Console.WriteLine();
                         break;
                 }
             } while (beneficio != 1 && beneficio != 2);
             return ValorTotalDePericulosidadeInsalubridade;
-            
         } 
 
         public double CalcularAdicionalNoturno()
@@ -414,8 +451,8 @@ namespace SistemaParaDesktop
 
             do
             {
-                Console.WriteLine("- Horas com minutos não são calculadas pois é necessario converte-las em horas.");
-                Console.WriteLine("- É necesario fazer converção de minutos em horas ?");
+                Console.WriteLine("- Horas com minutos não são calculadas, é necessario converter os minutos em horas.");
+                Console.WriteLine("- Deseja realizar a converção de minutos em horas ?");
                 Console.WriteLine();
                 Console.WriteLine("- Para SIM dígite [1]");
                 Console.WriteLine("- Para NÃO dígite [2]");
@@ -442,6 +479,7 @@ namespace SistemaParaDesktop
                     Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                     Console.WriteLine("- Dígite qualquer coisa para continuar.");
                     Console.ReadKey();
+                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                     Console.WriteLine();
                 }
             } while (converter != 1 && converter != 2);
@@ -449,6 +487,7 @@ namespace SistemaParaDesktop
             Console.WriteLine();
 
             Console.WriteLine("- Agora vamos calcular o adcional noturno do funcionário.");
+            Console.WriteLine();
             Console.Write("- Informe o salário bruto do funcionário: R$ ");
             salarioBruto = double.Parse(Console.ReadLine());
             valorDaHoraNormal = salarioBruto / (double) 220;
@@ -568,19 +607,14 @@ namespace SistemaParaDesktop
             double horasConvertidas;
             int converter, tipoDeDesconto;
 
-            //Console.WriteLine("---Atrasos--");
-            //Console.WriteLine();
             do {
-                Console.WriteLine("- Se for necessario fazer a conversão de minutos em horas para as proximas formulas digite [1], caso contrario digite [2].");
+                Console.WriteLine("- Se for necessario fazer a conversão de minutos em horas para os proximos cálculos digite [1], caso contrario digite [2].");
                 Console.Write("- Converter...: ");
                 converter = int.Parse(Console.ReadLine());
                 Console.WriteLine();
 
                 if (converter == 1)
                 {
-                    //Console.WriteLine();
-                    //Console.WriteLine("---------------------------------------------------");
-                   // Console.WriteLine();
                     horasConvertidas = this.ConversorDeMinutosEmHoras();
                     Console.WriteLine();
                     Console.WriteLine("- Proseguindo para a próxima etapa.");
@@ -589,7 +623,6 @@ namespace SistemaParaDesktop
                 }
                 else if (converter == 2)
                 {
-                    //Console.WriteLine("- Proseguindo para a próxima etapa.");
                     Console.WriteLine("- Dígite qualquer coisa para continuar.");
                     Console.ReadKey();
                 }
@@ -598,6 +631,7 @@ namespace SistemaParaDesktop
                     Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                     Console.WriteLine("- Dígite qualquer coisa para continuar.");
                     Console.ReadKey();
+                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                     Console.WriteLine();
                 }
             }while (converter != 1 && converter != 2);
@@ -648,6 +682,7 @@ namespace SistemaParaDesktop
                         Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                         Console.WriteLine("- Dígite qualquer coisa para continuar.");
                         Console.ReadKey();
+                        Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                         Console.WriteLine();
                         break;
                 }
@@ -659,18 +694,25 @@ namespace SistemaParaDesktop
         {
             int quantidadeDehorasFechadas, quantidadeDeMinutos;
             double totalDeMinutos;
-            //double QuantidadeDehoras;
-
-            Console.WriteLine("---Conversor de Horas Para Minutos---");
-            Console.WriteLine();
 
             Console.Write("- Informe a quantidade de horas fechadas: ");
             quantidadeDehorasFechadas = int.Parse(Console.ReadLine());
 
-            Console.Write("- Informe a quantidade de minutos: ");
-            quantidadeDeMinutos = int.Parse(Console.ReadLine());
-            totalDeMinutos = (double) quantidadeDeMinutos / 60.0;
+            do
+            {
+                Console.Write("- Informe a quantidade de minutos: ");
+                quantidadeDeMinutos = int.Parse(Console.ReadLine());
+                if (quantidadeDeMinutos <= 0 || quantidadeDeMinutos > 60)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("- Error! Não é possivel entrar com valores abaixo de [0] pois não se configuram em horas.");
+                    Console.WriteLine("- Error! Não é possível entrar com valores acima de [60] pois se configura como uma hora fechada.");
+                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ ENTRE COM UM VALOR VÁLIDO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                    Console.WriteLine();
+                }
+            } while (quantidadeDeMinutos <= 0 || quantidadeDeMinutos > 60);
 
+            totalDeMinutos = (double)quantidadeDeMinutos / 60.0;
             TotalDeHorasConvertidas = (double) quantidadeDehorasFechadas + totalDeMinutos;
             Console.WriteLine();
             Console.WriteLine($"- Total de Horas: {TotalDeHorasConvertidas:f2}");
@@ -709,7 +751,6 @@ namespace SistemaParaDesktop
             DescontoDeFaltasInjustificadas = (salarioBruto * (double) faltas) / (double) 30;
             Console.WriteLine();
             Console.WriteLine($"- O valor de desconto devido a faltas injustificadas é de: R$ {DescontoDeFaltasInjustificadas:f2}");
-            Console.ReadKey();
             return DescontoDeFaltasInjustificadas;
         } 
 
@@ -718,14 +759,12 @@ namespace SistemaParaDesktop
             double salarioBruto, valorDoDsr, horaExtra, valorDoReflexo;
             int faltas, dsr, reflexoDoDsr, diasUteis, dsrDoMes;
 
-            Console.WriteLine("--- Falta Injustificada com DSR---");
-            Console.WriteLine();
-
             Console.WriteLine("- Primeiro vamos calcular o valor do dsr do funcionario.");
             Console.WriteLine();
             Console.Write("- Informe o salário bruto do funcionario: ");
             salarioBruto = double.Parse(Console.ReadLine());
             valorDoDsr = salarioBruto / 30;
+            Console.WriteLine();
             Console.WriteLine($"- O valor do DSR do funcionario é de: R$ {valorDoDsr:f2}");
             Console.WriteLine("----------------------------------------------------------------");
             Console.WriteLine();
@@ -739,43 +778,48 @@ namespace SistemaParaDesktop
             FaltasInjustificadasComDsr = ((salarioBruto * (double) faltas) / (double) 30) + ((double) dsr * valorDoDsr) ;
             Console.WriteLine();
             Console.WriteLine($"- O valor total de desconto de faltas + DSR é de: R$ {FaltasInjustificadasComDsr:f2}");
-            Console.ReadKey();
             Console.WriteLine("----------------------------------------------------------------");
             Console.WriteLine();
-            Console.WriteLine("- O funcionario realizou horas extras ou teve algum acrescimo ao salário no mes? Caso sim o reflexo do DSR deverá ser calculado.");
-            Console.WriteLine();
-            Console.WriteLine("- Para sim dígite [1]");
-            Console.WriteLine("- Para não dígite [2]");
-            Console.Write("- Reflexo...: ");
-            reflexoDoDsr = int.Parse(Console.ReadLine());
-            Console.WriteLine();
 
-            if(reflexoDoDsr == 1)
+            do
             {
-                Console.Write("- Informe o valor da hora extra/comissão obtido pelo funcionario no mês: R$ ");
-                horaExtra = double.Parse(Console.ReadLine());
-                Console.Write("- Informe a quantidade de dias uteis do mes: ");
-                diasUteis = int.Parse(Console.ReadLine());
-                Console.Write("- Informe a quantidade de DSR do mes: ");
-                dsrDoMes = int.Parse(Console.ReadLine());
-                valorDoReflexo = (horaExtra / (double) diasUteis) * (double) dsrDoMes;
-                FaltasInjustificadasComDsr += valorDoReflexo;
+                Console.WriteLine("- O funcionario realizou horas extras ou teve algum acrescimo ao salário no mes? Caso sim o reflexo do DSR deverá ser calculado.");
                 Console.WriteLine();
-                Console.WriteLine($"- O valor do reflexo é de: R$ {valorDoReflexo:f2}");
-                Console.WriteLine($"- O valor a ser descontado por falta ao trabalho + DSR + reflexo do DSR é de: R$ {FaltasInjustificadasComDsr:f2}");
-                Console.ReadKey();
-            }
-            else if(reflexoDoDsr == 2)
-            {
-                Console.WriteLine("- Dígite qualquer coisa para retornar");
-                Console.ReadKey();
-            }
-            else
-            {
-                Console.WriteLine("- ERROR, Valor invalida selecione entre as opções [1] ou [2].");
-                Console.WriteLine("- Dígite qualquer coisa para retornar");
-                Console.ReadKey(); // Aqui eu vou fazer um laço para repetir o processo quando um valor invalido for digitado.
-            }
+                Console.WriteLine("- Para sim dígite [1]");
+                Console.WriteLine("- Para não dígite [2]");
+                Console.Write("- Reflexo...: ");
+                reflexoDoDsr = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                if (reflexoDoDsr == 1)
+                {
+                    Console.Write("- Informe o valor da hora extra/comissão obtido pelo funcionario no mês: R$ ");
+                    horaExtra = double.Parse(Console.ReadLine());
+                    Console.Write("- Informe a quantidade de dias uteis do mes: ");
+                    diasUteis = int.Parse(Console.ReadLine());
+                    Console.Write("- Informe a quantidade de DSR do mes: ");
+                    dsrDoMes = int.Parse(Console.ReadLine());
+                    valorDoReflexo = (horaExtra / (double)diasUteis) * (double)dsrDoMes;
+                    FaltasInjustificadasComDsr += valorDoReflexo;
+                    Console.WriteLine();
+                    Console.WriteLine($"- O valor do reflexo é de: R$ {valorDoReflexo:f2}");
+                    Console.WriteLine($"- O valor a ser descontado por falta ao trabalho + DSR + reflexo do DSR é de: R$ {FaltasInjustificadasComDsr:f2}");
+                }
+                else if (reflexoDoDsr == 2)
+                {
+                    Console.WriteLine("- Dígite qualquer coisa para retornar");
+                    Console.ReadKey();
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("- ERROR, Valor invalida selecione entre as opções [1] ou [2].");
+                    Console.WriteLine("- Dígite qualquer coisa para retornar");
+                    Console.ReadKey();
+                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                    Console.WriteLine();
+                }
+            } while (reflexoDoDsr != 1 &&  reflexoDoDsr != 2);
             return FaltasInjustificadasComDsr;
         } 
 
@@ -813,14 +857,14 @@ namespace SistemaParaDesktop
 
                 if (escolha == 1)
                 {
-                    double salarioBase;
+                    //double salarioBase;
                     int simNao;
 
                     Console.WriteLine("\t\t---Modelo Sequência---");
                     Console.WriteLine();
                     Console.WriteLine("- Etapa 1");
                     Console.Write("- Informe o salário base do funcionário: R$ ");
-                    salarioBase = double.Parse(Console.ReadLine());
+                    SalarioBase = double.Parse(Console.ReadLine());
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine();
 
@@ -843,6 +887,7 @@ namespace SistemaParaDesktop
                                 break;
 
                             case 2:
+                                AdiantamentoQuinzenal = 0;
                                 Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
@@ -852,6 +897,7 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                                 break;
                         }
@@ -877,6 +923,7 @@ namespace SistemaParaDesktop
                                 break;
 
                             case 2:
+                                ValorDoAdicionalNoturno = 0;
                                 Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
@@ -886,6 +933,7 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                                 break;
                         }
@@ -913,6 +961,7 @@ namespace SistemaParaDesktop
                                 break;
 
                             case 2:
+                                ValorTotalDePericulosidadeInsalubridade = 0;
                                 Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
@@ -922,6 +971,7 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                                 break;
                         }
@@ -948,6 +998,7 @@ namespace SistemaParaDesktop
                                 break;
 
                             case 2:
+                                TotalDeHorasExtras = 0;
                                 Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
@@ -957,6 +1008,7 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                                 break;
                         }
@@ -990,6 +1042,7 @@ namespace SistemaParaDesktop
                                 break;
 
                             case 2:
+                                DescontoDoValeTransporte = 0;
                                 Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
@@ -999,6 +1052,7 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                                 break;
                         }
@@ -1025,6 +1079,7 @@ namespace SistemaParaDesktop
                                 break;
 
                             case 2:
+                                DescontoDoValeRefeicaoAlimentacao = 0;
                                 Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
@@ -1034,6 +1089,7 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                                 break;
                         }
@@ -1060,6 +1116,7 @@ namespace SistemaParaDesktop
                                 break;
 
                             case 2:
+                                DescontoDoConvenioMedico = 0;
                                 Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
@@ -1069,6 +1126,7 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                                 break;
                         }
@@ -1095,6 +1153,7 @@ namespace SistemaParaDesktop
                                 break;
 
                             case 2:
+                                DescontoDoConvenioOdontologico = 0;
                                 Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
@@ -1104,6 +1163,7 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                                 break;
                         }
@@ -1130,6 +1190,7 @@ namespace SistemaParaDesktop
                                 break;
 
                             case 2:
+                                DescontoTotalDeDependentes = 0;
                                 Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
@@ -1139,6 +1200,7 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                                 break;
                         }
@@ -1149,7 +1211,7 @@ namespace SistemaParaDesktop
                     do
                     {
                         Console.WriteLine("- Etapa 12");
-                        Console.WriteLine("- O funcionario atrasos? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.WriteLine("- O funcionario teve atrasos durante o mês? Para SIM dígite [1], para NÃO dígite [2]");
                         Console.Write("- Escolha...: ");
                         simNao = int.Parse(Console.ReadLine());
                         Console.WriteLine();
@@ -1165,6 +1227,7 @@ namespace SistemaParaDesktop
                                 break;
 
                             case 2:
+                                TotalDeAtrasos = 0;
                                 Console.WriteLine("- Proseguindo para a próxima etapa.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
@@ -1174,10 +1237,22 @@ namespace SistemaParaDesktop
                                 Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
                                 Console.WriteLine("- Dígite qualquer coisa para continuar.");
                                 Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                                 Console.WriteLine();
                                 break;
                         }
                     } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+
+                    Console.WriteLine("- Etapa 13");
+                    Console.WriteLine("- Chegou a hora de calcular o INSS.");
+                    Console.WriteLine();
+                    CalcularInss();
+                    Console.WriteLine();
+                    Console.WriteLine("- Proseguindo para a próxima etapa.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine();
 
@@ -1206,6 +1281,7 @@ namespace SistemaParaDesktop
                     Console.WriteLine("-Error, Opção invalida, selecione entre as opções.");
                     Console.WriteLine("- Dígite qualquer coisa para continuar.");
                     Console.ReadKey();
+                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                     Console.WriteLine();
                 }
 
