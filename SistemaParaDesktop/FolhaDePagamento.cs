@@ -93,11 +93,9 @@ namespace SistemaParaDesktop
         public double CalcularInss()
         {
             // o descontro do INSS é aplicado sobre a soma de todos os proventos/entradas que o funcionario tiver.
-            // Vou precisar pegar todos os valores de entrada que o funcionario tiver, soma-los e depois aplicar a formula do INSS.
-            // Posso setar pra sempre que o usuario não solicitar um dos métodos de calculo ser atribuido o valor zero para o atributo e assim poder utilizar o seu valor nas formulas do INSS, IRRF e Pensão.
-            
+
             double percentualInss, valorParaCalculoDoInss;
-            double parcela1 = 0, parcela2 = 19.53, parcela3 = 96.00, parcela4 = 173.81, parcela5 = 877.24;
+            double parcela1 = 0, parcela2 = 19.80, parcela3 = 96.94, parcela4 = 174.08, parcela5 = 877.24;
             double salarioBruto = SalarioBase;
             double horasExtras = TotalDeHorasExtras;
             double periculosidadeInsalubridade = ValorTotalDePericulosidadeInsalubridade;
@@ -106,127 +104,133 @@ namespace SistemaParaDesktop
             // double adiantamentoDecimoTerceiro = Ainda não tenho este método então vou deixar esta linha comentada e liga-la ao código depois de criar o método.
             valorParaCalculoDoInss = salarioBruto + horasExtras + periculosidadeInsalubridade + adicionalNoturno;
 
-            
             Console.WriteLine("- IMPORTANTE: O desconto do INSS é cálculado sobre a soma de todos os proventos que o funcionario obteve ao mês");
-            Console.WriteLine();
             Console.WriteLine($"- Valor obtido para calculo do INSS: R$ {valorParaCalculoDoInss:f2}");
             Console.WriteLine();
-            Console.WriteLine("- Agora vejamos sobre qual índice sa tabela do INSS sera aplicado o calculo.");
+            Console.WriteLine("- Agora vejamos sobre qual índice da tabela do INSS sera aplicado o calculo.");
             Console.WriteLine("- Dígite qualquer coisa para continuar.");
             Console.ReadKey();
             Console.WriteLine();
 
-            if (valorParaCalculoDoInss <= 1302.00) {
+            if (valorParaCalculoDoInss <= 1320.00) {
                 Console.WriteLine("- Desconto feito com base na aliquota de 7,5%");
-                Console.WriteLine();
+                //Console.WriteLine();
                 percentualInss = 7.5 / 100;
                 DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela1;
                 Console.WriteLine("- Funcionario isento do desconto de INSS.");
                 Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
+                Console.WriteLine();
             }
 
             else if (valorParaCalculoDoInss <= 2571.29) {
-                Console.WriteLine("- Desconto feito com base na aliquota de 9%");
-                Console.WriteLine();
+                Console.WriteLine("- Desconto feito com base na aliquota de 9,0%");
                 percentualInss = 9.0 / 100;
                 DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela2;
                 Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
+                Console.WriteLine();
             }
 
             else if (valorParaCalculoDoInss <= 3856.94) {
-                Console.WriteLine("- Desconto feito com base na aliquota de 12%");
-                Console.WriteLine();
+                Console.WriteLine("- Desconto feito com base na aliquota de 12,0%");
+               // Console.WriteLine();
                 percentualInss = 12.0 / 100;
                 DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela3;
                 Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
+                Console.WriteLine();
             }
 
             else if (valorParaCalculoDoInss <= 7507.49) {
-                Console.WriteLine("- Desconto feito com base na aliquota de 14%");
-                Console.WriteLine();
+                Console.WriteLine("- Desconto feito com base na aliquota de 14,0%");
+               // Console.WriteLine();
                 percentualInss = 14.0 / 100;
                 DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela4;
                 Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
+                Console.WriteLine();
             }
 
             else {
-                Console.WriteLine("- Valores acima de 7.507.49 R$ possuem um desconto fixo de 877.24 R$");
-                Console.WriteLine();
+                Console.WriteLine("- Valores acima de 7.507.49 R$ (teto do INSS), possuem um desconto fixo de 877.24 R$");
+               // Console.WriteLine();
                 DescontoDoInss = valorParaCalculoDoInss - parcela5;
                 Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
+                Console.WriteLine();
             }
             return DescontoDoInss;
         } 
 
-        public double CalcularIr()
+        public double CalcularIrrf()
         {
-            double salarioBruto, baseIr, inss, pensao = 0, dependente = 0, percentual, descontoIr = 0;
-            double parcela2 = 142.80;
-            double parcela3 = 354.80;
-            double parcela4 = 636.13;
-            double parcela5 = 869.69;
+            double baseIrrf, percentual, calculoNormal, calculoSimplificado, descontoIr = 0, valorSimplificado = 528.00;
+            double parcela2 = 158.40, parcela3 = 370.40, parcela4 = 651.73, parcela5 = 884.96;
+            double salarioBruto = SalarioBase;
+            double valorDoInss = DescontoDoInss;
+            double valorDaPensao = DescontoTotalDePensao;
+            double valorDeDependente = DescontoTotalDeDependentes;
 
-            Console.WriteLine("---Calculo do IR---");
-            Console.WriteLine();
-            /* A formula para calcular o IR é: Proventos (entradas) - INSS - Pensão - Dependentes. O valor obtido desse calculo vai ser atribuido a porcentagem de acordo
-             com a tabela de desconto do IR.
-            O valor por dependentes é de R$ 189,59 */
+            calculoNormal = salarioBruto - valorDoInss - valorDaPensao - valorDeDependente;
+            calculoSimplificado = salarioBruto - valorSimplificado;
 
-            Console.Write("- Informe o salário bruto do funcionário: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            inss = DescontoDoInss;
-           // Pensao = this.CalcularPensao(); Ainda irei incluir este método.
-           // Dependente = this.CalcularDependencia(); Ainda irei incluir este método.
-            baseIr = salarioBruto - inss - pensao - dependente;
-            Console.WriteLine();
-
-            if (baseIr <= 1903.98)
+            if( calculoNormal < calculoSimplificado)
             {
-                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIr:f2}");
+                baseIrrf = calculoNormal;
+            }
+            else
+            {
+                baseIrrf = calculoSimplificado;
+            }
+            
+            if (baseIrrf <= 2112.00)
+            {
+                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIrrf:f2}");
                 Console.WriteLine("- Desconto feito com base na aliquota de: 0,00%.");
                 Console.WriteLine();
                 Console.WriteLine("- Isento do desconto de IR, parcela a deduzir: R$ 0,00.");
                 Console.ReadKey();
+                Console.WriteLine();
             }
-            else if(baseIr <= 2826.65)
+            else if(baseIrrf <= 2826.65)
             {
-                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIr:f2}");
+                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIrrf:f2}");
                 Console.WriteLine("- Desconto feito com base na aliquota de: 7,50%.");
                 Console.WriteLine();
                 percentual = 7.50 / 100;
-                descontoIr = (baseIr * percentual) - parcela2;
+                descontoIr = (baseIrrf * percentual) - parcela2;
                 Console.Write($"- Valor de Desconto do IR: R$ {descontoIr:f2}");
                 Console.ReadKey();
+                Console.WriteLine();
             }
-            else if (baseIr <= 3751.05)
+            else if (baseIrrf <= 3751.05)
             {
-                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIr:f2}");
+                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIrrf:f2}");
                 Console.WriteLine("- Desconto feito com base na aliquota de: 15,00%.");
                 Console.WriteLine();
                 percentual = 15.00 / 100;
-                descontoIr = (baseIr * percentual) - parcela3;
+                descontoIr = (baseIrrf * percentual) - parcela3;
                 Console.Write($"- Valor de Desconto do IR: R$ {descontoIr:f2}");
                 Console.ReadKey();
+                Console.WriteLine();
             }
-            else if(baseIr <= 4664.68)
+            else if(baseIrrf <= 4664.68)
             {
-                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIr:f2}");
+                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIrrf:f2}");
                 Console.WriteLine("- Desconto feito com base na aliquota de: 22,50%.");
                 Console.WriteLine();
                 percentual = 22.50 / 100;
-                descontoIr = (baseIr * percentual) - parcela4;
+                descontoIr = (baseIrrf * percentual) - parcela4;
                 Console.Write($"- Valor de Desconto do IR: R$ {descontoIr:f2}");
                 Console.ReadKey();
+                Console.WriteLine();
             }
             else
             {
-                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIr:f2}");
+                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIrrf:f2}");
                 Console.WriteLine("- Base de cálculo de IR maior que 4.664,687 o desconto feito com base na aliquota de: 27,50%.");
                 Console.WriteLine();
                 percentual = 27.50 / 100;
-                descontoIr = (baseIr * percentual) - parcela5;
+                descontoIr = (baseIrrf * percentual) - parcela5;
                 Console.Write($"- Valor de Desconto do IR: R$ {descontoIr:f2}");
                 Console.ReadKey();
+                Console.WriteLine();
             }
             DescontoDoIrrf = descontoIr;
             return DescontoDoIrrf;
@@ -552,53 +556,19 @@ namespace SistemaParaDesktop
 
         public double CalcularPensao()
         {
-            int porcento;
-            double porcentagem;
-            double salarioBruto; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do SalarioBase.
-            double horaExtra; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do TotalDaHoraExtra.
-            double periculosidadeInsalubridade; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do ValorTotalDePericulosidadeEInsalubridade.
-            double adicionalNoturno; //Vou Fazer essa variavel receber o valor que foi calculado no atributo ValorDoAdicionalNoturno.
-            double ferias; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do TotalDaFerias que vai estar na classe de férias.
-            double inss; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do DescontoDoInss.
-            double irrf; //Vou Fazer essa variavel receber o valor que foi calculado no atributo do DescontoDoIr.
-            double baseDeCalculoDeDescontoDePensao;
+            int porcentagemFixada;
+            double porcentagemFixadaConvertida, salarioMinimo = 1320.00, valorDaPensao;
+           
+            Console.Write("- Informe a porcentagem de pensão fixada judicialmente: ");
+            porcentagemFixada = int.Parse(Console.ReadLine());
 
+            porcentagemFixadaConvertida = (double) porcentagemFixada / 100.0;
+            valorDaPensao = salarioMinimo * porcentagemFixadaConvertida;
 
-            Console.WriteLine("---Pensão----");
-            Console.WriteLine();
-
-            Console.Write("- Informe qual a porcentagem que deverá ser descontado do funcionario: R$ ");
-            porcento = int.Parse(Console.ReadLine());
-            porcentagem = (double) porcento / 100.0;
-            Console.WriteLine();
-
-            Console.WriteLine("- Informe todos proventos obtidos. Caso haja a ausencia de algum deles digite [0].");
-            Console.WriteLine();
-            Console.Write("- Informe o salário bruto: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            Console.Write("- Informe o total obtido de horas extras: R$ ");
-            horaExtra = double.Parse(Console.ReadLine());
-            Console.Write("- Informe o total obtido de periculosidade ou insalubridade: R$ ");
-            periculosidadeInsalubridade = double.Parse(Console.ReadLine());
-            Console.Write("- Informe o total obtido de adicional noturno: R$ ");
-            adicionalNoturno = double.Parse(Console.ReadLine());
-            Console.Write("- Informe o valor obtido de férias: R$ ");
-            ferias = double.Parse(Console.ReadLine());
-            Console.WriteLine();
-
-            Console.WriteLine("- Agora informe os descontos legais do funcionario.");
-            Console.WriteLine();
-            Console.Write("- Informe o valor de desconto do INSS: R$ ");
-            inss = double.Parse(Console.ReadLine());
-            Console.Write("- Informe o valor de desconto do IR: R$ ");
-            irrf = double.Parse(Console.ReadLine());
-            Console.WriteLine();
-
-            baseDeCalculoDeDescontoDePensao = (salarioBruto + horaExtra + periculosidadeInsalubridade + adicionalNoturno + ferias) - (inss + irrf);
-            DescontoTotalDePensao = baseDeCalculoDeDescontoDePensao * porcentagem;
-            Console.WriteLine($"- A base para o calculo de desconto da pensão foi de: R$ {baseDeCalculoDeDescontoDePensao:f2}");
-            Console.WriteLine($"- O Desconto a ser retirado de pensão é de: R$ {DescontoTotalDePensao:f2}");
+            Console.Write($"- O Desconto a ser retirado de pensão é de: R$ {valorDaPensao:f2}");
             Console.ReadKey();
+            Console.WriteLine();
+            DescontoTotalDePensao = valorDaPensao;
             return DescontoTotalDePensao;
         } 
 
@@ -857,7 +827,6 @@ namespace SistemaParaDesktop
 
                 if (escolha == 1)
                 {
-                    //double salarioBase;
                     int simNao;
 
                     Console.WriteLine("\t\t---Modelo Sequência---");
@@ -1255,7 +1224,55 @@ namespace SistemaParaDesktop
                     Console.ReadKey();
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine();
+                    
+                    do
+                    {
+                        Console.WriteLine("- Etapa 14");
+                        Console.WriteLine("- O funcionario contribui paga pensão? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.Write("- Escolha...: ");
+                        simNao = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
 
+                        switch (simNao)
+                        {
+                            case 1:
+                                CalcularPensao();
+                                Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            case 2:
+                                DescontoTotalDePensao = 0;
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            default:
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                                Console.WriteLine();
+                                break;
+                        }
+                    } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+                    
+                    Console.WriteLine("- Etapa 15");
+                    Console.WriteLine("- Chegou a hora de calcular o IRRF.");
+                    Console.WriteLine();
+                    CalcularIrrf();
+                    Console.WriteLine();
+                    Console.WriteLine("- Proseguindo para a próxima etapa.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+                    
                 }
                 else if (escolha == 2)
                 {
