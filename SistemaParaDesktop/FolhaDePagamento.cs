@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Diagnostics.Metrics;
 
 namespace SistemaParaDesktop
 {
@@ -31,6 +32,10 @@ namespace SistemaParaDesktop
         private double TotalDeAtrasos { get; set; }
         private double FaltasInjustificadasComDsr { get; set; }
         private double DescontoDeFaltasInjustificadas { get; set; }
+        private double ValorDoDecimoTerceiroSalarioLiquido { get; set; }
+        private double ValorDoDecimoTerceiroSalarioBruto { get; set; }
+        private double InssSobreDecimoTerceiro { get; set; }
+        private double IrrfSobreDecimoTerceiro { get; set; }
         private double Fgts { get; set; }
 
         public double CalcularValeTransporte()
@@ -792,6 +797,267 @@ namespace SistemaParaDesktop
             } while (reflexoDoDsr != 1 &&  reflexoDoDsr != 2);
             return FaltasInjustificadasComDsr;
         } 
+        
+        public void CalcularDecimoTerceiroSalario()
+        {
+            // Por enquantovou deixar VOID para analisar melhor depois
+            // PRECISO TESTAR ESTE MÈTODO.
+            double salarioBruto = SalarioBase;
+            int  parcelar;
+
+            Console.WriteLine("---Calculando o Décimo Terceiro Salário---");
+            Console.WriteLine();
+
+            do
+            {
+                Console.WriteLine("- Informe se o decimo salário sera pago em 1x ou em 2x");
+                Console.WriteLine("- Para pagamento em 1x dígite [1]");
+                Console.WriteLine("- Para pagamento em 2x dígite [2]");
+                Console.Write("- Parcelar...: ");
+                parcelar = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                switch (parcelar)
+                {
+                    case 1:
+                        CalcularDecimoTerceiroEmParcelaUnica();
+                        break;
+
+                    case 2:
+                        int parcela;
+                        do
+                        {
+                            Console.WriteLine("- Deseja calcular a 1º ou a 2º parcela do décimo terceiro?");
+                            Console.WriteLine("- Para calcular a 1º parcela digite [1]");
+                            Console.WriteLine("- Para calcular a 2º parcela digite [2]");
+                            Console.Write("- Calcular...: ");
+                            parcela = int.Parse(Console.ReadLine());
+                            Console.WriteLine();
+
+                            if (parcela == 1)
+                            {
+                                CalcularPrimeiraParcelaDoDecimoTerceiro();
+                            }
+                            else if (parcela == 2)
+                            {
+                                CalcularSegundaParcelaDoDecimoTerceiro();
+                            }
+                            else
+                            {
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                                Console.WriteLine();
+                            }
+                        } while (parcela != 1 && parcela != 2);
+                        break;
+
+                    default:
+                        Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                        Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                        Console.ReadKey();
+                        Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                        Console.WriteLine();
+                        break;
+                }
+            } while (parcelar != 1 && parcelar != 2);
+        }
+        
+        private double CalcularDecimoTerceiroEmParcelaUnica() // Esse método tem que ser private
+        {
+            int mesesTrabalhados;
+            double decimoTerceiroBruto, decimoTerceiroSalarioLiquido, percentualInss, percentualIrrf, descontoDeInssDoDecimoTerceiro, baseIrrfDecimoTerceiro, descontoDeIrrDofDecimoTerceiro = 0;
+            double parcelaInss1 = 0, parcelaInss2 = 19.80, parcelaInss3 = 96.94, parcelaInss4 = 174.08, parcelaInss5 = 877.24;
+            double parcelaIrrf2 = 158.40, parcelaIrrf3 = 370.40, parcelaIrrf4 = 651.73, parcelaIrrf5 = 884.96;
+            // double salarioBruto = SalarioBase; vou atribuir o valor de forma manual antes de incluir no metodo da folha.
+            double salarioBruto;
+
+            Console.Write("- Informe o salário bruto do funcionario: ");
+            salarioBruto = double.Parse(Console.ReadLine());
+            Console.Write("- Informe quantos meses do ano o funcionário trabalhou: ");
+            mesesTrabalhados = int.Parse(Console.ReadLine());
+            decimoTerceiroBruto = (salarioBruto / 12) * (double) mesesTrabalhados;
+            Console.WriteLine();
+
+            if(decimoTerceiroBruto <= 1320.00) 
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de 7,5%");
+                percentualInss = 7.5 / 100;
+                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss1;
+            }
+            else if (decimoTerceiroBruto <= 2571.29)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de 9,0%");
+                percentualInss = 9.0 / 100;
+                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss2;
+            }
+            else if (decimoTerceiroBruto <= 3856.94)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de 12,0%");
+                percentualInss = 12.0 / 100;
+                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss3;
+            }
+            else if (decimoTerceiroBruto <= 7507.49)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de 14,0%");
+                percentualInss = 14.0 / 100;
+                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss4;
+            }
+            else
+            {
+                Console.WriteLine("- Valores acima de 7.507.49 R$ (teto do INSS), possuem um desconto fixo de 877.24 R$");
+                descontoDeInssDoDecimoTerceiro = decimoTerceiroBruto - parcelaInss5;
+            }
+
+            baseIrrfDecimoTerceiro = salarioBruto - descontoDeInssDoDecimoTerceiro;
+
+            if (baseIrrfDecimoTerceiro <= 2112.00)
+            {
+                Console.WriteLine("- Isento do desconto de IR, parcela a deduzir: R$ 0,00.");
+            }
+            else if (baseIrrfDecimoTerceiro <= 2826.65)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de: 7,50%.");
+                percentualIrrf = 7.50 / 100;
+                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf2;
+            }
+            else if (baseIrrfDecimoTerceiro <= 3751.05)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de: 15,00%.");
+                percentualIrrf = 15.00 / 100;
+                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf3;
+            }
+            else if (baseIrrfDecimoTerceiro <= 4664.68)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de: 22,50%.");
+                percentualIrrf = 22.50 / 100;
+                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf4;
+            }
+            else
+            {
+                Console.WriteLine("- Base de cálculo de IR maior que 4.664,687 o desconto feito com base na aliquota de: 27,50%.");
+                percentualIrrf = 27.50 / 100;
+                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf5;
+            }
+            Console.WriteLine();
+
+            decimoTerceiroSalarioLiquido = decimoTerceiroBruto - descontoDeInssDoDecimoTerceiro - descontoDeIrrDofDecimoTerceiro;
+            Console.Write($"- O valor bruto do décimo terceiro salário do funcionario é de: R$ {decimoTerceiroBruto:f2}");
+            ValorDoDecimoTerceiroSalarioBruto = decimoTerceiroBruto;
+            Console.WriteLine();
+            Console.Write($"- O desconto de INSS sobre o décimo terceiro é de: R$ {descontoDeInssDoDecimoTerceiro:f2}");
+            InssSobreDecimoTerceiro = descontoDeInssDoDecimoTerceiro;
+            Console.WriteLine();
+            Console.Write($"- O desconto de IRRF sobre o deécimo terceiro salário é de: R$ {descontoDeIrrDofDecimoTerceiro:f2}");
+            IrrfSobreDecimoTerceiro = descontoDeIrrDofDecimoTerceiro;
+            Console.WriteLine();
+            Console.WriteLine($"- O valor líquido do décimo terceiro a receber é de: R$ {decimoTerceiroSalarioLiquido:f2}");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+            Console.WriteLine();
+
+            return decimoTerceiroSalarioLiquido;
+        }
+
+        private double CalcularPrimeiraParcelaDoDecimoTerceiro()
+        {
+            //double salarioBruto = SalarioBase;
+            double salarioBruto, PrimeiraParcelaDecimoTerceiro;
+            int mesesTrabalhados;
+
+            Console.Write("- Informe o salário bruto do funcionario: ");
+            salarioBruto = double.Parse(Console.ReadLine());
+            Console.Write("- Informe quantos meses do ano o funcionário trabalhou: ");
+            mesesTrabalhados = int.Parse(Console.ReadLine());
+            PrimeiraParcelaDecimoTerceiro = (salarioBruto / 12) * (double) mesesTrabalhados;
+            Console.WriteLine();
+            return PrimeiraParcelaDecimoTerceiro;
+        }
+
+        private double CalcularSegundaParcelaDoDecimoTerceiro()
+        {
+            double decimoTerceiroBruto, segundaParcelaDecimoTerceiro, baseSegundaParcelaDecimoTerceiro, percentualInss, percentualIrrf, descontoDeInssDoDecimoTerceiro, baseIrrfDecimoTerceiro, descontoDeIrrDofDecimoTerceiro = 0;
+            double parcelaInss1 = 0, parcelaInss2 = 19.80, parcelaInss3 = 96.94, parcelaInss4 = 174.08, parcelaInss5 = 877.24;
+            double parcelaIrrf2 = 158.40, parcelaIrrf3 = 370.40, parcelaIrrf4 = 651.73, parcelaIrrf5 = 884.96;
+            // double salarioBruto = SalarioBase; vou atribuir o valor de forma manual antes de incluir no metodo da folha.
+
+            Console.WriteLine("- Informe o valor bruto do décimo terceiro: R$  ");
+            decimoTerceiroBruto = double.Parse(Console.ReadLine());
+            baseSegundaParcelaDecimoTerceiro = decimoTerceiroBruto / 2;
+
+            if (decimoTerceiroBruto <= 1320.00)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de 7,5%");
+                percentualInss = 7.5 / 100;
+                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss1;
+            }
+            else if (decimoTerceiroBruto <= 2571.29)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de 9,0%");
+                percentualInss = 9.0 / 100;
+                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss2;
+            }
+            else if (decimoTerceiroBruto <= 3856.94)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de 12,0%");
+                percentualInss = 12.0 / 100;
+                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss3;
+            }
+            else if (decimoTerceiroBruto <= 7507.49)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de 14,0%");
+                percentualInss = 14.0 / 100;
+                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss4;
+            }
+            else
+            {
+                Console.WriteLine("- Valores acima de 7.507.49 R$ (teto do INSS), possuem um desconto fixo de 877.24 R$");
+                descontoDeInssDoDecimoTerceiro = decimoTerceiroBruto - parcelaInss5;
+            }
+
+            baseIrrfDecimoTerceiro = decimoTerceiroBruto - descontoDeInssDoDecimoTerceiro;
+            if (baseIrrfDecimoTerceiro <= 2112.00)
+            {
+                Console.WriteLine("- Isento do desconto de IR, parcela a deduzir: R$ 0,00.");
+            }
+            else if (baseIrrfDecimoTerceiro <= 2826.65)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de: 7,50%.");
+                percentualIrrf = 7.50 / 100;
+                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf2;
+            }
+            else if (baseIrrfDecimoTerceiro <= 3751.05)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de: 15,00%.");
+                percentualIrrf = 15.00 / 100;
+                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf3;
+            }
+            else if (baseIrrfDecimoTerceiro <= 4664.68)
+            {
+                Console.WriteLine("- Desconto feito com base na aliquota de: 22,50%.");
+                percentualIrrf = 22.50 / 100;
+                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf4;
+            }
+            else
+            {
+                Console.WriteLine("- Base de cálculo de IR maior que 4.664,687 o desconto feito com base na aliquota de: 27,50%.");
+                percentualIrrf = 27.50 / 100;
+                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf5;
+            }
+            Console.WriteLine();
+
+            segundaParcelaDecimoTerceiro = baseSegundaParcelaDecimoTerceiro - descontoDeInssDoDecimoTerceiro - descontoDeIrrDofDecimoTerceiro;
+            Console.Write($"- O valor da Segunda parcela do décimo terceiro é de: R$ {segundaParcelaDecimoTerceiro:f2}");
+            Console.WriteLine();
+            Console.Write($"- O desconto de INSS sobre o décimo terceiro é de: R$ {descontoDeInssDoDecimoTerceiro:f2}");
+            InssSobreDecimoTerceiro = descontoDeInssDoDecimoTerceiro;
+            Console.WriteLine();
+            Console.Write($"- O desconto de IRRF sobre o décimo terceiro é de: R$ {descontoDeIrrDofDecimoTerceiro:f2}");
+            IrrfSobreDecimoTerceiro = descontoDeIrrDofDecimoTerceiro;
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+            Console.WriteLine();
+            return segundaParcelaDecimoTerceiro;
+        }
 
         public double CalcularFgts()
         {
