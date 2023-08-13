@@ -32,28 +32,26 @@ namespace SistemaParaDesktop
         private double TotalDeAtrasos { get; set; }
         private double FaltasInjustificadasComDsr { get; set; }
         private double DescontoDeFaltasInjustificadas { get; set; }
-        private double ValorDoDecimoTerceiroSalarioLiquido { get; set; }
-        private double ValorDoDecimoTerceiroSalarioBruto { get; set; }
-        private double InssSobreDecimoTerceiro { get; set; }
-        private double IrrfSobreDecimoTerceiro { get; set; }
+        private double ValorDoDecimoTerceiro { get; set; }
         private double Fgts { get; set; }
+
 
         public double CalcularValeTransporte()
         {
-            double porcentagem, passagem, valorPorcentagem,valorPassagem, salarioBruto;
+            double porcentagem, passagem, valorPorcentagem,valorPassagem, salarioBruto = SalarioBase;
             int diasUteis;
 
             Console.WriteLine("- Vamos verificar qual o menor valor para desconto do vale transporte.");
             Console.WriteLine();
 
-            Console.Write("- Primeiro informe o salário bruto do funcionario: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            Console.Write("- Segundo informe a porcentagem correspondente ao vale transporte: ");
+            //Console.Write("- Primeiro informe o salário bruto do funcionario: R$ ");
+            //salarioBruto = double.Parse(Console.ReadLine());
+            Console.Write("- Informe a porcentagem correspondente ao vale transporte: ");
             porcentagem = double.Parse(Console.ReadLine());
             valorPorcentagem = salarioBruto * (porcentagem / 100);
-            Console.Write("- Terceiro informe o valor da passagem somando ida e volta: R$ ");
+            Console.Write("- Informe o valor da passagem somando ida e volta: R$ ");
             passagem = double.Parse(Console.ReadLine());
-            Console.Write("- Quarto informe a quantidade de dias uteis: ");
+            Console.Write("- Informe a quantidade de dias uteis: ");
             diasUteis = int.Parse(Console.ReadLine());
             valorPassagem =  passagem * (double) diasUteis;
             Console.WriteLine();
@@ -85,9 +83,20 @@ namespace SistemaParaDesktop
             valorDoVale = double.Parse(Console.ReadLine());
             Console.Write("- Informe a quantidade de dias uteis do mês: ");
             diasUteis = int.Parse(Console.ReadLine());
-            Console.Write("- Informe o percentual de desconto do vale: ");
-            percentual = double.Parse(Console.ReadLine());
-            descontoDoVale = valorDoVale * (double) diasUteis * (percentual / 100);
+            do
+            {
+                Console.Write("- Informe o percentual de desconto do vale: ");
+                percentual = double.Parse(Console.ReadLine());
+                if (percentual > 20)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("- Valor inválido, percentual máximo permitido por lei de 20%.");
+                    Console.WriteLine("- Entre com um valor válido.");
+                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                    Console.WriteLine();
+                }
+            } while (percentual > 20);
+            descontoDoVale = valorDoVale * (double)diasUteis * (percentual / 100);
             Console.WriteLine();
             Console.WriteLine($"- Valor a se descontado de vale refeição/alimentação: R$ {descontoDoVale:f2}");
             Console.ReadKey();
@@ -97,150 +106,131 @@ namespace SistemaParaDesktop
 
         public double CalcularInss()
         {
-            // o descontro do INSS é aplicado sobre a soma de todos os proventos/entradas que o funcionario tiver.
-
-            double percentualInss, valorParaCalculoDoInss;
-            double parcela1 = 0, parcela2 = 19.80, parcela3 = 96.94, parcela4 = 174.08, parcela5 = 877.24;
             double salarioBruto = SalarioBase;
-            double horasExtras = TotalDeHorasExtras;
-            double periculosidadeInsalubridade = ValorTotalDePericulosidadeInsalubridade;
-            double adicionalNoturno = ValorDoAdicionalNoturno;
-            // double ferias =  Ainda não tenho este método então vou deixar esta linha comentada e liga-la ao código depois de criar o método.
-            // double adiantamentoDecimoTerceiro = Ainda não tenho este método então vou deixar esta linha comentada e liga-la ao código depois de criar o método.
-            valorParaCalculoDoInss = salarioBruto + horasExtras + periculosidadeInsalubridade + adicionalNoturno;
-
-            Console.WriteLine("- IMPORTANTE: O desconto do INSS é cálculado sobre a soma de todos os proventos que o funcionario obteve ao mês");
-            Console.WriteLine($"- Valor obtido para calculo do INSS: R$ {valorParaCalculoDoInss:f2}");
-            Console.WriteLine();
-            Console.WriteLine("- Agora vejamos sobre qual índice da tabela do INSS sera aplicado o calculo.");
-            Console.WriteLine("- Dígite qualquer coisa para continuar.");
+            
+            Console.WriteLine("- Precione qualquer tecla para calcular o desconto do INSS.");
             Console.ReadKey();
             Console.WriteLine();
-
-            if (valorParaCalculoDoInss <= 1320.00) {
-                Console.WriteLine("- Desconto feito com base na aliquota de 7,5%");
-                //Console.WriteLine();
-                percentualInss = 7.5 / 100;
-                DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela1;
-                Console.WriteLine("- Funcionario isento do desconto de INSS.");
-                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
-                Console.WriteLine();
-            }
-
-            else if (valorParaCalculoDoInss <= 2571.29) {
-                Console.WriteLine("- Desconto feito com base na aliquota de 9,0%");
-                percentualInss = 9.0 / 100;
-                DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela2;
-                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
-                Console.WriteLine();
-            }
-
-            else if (valorParaCalculoDoInss <= 3856.94) {
-                Console.WriteLine("- Desconto feito com base na aliquota de 12,0%");
-               // Console.WriteLine();
-                percentualInss = 12.0 / 100;
-                DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela3;
-                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
-                Console.WriteLine();
-            }
-
-            else if (valorParaCalculoDoInss <= 7507.49) {
-                Console.WriteLine("- Desconto feito com base na aliquota de 14,0%");
-               // Console.WriteLine();
-                percentualInss = 14.0 / 100;
-                DescontoDoInss = (valorParaCalculoDoInss * percentualInss) - parcela4;
-                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
-                Console.WriteLine();
-            }
-
-            else {
-                Console.WriteLine("- Valores acima de 7.507.49 R$ (teto do INSS), possuem um desconto fixo de 877.24 R$");
-               // Console.WriteLine();
-                DescontoDoInss = valorParaCalculoDoInss - parcela5;
-                Console.Write($"- Valor de Desconto do INSS: R$ {DescontoDoInss:f2}");
-                Console.WriteLine();
-            }
+            DescontoDoInss = FormulaDoInss(salarioBruto);
+            Console.WriteLine();
+            Console.WriteLine($"- O valor do desconto em folha de contribuição do INSS é de: R$ {DescontoDoInss:f2}");
             return DescontoDoInss;
         } 
 
+        static double FormulaDoInss(double salario)
+        {
+            double ValorDeDescontoDoInss, faixa2, faixa3, faixa4, restante;
+            double valorPadraoFaixa1 = 99.00;
+            double valorPadraoFaixa2 = 112.62;
+            double valorPadraoFaixa3 = 154.28;
+            double valorPadraoFaixa4 = 511.06;
+            if (salario <= 1320.00)
+            {
+                Console.WriteLine("- O salário se estabelece na primeira faixa da tabela. Desconto do INSS realizado sobre 7,5% ");
+                ValorDeDescontoDoInss = salario * 0.075;
+            }
+            else if (salario <= 2571.29)
+            {
+                Console.WriteLine("- O salário se estabelece na segunda faixa da tabela. Desconto do INSS realizado sobre 9,0% ");
+                restante = salario - 1320.00;
+                faixa2 = restante * 0.09;
+                ValorDeDescontoDoInss = valorPadraoFaixa1 + faixa2;
+            }
+            else if (salario <= 3856.94)
+            {
+                Console.WriteLine("- O salário se estabelece na terceira faixa da tabela. Desconto do INSS realizado sobre 12,00% ");
+                restante = salario - 2571.29;
+                faixa3 = restante * 0.12;
+                ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + faixa3;
+            }
+            else if (salario <= 7507.49)
+            {
+                Console.WriteLine("- O salário se estabelece na quarta faixa da tabela. Desconto do INSS realizado sobre 14,00% ");
+                restante = salario - 3856.94;
+                faixa4 = restante * 0.14;
+                ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + valorPadraoFaixa3 + faixa4;
+            }
+            else
+            {
+                Console.WriteLine("- O salaário excede o teto do INSS, Desconto sobre 14,0% ");
+                ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + valorPadraoFaixa3 + valorPadraoFaixa4;
+            }
+            return ValorDeDescontoDoInss;
+        }
+
         public double CalcularIrrf()
         {
-            double baseIrrf, percentual, calculoNormal, calculoSimplificado, descontoIr = 0, valorSimplificado = 528.00;
-            double parcela2 = 158.40, parcela3 = 370.40, parcela4 = 651.73, parcela5 = 884.96;
             double salarioBruto = SalarioBase;
             double valorDoInss = DescontoDoInss;
             double valorDaPensao = DescontoTotalDePensao;
             double valorDeDependente = DescontoTotalDeDependentes;
 
-            calculoNormal = salarioBruto - valorDoInss - valorDaPensao - valorDeDependente;
-            calculoSimplificado = salarioBruto - valorSimplificado;
-
-            if( calculoNormal < calculoSimplificado)
+            Console.WriteLine("- Precione qualquer tecla para calcular o desconto do IRRF.");
+            Console.ReadKey();
+            Console.WriteLine();
+            DescontoDoIrrf = FormulaDoIrrf(salarioBruto, valorDoInss, valorDaPensao, valorDeDependente);
+            if(DescontoDoIrrf != 0)
             {
-                baseIrrf = calculoNormal;
+                Console.WriteLine($"- O valor do desconto em folha de contribuição do IRRF é de: R$ {DescontoDoIrrf:f2}");
             }
             else
             {
-                baseIrrf = calculoSimplificado;
+            }
+            return DescontoDoIrrf;
+        } 
+
+        static double FormulaDoIrrf(double salario, double inss, double pensao, double dependente)
+        {
+            double deducoesLegais, descontoSimplificado, baseDeCalculoDoIrrfDefinitivo, valorDeDescontoDoIrrf = 0, percentual;
+            double parcela2 = 158.40;
+            double parcela3 = 370.40;
+            double parcela4 = 651.73;
+            double parcela5 = 884.96;
+            double valorSimplificado = 528.00;
+
+            deducoesLegais = salario - inss - pensao - dependente;
+            descontoSimplificado = salario - valorSimplificado;
+
+            if(deducoesLegais > descontoSimplificado)
+            {
+                baseDeCalculoDoIrrfDefinitivo = deducoesLegais;
+            }
+            else
+            {
+                baseDeCalculoDoIrrfDefinitivo = descontoSimplificado;
             }
             
-            if (baseIrrf <= 2112.00)
+            if (baseDeCalculoDoIrrfDefinitivo <= 2112.00)
             {
-                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIrrf:f2}");
-                Console.WriteLine("- Desconto feito com base na aliquota de: 0,00%.");
-                Console.WriteLine();
-                Console.WriteLine("- Isento do desconto de IR, parcela a deduzir: R$ 0,00.");
-                Console.ReadKey();
-                Console.WriteLine();
+                Console.WriteLine("- A base de calculo se estabelece na segunda faixa. Funcionário está isento do desconto de IRRF.");
+                valorDeDescontoDoIrrf = 0;
             }
-            else if(baseIrrf <= 2826.65)
+            else if (baseDeCalculoDoIrrfDefinitivo <= 2826.65)
             {
-                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIrrf:f2}");
-                Console.WriteLine("- Desconto feito com base na aliquota de: 7,50%.");
-                Console.WriteLine();
+                Console.WriteLine("- A base de calculo se estabelece na segunda faixa. Desconto do IRRF realizado sobre 7,5%");
                 percentual = 7.50 / 100;
-                descontoIr = (baseIrrf * percentual) - parcela2;
-                Console.Write($"- Valor de Desconto do IR: R$ {descontoIr:f2}");
-                Console.ReadKey();
-                Console.WriteLine();
+                valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela2;
             }
-            else if (baseIrrf <= 3751.05)
+            else if (baseDeCalculoDoIrrfDefinitivo <= 3751.05)
             {
-                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIrrf:f2}");
-                Console.WriteLine("- Desconto feito com base na aliquota de: 15,00%.");
-                Console.WriteLine();
+                Console.WriteLine("- A base de calculo se estabelece na terceira faixa. Desconto do IRRF realizado sobre 15,00%%");
                 percentual = 15.00 / 100;
-                descontoIr = (baseIrrf * percentual) - parcela3;
-                Console.Write($"- Valor de Desconto do IR: R$ {descontoIr:f2}");
-                Console.ReadKey();
-                Console.WriteLine();
+                valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela3;
             }
-            else if(baseIrrf <= 4664.68)
+            else if (baseDeCalculoDoIrrfDefinitivo <= 4664.68)
             {
-                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIrrf:f2}");
-                Console.WriteLine("- Desconto feito com base na aliquota de: 22,50%.");
-                Console.WriteLine();
+                Console.WriteLine("- A base de calculo se estabelece na terceira faixa. Desconto do IRRF realizado sobre 22,50%");
                 percentual = 22.50 / 100;
-                descontoIr = (baseIrrf * percentual) - parcela4;
-                Console.Write($"- Valor de Desconto do IR: R$ {descontoIr:f2}");
-                Console.ReadKey();
-                Console.WriteLine();
+                valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela4;
             }
             else
             {
-                Console.WriteLine($"- Base de cálculo para IR de: R$ {baseIrrf:f2}");
-                Console.WriteLine("- Base de cálculo de IR maior que 4.664,687 o desconto feito com base na aliquota de: 27,50%.");
-                Console.WriteLine();
+                Console.WriteLine("- A base de calculo se estabelece na quarta faixa. Desconto do IRRF realizado sobre 27,50%");
                 percentual = 27.50 / 100;
-                descontoIr = (baseIrrf * percentual) - parcela5;
-                Console.Write($"- Valor de Desconto do IR: R$ {descontoIr:f2}");
-                Console.ReadKey();
-                Console.WriteLine();
+                valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela5;
             }
-            DescontoDoIrrf = descontoIr;
-            return DescontoDoIrrf;
-
-        } 
+            return valorDeDescontoDoIrrf;
+        }
 
         public double CalcularAdiantamentoQuinzenal()
         {
@@ -259,8 +249,10 @@ namespace SistemaParaDesktop
 
         public double CalcularHoraExtra()
         {
-            double valorHora, valorDaHoraExtra, hora, valorTotalDaHoraExtra, salarioBruto, horaConvertida = 0, indicadorDsr, percentualDoDsr, valorDoDsr;
+            double valorHora, valorDaHoraExtra, valorTotalDaHoraExtra, indicadorDsr, percentualDoDsr, valorDoDsr;
             int converter, porcentagem, diasUteis, repousosFeriados;
+            double hora = 0, horaConvertida = 0;
+            double salarioBruto = SalarioBase;
 
             do {
                 Console.WriteLine("- Horas com minutos não são calculadas pois é necessario converte-las em horas.");
@@ -298,19 +290,24 @@ namespace SistemaParaDesktop
             Console.WriteLine("-----------------------------------------------------------------------------------------------------");
             Console.WriteLine();
 
-            Console.Write("- Informe o salário bruto do funcionário: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            Console.Write("- Informe a quantidade de horas realizadas: ");
-            hora = double.Parse(Console.ReadLine());
+            //Console.Write("- Informe o salário bruto do funcionário: R$ ");
+           // salarioBruto = double.Parse(Console.ReadLine());
+           if(horaConvertida == 0)
+            {
+                Console.Write("- Informe a quantidade de horas realizadas: ");
+                hora = double.Parse(Console.ReadLine());
+            }
+           else
+            {
+                hora = horaConvertida;
+            }
             Console.Write("- Informe a porcentagem incedida sobre as horas extras: ");
             porcentagem = int.Parse(Console.ReadLine());
             Console.WriteLine();
-
             valorHora = salarioBruto / 220;
             porcentagem = porcentagem / 100;
             valorDaHoraExtra = valorHora + (valorHora * (double) porcentagem);
             valorTotalDaHoraExtra = hora * valorDaHoraExtra;
-
             Console.WriteLine("- Agora é preciso calcular o DSR sobre as horas extras.");
             Console.WriteLine();
             Console.Write("- Informe a quantidade de dias uteis do mes: ");
@@ -318,12 +315,20 @@ namespace SistemaParaDesktop
             Console.Write("- Informe a quantidade de dias de repouso e feriados do mes: ");
             repousosFeriados = int.Parse(Console.ReadLine());
             Console.WriteLine();
-
-            indicadorDsr = (double) repousosFeriados / diasUteis;
-            percentualDoDsr = indicadorDsr * porcentagem;
-            valorDoDsr = valorDaHoraExtra * percentualDoDsr;
-            valorTotalDaHoraExtra = horaConvertida * (valorDaHoraExtra + valorDoDsr);
-
+            if(horaConvertida == 0)
+            {
+                indicadorDsr = (double)repousosFeriados / diasUteis;
+                percentualDoDsr = indicadorDsr * porcentagem;
+                valorDoDsr = valorDaHoraExtra * percentualDoDsr;
+                valorTotalDaHoraExtra = hora * (valorDaHoraExtra + valorDoDsr);
+            }
+            else
+            {
+                indicadorDsr = (double)repousosFeriados / diasUteis;
+                percentualDoDsr = indicadorDsr * porcentagem;
+                valorDoDsr = valorDaHoraExtra * percentualDoDsr;
+                valorTotalDaHoraExtra = horaConvertida * (valorDaHoraExtra + valorDoDsr);
+            }
             Console.WriteLine($"- Valor da hora normal: R$ {valorHora:f2}");
             Console.WriteLine($"- Valor da hora extra: R$ {valorDaHoraExtra:f2}");
             Console.WriteLine($"- Valor do DSR incedido sobre as horas extras: R$ {valorDoDsr:f2}");
@@ -336,13 +341,13 @@ namespace SistemaParaDesktop
 
         public double CalcularPericulosidadeInsalubridade()
         {
-            double valorDaPorcentagem, salarioBruto;
+            double valorDaPorcentagem, salarioBruto = SalarioBase;
             int beneficio;
 
            // Console.WriteLine();
-            Console.Write("- Informe o salário bruto do funcionario: ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            Console.WriteLine();
+            //Console.Write("- Informe o salário bruto do funcionario: ");
+            //salarioBruto = double.Parse(Console.ReadLine());
+            //Console.WriteLine();
             do
             {
                 Console.WriteLine("- Informe qual o tipo de benefício do funcionário.");
@@ -455,7 +460,7 @@ namespace SistemaParaDesktop
 
         public double CalcularAdicionalNoturno()
         {
-            double salarioBruto, valorDaHoraNormal, valorDoAdicionalNoturnoHora, acrescimo, horaConvertida, quantidadeDeHoras;
+            double salarioBruto = SalarioBase, valorDaHoraNormal, valorDoAdicionalNoturnoHora, acrescimo, horaConvertida = 0, quantidadeDeHoras;
             int converter;
 
             do
@@ -497,17 +502,23 @@ namespace SistemaParaDesktop
 
             Console.WriteLine("- Agora vamos calcular o adcional noturno do funcionário.");
             Console.WriteLine();
-            Console.Write("- Informe o salário bruto do funcionário: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
+            //Console.Write("- Informe o salário bruto do funcionário: R$ ");
+            //salarioBruto = double.Parse(Console.ReadLine());
             valorDaHoraNormal = salarioBruto / (double) 220;
             acrescimo = valorDaHoraNormal * 0.2;
             valorDoAdicionalNoturnoHora = valorDaHoraNormal + acrescimo;
-
-            Console.Write("- Informe a quantidade de horas trabalhadas como adicional noturno: ");
-            quantidadeDeHoras = double.Parse(Console.ReadLine());
-            ValorDoAdicionalNoturno = quantidadeDeHoras * valorDoAdicionalNoturnoHora;
-            Console.WriteLine();
-
+            if (horaConvertida == 0)
+            {
+                Console.Write("- Informe a quantidade de horas trabalhadas como adicional noturno: ");
+                quantidadeDeHoras = double.Parse(Console.ReadLine());
+                ValorDoAdicionalNoturno = quantidadeDeHoras * valorDoAdicionalNoturnoHora;
+                Console.WriteLine();
+            }
+            else
+            {
+                quantidadeDeHoras = horaConvertida;
+                ValorDoAdicionalNoturno = quantidadeDeHoras * valorDoAdicionalNoturnoHora;
+            }
             Console.WriteLine($"- O valor hora de adicional noturno do funcionário é de: R$ {valorDoAdicionalNoturnoHora:f2}");
             Console.WriteLine($"- O valor total que o funcionário ira receber de adicional noturno é: R$ {ValorDoAdicionalNoturno:f2}");
             return ValorDoAdicionalNoturno;
@@ -579,40 +590,7 @@ namespace SistemaParaDesktop
 
         public double CalcularAtrasos()
         {
-            double horasConvertidas;
-            int converter, tipoDeDesconto;
-
-            do {
-                Console.WriteLine("- Se for necessario fazer a conversão de minutos em horas para os proximos cálculos digite [1], caso contrario digite [2].");
-                Console.Write("- Converter...: ");
-                converter = int.Parse(Console.ReadLine());
-                Console.WriteLine();
-
-                if (converter == 1)
-                {
-                    horasConvertidas = this.ConversorDeMinutosEmHoras();
-                    Console.WriteLine();
-                    Console.WriteLine("- Proseguindo para a próxima etapa.");
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                }
-                else if (converter == 2)
-                {
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                    Console.WriteLine();
-                }
-            }while (converter != 1 && converter != 2);
-
-            Console.WriteLine("---------------------------------------------------");
-            Console.WriteLine();
+            int tipoDeDesconto;
 
             do
             {
@@ -696,31 +674,71 @@ namespace SistemaParaDesktop
 
         private double AtrasoComum()
         {
-            double salarioBruto, horasEmAtraso;
-            int jornada;
+            double salarioBruto = SalarioBase, horasEmAtraso, horasConvertidas = 0;
+            int jornada, converter;
 
-            Console.Write("- Informe o salario bruto do funcionario: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            Console.Write("- Informe a quantidade de atrasos em horas: ");
-            horasEmAtraso = double.Parse(Console.ReadLine());
+            do
+            {
+                Console.WriteLine("- Horas com minutos não são calculadas, é necessario converter os minutos em horas.");
+                Console.WriteLine("- Deseja realizar a converção de minutos em horas ?");
+                Console.WriteLine();
+                Console.WriteLine("- Para SIM dígite [1]");
+                Console.WriteLine("- Para NÃO dígite [2]");
+                Console.Write("- Converter...: ");
+                converter = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                if (converter == 1)
+                {
+                    horasConvertidas = this.ConversorDeMinutosEmHoras();
+                    Console.WriteLine();
+                    Console.WriteLine("- Proseguindo para a próxima etapa.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                }
+                else if (converter == 2)
+                {
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                    Console.WriteLine();
+                }
+            } while (converter != 1 && converter != 2);
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+            Console.WriteLine();
+            //Console.Write("- Informe o salario bruto do funcionario: R$ ");
+            //salarioBruto = double.Parse(Console.ReadLine());
+            if (horasConvertidas == 0)
+            {
+                Console.Write("- Informe a quantidade de atrasos em horas: ");
+                horasEmAtraso = double.Parse(Console.ReadLine());
+            }
+            else
+            {
+                horasEmAtraso = horasConvertidas;
+            }
             Console.Write("- Informe as horas da jornada de trabalho: ");
             jornada = int.Parse(Console.ReadLine());
-
-            DescontoDeAtrasos = (salarioBruto * horasEmAtraso) / (double) jornada;
+            DescontoDeAtrasos = (salarioBruto * horasEmAtraso) / (double)jornada;
             Console.WriteLine();
-
             Console.WriteLine($"- O valor de desconto devido a tempo de atrasos é de: R$ {DescontoDeAtrasos:f2}");
-            Console.WriteLine($"- Total de horas em atraso: {horasEmAtraso}");
+            Console.WriteLine($"- Total de horas em atraso: {horasEmAtraso:f2}");
             return DescontoDeAtrasos;
         } 
 
         private double FaltaInjustificada()
         {
-            double salarioBruto;
+            double salarioBruto = SalarioBase;
             int faltas;
 
-            Console.Write("- Informe o salário bruto do funcionario: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
+            //Console.Write("- Informe o salário bruto do funcionario: R$ ");
+            //salarioBruto = double.Parse(Console.ReadLine());
             Console.Write("- Informe a quantidade de faltas do funcionario: ");
             faltas = int.Parse(Console.ReadLine());
             DescontoDeFaltasInjustificadas = (salarioBruto * (double) faltas) / (double) 30;
@@ -731,20 +749,20 @@ namespace SistemaParaDesktop
 
         private double FaltaInjustificadaComDsr()
         {
-            double salarioBruto, valorDoDsr, horaExtra, valorDoReflexo;
+            double salarioBruto = SalarioBase, valorDoDsr, horaExtra, valorDoReflexo;
             int faltas, dsr, reflexoDoDsr, diasUteis, dsrDoMes;
 
-            Console.WriteLine("- Primeiro vamos calcular o valor do dsr do funcionario.");
-            Console.WriteLine();
-            Console.Write("- Informe o salário bruto do funcionario: ");
-            salarioBruto = double.Parse(Console.ReadLine());
+            //Console.WriteLine("- Primeiro vamos calcular o valor do dsr do funcionario.");
+            //Console.WriteLine();
+           // Console.Write("- Informe o salário bruto do funcionario: ");
+            //salarioBruto = double.Parse(Console.ReadLine());
             valorDoDsr = salarioBruto / 30;
             Console.WriteLine();
             Console.WriteLine($"- O valor do DSR do funcionario é de: R$ {valorDoDsr:f2}");
             Console.WriteLine("----------------------------------------------------------------");
             Console.WriteLine();
 
-            Console.WriteLine("- Segundo, vamos calcular o desconto por falta ao trabalho com DSR.");
+            Console.WriteLine("- Primeiro, vamos calcular o desconto por falta ao trabalho com DSR.");
             Console.WriteLine();
             Console.Write("- Informe a quantidade de faltas do funcionario: ");
             faltas = int.Parse(Console.ReadLine());
@@ -753,104 +771,69 @@ namespace SistemaParaDesktop
             FaltasInjustificadasComDsr = ((salarioBruto * (double) faltas) / (double) 30) + ((double) dsr * valorDoDsr) ;
             Console.WriteLine();
             Console.WriteLine($"- O valor total de desconto de faltas + DSR é de: R$ {FaltasInjustificadasComDsr:f2}");
-            Console.WriteLine("----------------------------------------------------------------");
-            Console.WriteLine();
-
-            do
+            
+            horaExtra = TotalDeHorasExtras;
+            if (horaExtra != 0)
             {
-                Console.WriteLine("- O funcionario realizou horas extras ou teve algum acrescimo ao salário no mes? Caso sim o reflexo do DSR deverá ser calculado.");
                 Console.WriteLine();
-                Console.WriteLine("- Para sim dígite [1]");
-                Console.WriteLine("- Para não dígite [2]");
-                Console.Write("- Reflexo...: ");
-                reflexoDoDsr = int.Parse(Console.ReadLine());
+                Console.WriteLine("- Este funcionario realizou horas extras, o reflexo do DSR deverá ser calculado.");
                 Console.WriteLine();
-
-                if (reflexoDoDsr == 1)
-                {
-                    Console.Write("- Informe o valor da hora extra/comissão obtido pelo funcionario no mês: R$ ");
-                    horaExtra = double.Parse(Console.ReadLine());
-                    Console.Write("- Informe a quantidade de dias uteis do mes: ");
-                    diasUteis = int.Parse(Console.ReadLine());
-                    Console.Write("- Informe a quantidade de DSR do mes: ");
-                    dsrDoMes = int.Parse(Console.ReadLine());
-                    valorDoReflexo = (horaExtra / (double)diasUteis) * (double)dsrDoMes;
-                    FaltasInjustificadasComDsr += valorDoReflexo;
-                    Console.WriteLine();
-                    Console.WriteLine($"- O valor do reflexo é de: R$ {valorDoReflexo:f2}");
-                    Console.WriteLine($"- O valor a ser descontado por falta ao trabalho + DSR + reflexo do DSR é de: R$ {FaltasInjustificadasComDsr:f2}");
-                }
-                else if (reflexoDoDsr == 2)
-                {
-                    Console.WriteLine("- Dígite qualquer coisa para retornar");
-                    Console.ReadKey();
-                    Console.WriteLine();
-                }
-                else
-                {
-                    Console.WriteLine("- ERROR, Valor invalida selecione entre as opções [1] ou [2].");
-                    Console.WriteLine("- Dígite qualquer coisa para retornar");
-                    Console.ReadKey();
-                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                    Console.WriteLine();
-                }
-            } while (reflexoDoDsr != 1 &&  reflexoDoDsr != 2);
+                Console.Write("- Informe a quantidade de dias uteis do mes: ");
+                diasUteis = int.Parse(Console.ReadLine());
+                Console.Write("- Informe a quantidade de DSR do mes: ");
+                dsrDoMes = int.Parse(Console.ReadLine());
+                valorDoReflexo = (horaExtra / (double)diasUteis) * (double)dsrDoMes;
+                FaltasInjustificadasComDsr += valorDoReflexo;
+                Console.WriteLine();
+                Console.WriteLine($"- O valor do reflexo é de: R$ {valorDoReflexo:f2}");
+                Console.WriteLine($"- O valor a ser descontado por falta ao trabalho + DSR + reflexo do DSR é de: R$ {FaltasInjustificadasComDsr:f2}");
+            }
+            else 
+            {}
             return FaltasInjustificadasComDsr;
         } 
-        
-        public void CalcularDecimoTerceiroSalario()
+
+        private double CalcularDecimoTerceiro()
         {
-            // Por enquantovou deixar VOID para analisar melhor depois
-            // PRECISO TESTAR ESTE MÈTODO.
+            double decimoTerceiroBruto;
             double salarioBruto = SalarioBase;
-            int  parcelar;
+            int mesesTrabalhados;
 
-            Console.WriteLine("---Calculando o Décimo Terceiro Salário---");
-            Console.WriteLine();
+            Console.Write("- Informe quantos meses do ano o funcionário trabalhou: ");
+            mesesTrabalhados = int.Parse(Console.ReadLine());
+            decimoTerceiroBruto = (salarioBruto / 12) * (double) mesesTrabalhados;
+            return decimoTerceiroBruto;
+        }
 
-            do
-            {
-                Console.WriteLine("- Informe se o decimo salário sera pago em 1x ou em 2x");
-                Console.WriteLine("- Para pagamento em 1x dígite [1]");
-                Console.WriteLine("- Para pagamento em 2x dígite [2]");
-                Console.Write("- Parcelar...: ");
-                parcelar = int.Parse(Console.ReadLine());
+        public double CalcularFormulasDoDecimoTerceiro() 
+        {
+            int tipoDePagamento;
+            double valorDoPagamento = 0;
+
+            do {
+                Console.WriteLine("- Informe o tipo de pagamento do décimo terceiro deve ser realizado.");
                 Console.WriteLine();
-
-                switch (parcelar)
+                Console.WriteLine("- Para pagamento do valor completo de forma única dígite [1]");
+                Console.WriteLine("- Para pagamento da primeira parcela dígite [2]");
+                Console.WriteLine("- Para pagamento da segunda parcela dígite [3]");
+                Console.Write("- Tipo de pagamento...: ");
+                tipoDePagamento = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+                switch (tipoDePagamento)
                 {
                     case 1:
-                        CalcularDecimoTerceiroEmParcelaUnica();
+                        valorDoPagamento = CalcularPagamentoUnicoDoDecimoTerceiro();
+                        Console.WriteLine($"- Valor a receber de décimo terceiro é de: R$ {valorDoPagamento:f2}");
                         break;
 
                     case 2:
-                        int parcela;
-                        do
-                        {
-                            Console.WriteLine("- Deseja calcular a 1º ou a 2º parcela do décimo terceiro?");
-                            Console.WriteLine("- Para calcular a 1º parcela digite [1]");
-                            Console.WriteLine("- Para calcular a 2º parcela digite [2]");
-                            Console.Write("- Calcular...: ");
-                            parcela = int.Parse(Console.ReadLine());
-                            Console.WriteLine();
+                        valorDoPagamento = CalcularPrimeiraParcelaDoDecimoTerceiro();
+                        Console.WriteLine($"- O valor da primeira parcelado décimo terceiro coresponde a: R$ {valorDoPagamento:f2}");
+                        break;
 
-                            if (parcela == 1)
-                            {
-                                CalcularPrimeiraParcelaDoDecimoTerceiro();
-                            }
-                            else if (parcela == 2)
-                            {
-                                CalcularSegundaParcelaDoDecimoTerceiro();
-                            }
-                            else
-                            {
-                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
-                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                                Console.ReadKey();
-                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                                Console.WriteLine();
-                            }
-                        } while (parcela != 1 && parcela != 2);
+                    case 3:
+                        valorDoPagamento = CalcularSegundaParcelaDoDecimoTerceiro();
+                        Console.WriteLine($"- O valor da segunda parcelado décimo terceiro coresponde a: R$ {valorDoPagamento:f2}");
                         break;
 
                     default:
@@ -861,215 +844,63 @@ namespace SistemaParaDesktop
                         Console.WriteLine();
                         break;
                 }
-            } while (parcelar != 1 && parcelar != 2);
-        }
-        
-        private double CalcularDecimoTerceiroEmParcelaUnica() // Esse método tem que ser private
-        {
-            int mesesTrabalhados;
-            double decimoTerceiroBruto, decimoTerceiroSalarioLiquido, percentualInss, percentualIrrf, descontoDeInssDoDecimoTerceiro, baseIrrfDecimoTerceiro, descontoDeIrrDofDecimoTerceiro = 0;
-            double parcelaInss1 = 0, parcelaInss2 = 19.80, parcelaInss3 = 96.94, parcelaInss4 = 174.08, parcelaInss5 = 877.24;
-            double parcelaIrrf2 = 158.40, parcelaIrrf3 = 370.40, parcelaIrrf4 = 651.73, parcelaIrrf5 = 884.96;
-            // double salarioBruto = SalarioBase; vou atribuir o valor de forma manual antes de incluir no metodo da folha.
-            double salarioBruto;
-
-            Console.Write("- Informe o salário bruto do funcionario: ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            Console.Write("- Informe quantos meses do ano o funcionário trabalhou: ");
-            mesesTrabalhados = int.Parse(Console.ReadLine());
-            decimoTerceiroBruto = (salarioBruto / 12) * (double) mesesTrabalhados;
-            Console.WriteLine();
-
-            if(decimoTerceiroBruto <= 1320.00) 
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de 7,5%");
-                percentualInss = 7.5 / 100;
-                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss1;
-            }
-            else if (decimoTerceiroBruto <= 2571.29)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de 9,0%");
-                percentualInss = 9.0 / 100;
-                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss2;
-            }
-            else if (decimoTerceiroBruto <= 3856.94)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de 12,0%");
-                percentualInss = 12.0 / 100;
-                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss3;
-            }
-            else if (decimoTerceiroBruto <= 7507.49)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de 14,0%");
-                percentualInss = 14.0 / 100;
-                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss4;
-            }
-            else
-            {
-                Console.WriteLine("- Valores acima de 7.507.49 R$ (teto do INSS), possuem um desconto fixo de 877.24 R$");
-                descontoDeInssDoDecimoTerceiro = decimoTerceiroBruto - parcelaInss5;
-            }
-
-            baseIrrfDecimoTerceiro = salarioBruto - descontoDeInssDoDecimoTerceiro;
-
-            if (baseIrrfDecimoTerceiro <= 2112.00)
-            {
-                Console.WriteLine("- Isento do desconto de IR, parcela a deduzir: R$ 0,00.");
-            }
-            else if (baseIrrfDecimoTerceiro <= 2826.65)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de: 7,50%.");
-                percentualIrrf = 7.50 / 100;
-                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf2;
-            }
-            else if (baseIrrfDecimoTerceiro <= 3751.05)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de: 15,00%.");
-                percentualIrrf = 15.00 / 100;
-                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf3;
-            }
-            else if (baseIrrfDecimoTerceiro <= 4664.68)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de: 22,50%.");
-                percentualIrrf = 22.50 / 100;
-                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf4;
-            }
-            else
-            {
-                Console.WriteLine("- Base de cálculo de IR maior que 4.664,687 o desconto feito com base na aliquota de: 27,50%.");
-                percentualIrrf = 27.50 / 100;
-                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf5;
-            }
-            Console.WriteLine();
-
-            decimoTerceiroSalarioLiquido = decimoTerceiroBruto - descontoDeInssDoDecimoTerceiro - descontoDeIrrDofDecimoTerceiro;
-            Console.Write($"- O valor bruto do décimo terceiro salário do funcionario é de: R$ {decimoTerceiroBruto:f2}");
-            ValorDoDecimoTerceiroSalarioBruto = decimoTerceiroBruto;
-            Console.WriteLine();
-            Console.Write($"- O desconto de INSS sobre o décimo terceiro é de: R$ {descontoDeInssDoDecimoTerceiro:f2}");
-            InssSobreDecimoTerceiro = descontoDeInssDoDecimoTerceiro;
-            Console.WriteLine();
-            Console.Write($"- O desconto de IRRF sobre o deécimo terceiro salário é de: R$ {descontoDeIrrDofDecimoTerceiro:f2}");
-            IrrfSobreDecimoTerceiro = descontoDeIrrDofDecimoTerceiro;
-            Console.WriteLine();
-            Console.WriteLine($"- O valor líquido do décimo terceiro a receber é de: R$ {decimoTerceiroSalarioLiquido:f2}");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-            Console.WriteLine();
-
-            return decimoTerceiroSalarioLiquido;
+            } while (tipoDePagamento != 1 &&  tipoDePagamento != 2 && tipoDePagamento != 3);
+            ValorDoDecimoTerceiro = valorDoPagamento;
+            return ValorDoDecimoTerceiro;
         }
 
         private double CalcularPrimeiraParcelaDoDecimoTerceiro()
         {
-            //double salarioBruto = SalarioBase;
-            double salarioBruto, PrimeiraParcelaDecimoTerceiro;
-            int mesesTrabalhados;
-
-            Console.Write("- Informe o salário bruto do funcionario: ");
-            salarioBruto = double.Parse(Console.ReadLine());
-            Console.Write("- Informe quantos meses do ano o funcionário trabalhou: ");
-            mesesTrabalhados = int.Parse(Console.ReadLine());
-            PrimeiraParcelaDecimoTerceiro = (salarioBruto / 12) * (double) mesesTrabalhados;
+            double salarioBrutoDoDecimoTerceiro = CalcularDecimoTerceiro();
+            double PrimeiraParcelaDecimoTerceiro;
+           
+            //Console.Write("- Informe quantos meses do ano o funcionário trabalhou: ");
+            //mesesTrabalhados = int.Parse(Console.ReadLine());
+            PrimeiraParcelaDecimoTerceiro = salarioBrutoDoDecimoTerceiro / 2;
             Console.WriteLine();
             return PrimeiraParcelaDecimoTerceiro;
         }
 
         private double CalcularSegundaParcelaDoDecimoTerceiro()
         {
-            double decimoTerceiroBruto, segundaParcelaDecimoTerceiro, baseSegundaParcelaDecimoTerceiro, percentualInss, percentualIrrf, descontoDeInssDoDecimoTerceiro, baseIrrfDecimoTerceiro, descontoDeIrrDofDecimoTerceiro = 0;
-            double parcelaInss1 = 0, parcelaInss2 = 19.80, parcelaInss3 = 96.94, parcelaInss4 = 174.08, parcelaInss5 = 877.24;
-            double parcelaIrrf2 = 158.40, parcelaIrrf3 = 370.40, parcelaIrrf4 = 651.73, parcelaIrrf5 = 884.96;
-            // double salarioBruto = SalarioBase; vou atribuir o valor de forma manual antes de incluir no metodo da folha.
+            double salarioBrutoDoDecimoTerceiro, valorDaSegundaParcelaDoDecimo, inss, irrf;
+            double pensao = DescontoTotalDePensao;
+            double dependente = DescontoTotalDeDependentes;
 
-            Console.WriteLine("- Informe o valor bruto do décimo terceiro: R$  ");
-            decimoTerceiroBruto = double.Parse(Console.ReadLine());
-            baseSegundaParcelaDecimoTerceiro = decimoTerceiroBruto / 2;
-
-            if (decimoTerceiroBruto <= 1320.00)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de 7,5%");
-                percentualInss = 7.5 / 100;
-                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss1;
-            }
-            else if (decimoTerceiroBruto <= 2571.29)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de 9,0%");
-                percentualInss = 9.0 / 100;
-                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss2;
-            }
-            else if (decimoTerceiroBruto <= 3856.94)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de 12,0%");
-                percentualInss = 12.0 / 100;
-                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss3;
-            }
-            else if (decimoTerceiroBruto <= 7507.49)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de 14,0%");
-                percentualInss = 14.0 / 100;
-                descontoDeInssDoDecimoTerceiro = (decimoTerceiroBruto * percentualInss) - parcelaInss4;
-            }
-            else
-            {
-                Console.WriteLine("- Valores acima de 7.507.49 R$ (teto do INSS), possuem um desconto fixo de 877.24 R$");
-                descontoDeInssDoDecimoTerceiro = decimoTerceiroBruto - parcelaInss5;
-            }
-
-            baseIrrfDecimoTerceiro = decimoTerceiroBruto - descontoDeInssDoDecimoTerceiro;
-            if (baseIrrfDecimoTerceiro <= 2112.00)
-            {
-                Console.WriteLine("- Isento do desconto de IR, parcela a deduzir: R$ 0,00.");
-            }
-            else if (baseIrrfDecimoTerceiro <= 2826.65)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de: 7,50%.");
-                percentualIrrf = 7.50 / 100;
-                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf2;
-            }
-            else if (baseIrrfDecimoTerceiro <= 3751.05)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de: 15,00%.");
-                percentualIrrf = 15.00 / 100;
-                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf3;
-            }
-            else if (baseIrrfDecimoTerceiro <= 4664.68)
-            {
-                Console.WriteLine("- Desconto feito com base na aliquota de: 22,50%.");
-                percentualIrrf = 22.50 / 100;
-                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf4;
-            }
-            else
-            {
-                Console.WriteLine("- Base de cálculo de IR maior que 4.664,687 o desconto feito com base na aliquota de: 27,50%.");
-                percentualIrrf = 27.50 / 100;
-                descontoDeIrrDofDecimoTerceiro = (baseIrrfDecimoTerceiro * percentualIrrf) - parcelaIrrf5;
-            }
+            salarioBrutoDoDecimoTerceiro = CalcularDecimoTerceiro();
             Console.WriteLine();
-
-            segundaParcelaDecimoTerceiro = baseSegundaParcelaDecimoTerceiro - descontoDeInssDoDecimoTerceiro - descontoDeIrrDofDecimoTerceiro;
-            Console.Write($"- O valor da Segunda parcela do décimo terceiro é de: R$ {segundaParcelaDecimoTerceiro:f2}");
+            inss = FormulaDoInss(salarioBrutoDoDecimoTerceiro);
+            irrf = FormulaDoIrrf(salarioBrutoDoDecimoTerceiro, inss, pensao, dependente);
+            valorDaSegundaParcelaDoDecimo = (salarioBrutoDoDecimoTerceiro / 2) - inss - irrf;
             Console.WriteLine();
-            Console.Write($"- O desconto de INSS sobre o décimo terceiro é de: R$ {descontoDeInssDoDecimoTerceiro:f2}");
-            InssSobreDecimoTerceiro = descontoDeInssDoDecimoTerceiro;
-            Console.WriteLine();
-            Console.Write($"- O desconto de IRRF sobre o décimo terceiro é de: R$ {descontoDeIrrDofDecimoTerceiro:f2}");
-            IrrfSobreDecimoTerceiro = descontoDeIrrDofDecimoTerceiro;
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-            Console.WriteLine();
-            return segundaParcelaDecimoTerceiro;
+            return valorDaSegundaParcelaDoDecimo;
         }
 
+        private double CalcularPagamentoUnicoDoDecimoTerceiro()
+        {
+            double salarioBrutoDoDecimoTerceiro, pagamentoUnicoDoDecimoTerceiro, inss, irrf;
+            double pensao = DescontoTotalDePensao;
+            double dependente = DescontoTotalDeDependentes;
+
+            salarioBrutoDoDecimoTerceiro = CalcularDecimoTerceiro();
+            Console.WriteLine();
+            inss = FormulaDoInss(salarioBrutoDoDecimoTerceiro);
+            irrf = FormulaDoIrrf(salarioBrutoDoDecimoTerceiro, inss, pensao, dependente);
+            pagamentoUnicoDoDecimoTerceiro = salarioBrutoDoDecimoTerceiro - inss - irrf;
+            Console.WriteLine();
+            return pagamentoUnicoDoDecimoTerceiro;
+        }
+        
         public double CalcularFgts()
         {
-            double salarioBruto;
+            double salarioBruto = SalarioBase;
 
             Console.WriteLine("---Calcular o FGTS---");
             Console.WriteLine();
 
-            Console.Write("- Informe o salário bruto do funcionario: R$ ");
-            salarioBruto = double.Parse(Console.ReadLine());
+            //Console.Write("- Informe o salário bruto do funcionario: R$ ");
+            //salarioBruto = double.Parse(Console.ReadLine());
             Fgts = salarioBruto * 0.08;
-            Console.WriteLine();
             Console.WriteLine($"- O valor do FGTS a ser depositado é de: R$ {Fgts:f2}");
             Console.ReadKey();
             return Fgts;
@@ -1080,7 +911,7 @@ namespace SistemaParaDesktop
             int escolha;
             double valor = 0;
 
-            Console.WriteLine("---Gerando o Holerite---");
+            Console.WriteLine("\t---Gerando o Holerite---");
             Console.WriteLine();
 
             do { 
@@ -1527,7 +1358,7 @@ namespace SistemaParaDesktop
                     } while (simNao != 1 && simNao != 2);
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine();
-                    
+
                     Console.WriteLine("- Etapa 15");
                     Console.WriteLine("- Chegou a hora de calcular o IRRF.");
                     Console.WriteLine();
@@ -1538,7 +1369,105 @@ namespace SistemaParaDesktop
                     Console.ReadKey();
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine();
-                    
+
+                    do
+                    {
+                        Console.WriteLine("- Etapa 16");
+                        Console.WriteLine("- O funcionario ira receber o décimo salário? Para SIM dígite [1], para NÃO dígite [2]");
+                        Console.Write("- Escolha...: ");
+                        simNao = int.Parse(Console.ReadLine());
+                        Console.WriteLine();
+
+                        switch (simNao)
+                        {
+                            case 1:
+                                CalcularFormulasDoDecimoTerceiro();
+                                Console.WriteLine();
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            case 2:
+                                ValorDoDecimoTerceiro = 0;
+                                Console.WriteLine("- Proseguindo para a próxima etapa.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                break;
+
+                            default:
+                                Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
+                                Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                                Console.ReadKey();
+                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                                Console.WriteLine();
+                                break;
+                        }
+                    } while (simNao != 1 && simNao != 2);
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+
+                    Console.WriteLine("- Etapa 17");
+                    Console.WriteLine("- Chegou a hora de calcular o FGTS.");
+                    Console.WriteLine();
+                    CalcularFgts();
+                    Console.WriteLine();
+                    Console.WriteLine("- Proseguindo para a próxima etapa.");
+                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
+                    Console.ReadKey();
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine();
+
+                    Console.WriteLine("- CONCLUIDO! O processo chegou ao fim.");
+                    Console.WriteLine("- Para gerar a folha de pagamento dígite qualquer coisa.");
+                    Console.ReadKey();
+                    Console.WriteLine();
+                    Console.WriteLine();
+
+                    Vencimentos = SalarioBase + AdiantamentoQuinzenal + TotalDeHorasExtras + ValorTotalDePericulosidadeInsalubridade + ValorDoAdicionalNoturno;
+                    Descontos = DescontoDoValeTransporte + DescontoDoValeRefeicaoAlimentacao + DescontoDoConvenioMedico + DescontoDoConvenioOdontologico + DescontoDeAtrasos + DescontoTotalDeDependentes + DescontoTotalDePensao + DescontoDoInss + DescontoDoIrrf;
+                    SalarioLiquido = Vencimentos - Descontos;
+
+                    Console.WriteLine("Nome Do Funcionário..................................... | Cargo..................................................");
+                    Console.WriteLine();
+                    Console.WriteLine("Salario................................................. | Empresa................................................");
+                    Console.WriteLine();
+                    Console.WriteLine("Conta................................................... | Registro...............................................");
+                    Console.WriteLine();
+                    // Console.WriteLine($"|Férias                   | ");
+                    Console.WriteLine("-----------------------------------------");
+                    Console.WriteLine("VENCIMENTOS");
+                    Console.WriteLine("-----------------------------------------");
+                    Console.WriteLine($"|Salário Base           | {SalarioBase:f2}");
+                    Console.WriteLine($"|Horas Extras           | {TotalDeHorasExtras:f2}");
+                    Console.WriteLine($"|Insalubridade          | {ValorTotalDePericulosidadeInsalubridade:f2}");
+                    Console.WriteLine($"|Adicional Noturno      | {ValorDoAdicionalNoturno:f2}");
+
+                    Console.WriteLine("-----------------------------------------");
+                    Console.WriteLine("DESCONTOS");
+                    Console.WriteLine("-----------------------------------------");
+                    Console.WriteLine($"|Adiantamento Quinzenal | {AdiantamentoQuinzenal:f2}");
+                    Console.WriteLine($"|Vale Alimentação       | {DescontoDoValeRefeicaoAlimentacao:f2}");
+                    Console.WriteLine($"|Convênio Médico        | {DescontoDoConvenioMedico:f2}");
+                    Console.WriteLine($"|Vale Transporte        | {DescontoDoValeTransporte:f2}");
+                    Console.WriteLine($"|Convênio Odontológico  | {DescontoDoConvenioOdontologico:f2}");
+                    Console.WriteLine($"|Atrasos                | {DescontoDeAtrasos:f2}");
+                    Console.WriteLine($"|Dependente             | {DescontoTotalDeDependentes:f2}");
+                    Console.WriteLine($"|Pensão                 | {DescontoTotalDePensao:f2}");
+                    Console.WriteLine($"|INSS                   | {DescontoDoInss:f2}");
+                    Console.WriteLine($"|IRRF                   | {DescontoDoIrrf:f2}");
+                    Console.WriteLine();
+
+                    Console.WriteLine("-----------------------------------------");
+                    Console.WriteLine("TOTAIS");
+                    Console.WriteLine("-----------------------------------------");
+                    Console.WriteLine($"|VENCIMENTOS            | {Vencimentos:f2}");
+                    Console.WriteLine($"|DESCONTOS              | {Descontos:f2}");
+                    Console.WriteLine($"|LÍQUIDO                | {SalarioLiquido:f2}");
+                    Console.WriteLine();
+                    Console.WriteLine("- Precione qualquer coisa para concluir e encerrar.");
+                    Console.ReadKey();
+
                 }
                 else if (escolha == 2)
                 {

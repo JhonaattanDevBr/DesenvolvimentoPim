@@ -11,17 +11,15 @@ namespace SistemaParaDesktop
         static void Main(string[] args)
         {
             FolhaDePagamento ObjetofolhaDePagamento = new FolhaDePagamento();
-            /*
-            Console.WriteLine("Vamos gerar a folha de pagamento");
-            Console.WriteLine();
-            Console.WriteLine();
+            
+            
              ObjetofolhaDePagamento.GerarFolhaDePagamento();
-            */
+            
 
-            Console.WriteLine("---TESTE---");
+            /*Console.WriteLine("---TESTE---");
             Console.WriteLine();
 
-           // ObjetofolhaDePagamento.CalcularDecimoTerceiroEmParcelaUnica();
+            ObjetofolhaDePagamento.CalcularFormulasDoDecimoTerceiro();*/
         }
     }
 }
