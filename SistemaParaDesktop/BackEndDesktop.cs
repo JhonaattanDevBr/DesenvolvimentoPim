@@ -11,9 +11,13 @@ namespace SistemaParaDesktop
         static void Main(string[] args)
         {
             FolhaDePagamento ObjetofolhaDePagamento = new FolhaDePagamento();
-            
-            
-             ObjetofolhaDePagamento.GerarFolhaDePagamento();
+            Ferias ObjFerias = new Ferias();
+
+            //ObjetofolhaDePagamento.GerarFolhaDePagamento();
+            Console.WriteLine("TESTE do metodo calcular férias.");
+            Console.WriteLine();
+            Console.WriteLine();
+            ObjFerias.CalcularFerias();
             
 
             /*Console.WriteLine("---TESTE---");

@@ -117,7 +117,7 @@ namespace SistemaParaDesktop
             return DescontoDoInss;
         } 
 
-        static double FormulaDoInss(double salario)
+        public double FormulaDoInss(double salario)
         {
             double ValorDeDescontoDoInss, faixa2, faixa3, faixa4, restante;
             double valorPadraoFaixa1 = 99.00;
@@ -179,7 +179,7 @@ namespace SistemaParaDesktop
             return DescontoDoIrrf;
         } 
 
-        static double FormulaDoIrrf(double salario, double inss, double pensao, double dependente)
+        public double FormulaDoIrrf(double salario, double inss, double pensao, double dependente)
         {
             double deducoesLegais, descontoSimplificado, baseDeCalculoDoIrrfDefinitivo, valorDeDescontoDoIrrf = 0, percentual;
             double parcela2 = 158.40;
