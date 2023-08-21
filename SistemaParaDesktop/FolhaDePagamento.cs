@@ -1467,7 +1467,13 @@ namespace SistemaParaDesktop
                     Console.WriteLine();
                     Console.WriteLine("- Precione qualquer coisa para concluir e encerrar.");
                     Console.ReadKey();
+                    /* Quando a folha de pagamento do funcionario for gerada eu terei que incluir mais uma etapa que sera, gerar o recibo de férias.
+                    Para isso eu vou consumir dentro do método GerarFolhaDePagamento() da classe FolhaDePagamento, o método GerarReciboDeFerias() da classe Ferias
+                    e só após isso vou encerrar o processo.
 
+                    IMPORTATNE: O método de OpcaoDeFerias() que vai ser usado dentro do método GerarFolhaDePagamento() deve ser chamado ANTES do calculo do FGTS.
+                    Caso o funcionário não vá tirar ferias o sistema deve concluir o processo e gerar a folha de pagamento.
+                    */
                 }
                 else if (escolha == 2)
                 {

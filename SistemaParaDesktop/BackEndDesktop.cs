@@ -17,7 +17,7 @@ namespace SistemaParaDesktop
             Console.WriteLine("TESTE do metodo calcular férias.");
             Console.WriteLine();
             Console.WriteLine();
-            ObjFerias.CalcularFerias();
+            ObjFerias.AgendarFerias();
             
 
             /*Console.WriteLine("---TESTE---");
