@@ -12,3 +12,8 @@ C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaD
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_DoisPeriodos.resources
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_PeriodoCompleto.resources
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Inter_AgendarFerias.resources
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\bin\Debug\FolhaDePagamento.dll
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\bin\Debug\FolhaDePagamento.pdb
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_ValeTransporte.resources
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.csproj.CopyComplete
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_ValeAlimentacao.resources

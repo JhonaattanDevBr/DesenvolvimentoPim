@@ -58,6 +58,18 @@
     <Compile Include="Form_DoisPeriodos.Designer.cs">
       <DependentUpon>Form_DoisPeriodos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_ValeAlimentacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ValeAlimentacao.Designer.cs">
+      <DependentUpon>Form_ValeAlimentacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ValeTransporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ValeTransporte.Designer.cs">
+      <DependentUpon>Form_ValeTransporte.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inter_AgendarFerias.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +82,11 @@
     <Compile Include="InterfacePrincipal.Designer.cs">
       <DependentUpon>InterfacePrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="PersonalDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PersonalDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_DoisPeriodos.resx">
@@ -77,6 +94,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_PeriodoCompleto.resx">
       <DependentUpon>Form_PeriodoCompleto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ValeAlimentacao.resx">
+      <DependentUpon>Form_ValeAlimentacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ValeTransporte.resx">
+      <DependentUpon>Form_ValeTransporte.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inter_AgendarFerias.resx">
       <DependentUpon>Inter_AgendarFerias.cs</DependentUpon>
@@ -93,6 +116,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="PersonalDataSet.xsc">
+      <DependentUpon>PersonalDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="PersonalDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PersonalDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PersonalDataSet.xss">
+      <DependentUpon>PersonalDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -105,6 +139,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FolhaDePagamento\FolhaDePagamento.csproj">
+      <Project>{8eab9188-d295-4ca5-b00f-2dd61279e3b0}</Project>
+      <Name>FolhaDePagamento</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

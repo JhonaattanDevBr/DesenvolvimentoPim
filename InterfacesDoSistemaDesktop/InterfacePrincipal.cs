@@ -48,8 +48,16 @@ namespace InterfacesDoSistemaDesktop
             
         }
 
-        
+        private void calcularValeTransporteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_ValeTransporte Obj_FormValeTransporte = new Form_ValeTransporte();
+            Obj_FormValeTransporte.Show();
+        }
 
-        
+        private void calcularValeAlimentaçãoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form Obj_FormValeAlimentacao = new Form_ValeAlimentacao();
+            Obj_FormValeAlimentacao.Show();
+        }
     }
 }

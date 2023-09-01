@@ -1,6 +1,6 @@
 ﻿namespace InterfacesDoSistemaDesktop
 {
-    partial class InterfacePrincipal
+    partial class Form_ValeTransporte
     {
         /// <summary>
         /// Required designer variable.
@@ -58,7 +58,6 @@
             this.consultarBeneficioDasFériasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gerarNovaFolhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizarFolhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calcularValeTransporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gerarReciboDeFériasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gerarNovoReciboDeFériasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizarReciboDeFériasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,8 +66,19 @@
             this.períodoCompletoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doisPeríodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trêsPeríodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calcularValeAlimentaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblPercentual = new System.Windows.Forms.Label();
+            this.txtRetorno = new System.Windows.Forms.TextBox();
+            this.btnCalcular = new System.Windows.Forms.Button();
+            this.txtDias = new System.Windows.Forms.TextBox();
+            this.txtPassagem = new System.Windows.Forms.TextBox();
+            this.txtSalarioBase = new System.Windows.Forms.TextBox();
+            this.lblDiasUteis = new System.Windows.Forms.Label();
+            this.lblPassagem = new System.Windows.Forms.Label();
+            this.lblSalarioBase = new System.Windows.Forms.Label();
+            this.btnAvancar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -79,7 +89,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // arquivoToolStripMenuItem
@@ -275,9 +285,7 @@
             // 
             this.consultarBeneficioDasFériasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gerarNovaFolhaToolStripMenuItem,
-            this.visualizarFolhaToolStripMenuItem,
-            this.calcularValeTransporteToolStripMenuItem,
-            this.calcularValeAlimentaçãoToolStripMenuItem});
+            this.visualizarFolhaToolStripMenuItem});
             this.consultarBeneficioDasFériasToolStripMenuItem.Name = "consultarBeneficioDasFériasToolStripMenuItem";
             this.consultarBeneficioDasFériasToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.consultarBeneficioDasFériasToolStripMenuItem.Text = "Folha de pagamento";
@@ -285,21 +293,14 @@
             // gerarNovaFolhaToolStripMenuItem
             // 
             this.gerarNovaFolhaToolStripMenuItem.Name = "gerarNovaFolhaToolStripMenuItem";
-            this.gerarNovaFolhaToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.gerarNovaFolhaToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.gerarNovaFolhaToolStripMenuItem.Text = "Gerar nova folha";
             // 
             // visualizarFolhaToolStripMenuItem
             // 
             this.visualizarFolhaToolStripMenuItem.Name = "visualizarFolhaToolStripMenuItem";
-            this.visualizarFolhaToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.visualizarFolhaToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.visualizarFolhaToolStripMenuItem.Text = "Visualizar folha";
-            // 
-            // calcularValeTransporteToolStripMenuItem
-            // 
-            this.calcularValeTransporteToolStripMenuItem.Name = "calcularValeTransporteToolStripMenuItem";
-            this.calcularValeTransporteToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.calcularValeTransporteToolStripMenuItem.Text = "Calcular vale transporte";
-            this.calcularValeTransporteToolStripMenuItem.Click += new System.EventHandler(this.calcularValeTransporteToolStripMenuItem_Click);
             // 
             // gerarReciboDeFériasToolStripMenuItem1
             // 
@@ -339,7 +340,6 @@
             this.agendarFériasToolStripMenuItem.Name = "agendarFériasToolStripMenuItem";
             this.agendarFériasToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.agendarFériasToolStripMenuItem.Text = "Agendar férias";
-            this.agendarFériasToolStripMenuItem.Click += new System.EventHandler(this.agendarFériasToolStripMenuItem_Click);
             // 
             // períodoCompletoToolStripMenuItem
             // 
@@ -360,26 +360,142 @@
             this.trêsPeríodosToolStripMenuItem.Name = "trêsPeríodosToolStripMenuItem";
             this.trêsPeríodosToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.trêsPeríodosToolStripMenuItem.Text = "Três períodos";
-            this.trêsPeríodosToolStripMenuItem.Click += new System.EventHandler(this.trêsPeríodosToolStripMenuItem_Click);
             // 
-            // calcularValeAlimentaçãoToolStripMenuItem
+            // groupBox1
             // 
-            this.calcularValeAlimentaçãoToolStripMenuItem.Name = "calcularValeAlimentaçãoToolStripMenuItem";
-            this.calcularValeAlimentaçãoToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.calcularValeAlimentaçãoToolStripMenuItem.Text = "Calcular vale alimentação";
-            this.calcularValeAlimentaçãoToolStripMenuItem.Click += new System.EventHandler(this.calcularValeAlimentaçãoToolStripMenuItem_Click);
+            this.groupBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBox1.Controls.Add(this.lblPercentual);
+            this.groupBox1.Controls.Add(this.txtRetorno);
+            this.groupBox1.Controls.Add(this.btnCalcular);
+            this.groupBox1.Controls.Add(this.txtDias);
+            this.groupBox1.Controls.Add(this.txtPassagem);
+            this.groupBox1.Controls.Add(this.txtSalarioBase);
+            this.groupBox1.Controls.Add(this.lblDiasUteis);
+            this.groupBox1.Controls.Add(this.lblPassagem);
+            this.groupBox1.Controls.Add(this.lblSalarioBase);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.Location = new System.Drawing.Point(12, 42);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(776, 265);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Vale transporte";
             // 
-            // InterfacePrincipal
+            // lblPercentual
+            // 
+            this.lblPercentual.AutoSize = true;
+            this.lblPercentual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblPercentual.Location = new System.Drawing.Point(6, 80);
+            this.lblPercentual.Name = "lblPercentual";
+            this.lblPercentual.Size = new System.Drawing.Size(104, 15);
+            this.lblPercentual.TabIndex = 8;
+            this.lblPercentual.Text = "Percentual de 6%";
+            // 
+            // txtRetorno
+            // 
+            this.txtRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtRetorno.Location = new System.Drawing.Point(12, 231);
+            this.txtRetorno.Name = "txtRetorno";
+            this.txtRetorno.Size = new System.Drawing.Size(406, 20);
+            this.txtRetorno.TabIndex = 7;
+            // 
+            // btnCalcular
+            // 
+            this.btnCalcular.BackColor = System.Drawing.Color.LightBlue;
+            this.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCalcular.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.btnCalcular.Location = new System.Drawing.Point(12, 184);
+            this.btnCalcular.Name = "btnCalcular";
+            this.btnCalcular.Size = new System.Drawing.Size(75, 23);
+            this.btnCalcular.TabIndex = 6;
+            this.btnCalcular.Text = "Calcular";
+            this.btnCalcular.UseVisualStyleBackColor = false;
+            this.btnCalcular.Click += new System.EventHandler(this.btnCalcular_Click);
+            // 
+            // txtDias
+            // 
+            this.txtDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtDias.Location = new System.Drawing.Point(76, 138);
+            this.txtDias.Name = "txtDias";
+            this.txtDias.Size = new System.Drawing.Size(56, 20);
+            this.txtDias.TabIndex = 5;
+            // 
+            // txtPassagem
+            // 
+            this.txtPassagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtPassagem.Location = new System.Drawing.Point(241, 103);
+            this.txtPassagem.Name = "txtPassagem";
+            this.txtPassagem.Size = new System.Drawing.Size(100, 20);
+            this.txtPassagem.TabIndex = 4;
+            // 
+            // txtSalarioBase
+            // 
+            this.txtSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtSalarioBase.Location = new System.Drawing.Point(89, 46);
+            this.txtSalarioBase.Name = "txtSalarioBase";
+            this.txtSalarioBase.Size = new System.Drawing.Size(56, 20);
+            this.txtSalarioBase.TabIndex = 3;
+            // 
+            // lblDiasUteis
+            // 
+            this.lblDiasUteis.AutoSize = true;
+            this.lblDiasUteis.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblDiasUteis.Location = new System.Drawing.Point(9, 143);
+            this.lblDiasUteis.Name = "lblDiasUteis";
+            this.lblDiasUteis.Size = new System.Drawing.Size(61, 15);
+            this.lblDiasUteis.TabIndex = 2;
+            this.lblDiasUteis.Text = "Dias uteis";
+            // 
+            // lblPassagem
+            // 
+            this.lblPassagem.AutoSize = true;
+            this.lblPassagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblPassagem.Location = new System.Drawing.Point(6, 108);
+            this.lblPassagem.Name = "lblPassagem";
+            this.lblPassagem.Size = new System.Drawing.Size(226, 15);
+            this.lblPassagem.TabIndex = 1;
+            this.lblPassagem.Text = "Valor da passagem somando ida e volta";
+            // 
+            // lblSalarioBase
+            // 
+            this.lblSalarioBase.AutoSize = true;
+            this.lblSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblSalarioBase.Location = new System.Drawing.Point(6, 51);
+            this.lblSalarioBase.Name = "lblSalarioBase";
+            this.lblSalarioBase.Size = new System.Drawing.Size(77, 15);
+            this.lblSalarioBase.TabIndex = 0;
+            this.lblSalarioBase.Text = "Salario Base";
+            // 
+            // btnAvancar
+            // 
+            this.btnAvancar.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnAvancar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAvancar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.btnAvancar.Location = new System.Drawing.Point(713, 415);
+            this.btnAvancar.Name = "btnAvancar";
+            this.btnAvancar.Size = new System.Drawing.Size(75, 23);
+            this.btnAvancar.TabIndex = 4;
+            this.btnAvancar.Text = "Avançar";
+            this.btnAvancar.UseVisualStyleBackColor = false;
+            // 
+            // Form_ValeTransporte
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SkyBlue;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnAvancar);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
-            this.Name = "InterfacePrincipal";
-            this.Text = "InterfacePrincipal";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "Form_ValeTransporte";
+            this.Text = "Form_ValeTransporte";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -425,7 +541,16 @@
         private System.Windows.Forms.ToolStripMenuItem períodoCompletoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doisPeríodosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trêsPeríodosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularValeTransporteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularValeAlimentaçãoToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblSalarioBase;
+        private System.Windows.Forms.Label lblPassagem;
+        private System.Windows.Forms.Label lblDiasUteis;
+        private System.Windows.Forms.TextBox txtDias;
+        private System.Windows.Forms.TextBox txtPassagem;
+        private System.Windows.Forms.TextBox txtSalarioBase;
+        private System.Windows.Forms.Button btnCalcular;
+        private System.Windows.Forms.TextBox txtRetorno;
+        private System.Windows.Forms.Button btnAvancar;
+        private System.Windows.Forms.Label lblPercentual;
     }
 }
