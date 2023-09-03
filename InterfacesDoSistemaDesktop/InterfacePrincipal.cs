@@ -71,5 +71,35 @@ namespace InterfacesDoSistemaDesktop
             Form_ConvenioOdontologico form_ConvenioOdontologico = new Form_ConvenioOdontologico();
             form_ConvenioOdontologico.Show();
         }
+
+        private void calcularConvênioMédicoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_ConvenioMedico form_ConvenioMedico = new Form_ConvenioMedico();
+            form_ConvenioMedico.Show();
+        }
+
+        private void calcularDependentesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_Dependentes form_Dependentes = new Form_Dependentes();
+            form_Dependentes.Show();
+        }
+
+        private void calcularPensãoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_Pensao form_Pensao = new Form_Pensao();
+            form_Pensao.Show();
+        }
+
+        private void calcularFGTSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_Fgts form_Fgts = new Form_Fgts();
+            form_Fgts.Show();
+        }
+
+        private void calcularINSSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_Inss form_Inss = new Form_Inss();
+            form_Inss.Show();
+        }
     }
 }

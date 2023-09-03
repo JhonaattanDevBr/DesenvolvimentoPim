@@ -1,6 +1,6 @@
 ﻿namespace InterfacesDoSistemaDesktop
 {
-    partial class InterfacePrincipal
+    partial class Form_ConvenioMedico
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnAvancar = new System.Windows.Forms.Button();
+            this.gpbConvenioMedico = new System.Windows.Forms.GroupBox();
+            this.cmbLista = new System.Windows.Forms.ComboBox();
+            this.btnLimpar = new System.Windows.Forms.Button();
+            this.btnCalcular = new System.Windows.Forms.Button();
+            this.txtRetorno = new System.Windows.Forms.TextBox();
+            this.txtSalarioBase = new System.Windows.Forms.TextBox();
+            this.lblRetorno = new System.Windows.Forms.Label();
+            this.lblConvenioMedico = new System.Windows.Forms.Label();
+            this.lblSalarioBase = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novoArquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,9 +73,6 @@
             this.calcularAdiantamentoQuinzenalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calcularConvênioOdontológicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calcularConvênioMédicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calcularDependentesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calcularPensãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calcularFGTSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gerarReciboDeFériasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gerarNovoReciboDeFériasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizarReciboDeFériasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,9 +81,121 @@
             this.períodoCompletoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doisPeríodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trêsPeríodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calcularINSSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gpbConvenioMedico.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnAvancar
+            // 
+            this.btnAvancar.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnAvancar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAvancar.Location = new System.Drawing.Point(895, 637);
+            this.btnAvancar.Name = "btnAvancar";
+            this.btnAvancar.Size = new System.Drawing.Size(75, 30);
+            this.btnAvancar.TabIndex = 0;
+            this.btnAvancar.Text = "Avançar";
+            this.btnAvancar.UseVisualStyleBackColor = false;
+            // 
+            // gpbConvenioMedico
+            // 
+            this.gpbConvenioMedico.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.gpbConvenioMedico.Controls.Add(this.cmbLista);
+            this.gpbConvenioMedico.Controls.Add(this.btnLimpar);
+            this.gpbConvenioMedico.Controls.Add(this.btnCalcular);
+            this.gpbConvenioMedico.Controls.Add(this.txtRetorno);
+            this.gpbConvenioMedico.Controls.Add(this.txtSalarioBase);
+            this.gpbConvenioMedico.Controls.Add(this.lblRetorno);
+            this.gpbConvenioMedico.Controls.Add(this.lblConvenioMedico);
+            this.gpbConvenioMedico.Controls.Add(this.lblSalarioBase);
+            this.gpbConvenioMedico.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.gpbConvenioMedico.Location = new System.Drawing.Point(12, 45);
+            this.gpbConvenioMedico.Name = "gpbConvenioMedico";
+            this.gpbConvenioMedico.Size = new System.Drawing.Size(960, 586);
+            this.gpbConvenioMedico.TabIndex = 1;
+            this.gpbConvenioMedico.TabStop = false;
+            this.gpbConvenioMedico.Text = "Convênio médico";
+            // 
+            // cmbLista
+            // 
+            this.cmbLista.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.cmbLista.FormattingEnabled = true;
+            this.cmbLista.Location = new System.Drawing.Point(114, 62);
+            this.cmbLista.Name = "cmbLista";
+            this.cmbLista.Size = new System.Drawing.Size(121, 21);
+            this.cmbLista.TabIndex = 8;
+            this.cmbLista.Text = "Selecione um plano";
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.BackColor = System.Drawing.Color.LightBlue;
+            this.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLimpar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.btnLimpar.Location = new System.Drawing.Point(90, 92);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(75, 30);
+            this.btnLimpar.TabIndex = 7;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = false;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
+            // 
+            // btnCalcular
+            // 
+            this.btnCalcular.BackColor = System.Drawing.Color.LightBlue;
+            this.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCalcular.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.btnCalcular.Location = new System.Drawing.Point(9, 92);
+            this.btnCalcular.Name = "btnCalcular";
+            this.btnCalcular.Size = new System.Drawing.Size(75, 30);
+            this.btnCalcular.TabIndex = 6;
+            this.btnCalcular.Text = "Calcular";
+            this.btnCalcular.UseVisualStyleBackColor = false;
+            this.btnCalcular.Click += new System.EventHandler(this.btnCalcular_Click);
+            // 
+            // txtRetorno
+            // 
+            this.txtRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtRetorno.Location = new System.Drawing.Point(160, 131);
+            this.txtRetorno.Name = "txtRetorno";
+            this.txtRetorno.Size = new System.Drawing.Size(100, 20);
+            this.txtRetorno.TabIndex = 5;
+            // 
+            // txtSalarioBase
+            // 
+            this.txtSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtSalarioBase.Location = new System.Drawing.Point(88, 34);
+            this.txtSalarioBase.Name = "txtSalarioBase";
+            this.txtSalarioBase.Size = new System.Drawing.Size(100, 20);
+            this.txtSalarioBase.TabIndex = 4;
+            // 
+            // lblRetorno
+            // 
+            this.lblRetorno.AutoSize = true;
+            this.lblRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblRetorno.Location = new System.Drawing.Point(6, 134);
+            this.lblRetorno.Name = "lblRetorno";
+            this.lblRetorno.Size = new System.Drawing.Size(148, 15);
+            this.lblRetorno.TabIndex = 2;
+            this.lblRetorno.Text = "Valor do convênio médico";
+            // 
+            // lblConvenioMedico
+            // 
+            this.lblConvenioMedico.AutoSize = true;
+            this.lblConvenioMedico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblConvenioMedico.Location = new System.Drawing.Point(6, 65);
+            this.lblConvenioMedico.Name = "lblConvenioMedico";
+            this.lblConvenioMedico.Size = new System.Drawing.Size(102, 15);
+            this.lblConvenioMedico.TabIndex = 1;
+            this.lblConvenioMedico.Text = "Convênio médico";
+            // 
+            // lblSalarioBase
+            // 
+            this.lblSalarioBase.AutoSize = true;
+            this.lblSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblSalarioBase.Location = new System.Drawing.Point(6, 34);
+            this.lblSalarioBase.Name = "lblSalarioBase";
+            this.lblSalarioBase.Size = new System.Drawing.Size(76, 15);
+            this.lblSalarioBase.TabIndex = 0;
+            this.lblSalarioBase.Text = "Salário base";
             // 
             // menuStrip1
             // 
@@ -86,7 +205,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 24);
-            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // arquivoToolStripMenuItem
@@ -287,11 +406,7 @@
             this.calcularValeAlimentaçãoToolStripMenuItem,
             this.calcularAdiantamentoQuinzenalToolStripMenuItem,
             this.calcularConvênioOdontológicoToolStripMenuItem,
-            this.calcularConvênioMédicoToolStripMenuItem,
-            this.calcularDependentesToolStripMenuItem,
-            this.calcularPensãoToolStripMenuItem,
-            this.calcularFGTSToolStripMenuItem,
-            this.calcularINSSToolStripMenuItem});
+            this.calcularConvênioMédicoToolStripMenuItem});
             this.consultarBeneficioDasFériasToolStripMenuItem.Name = "consultarBeneficioDasFériasToolStripMenuItem";
             this.consultarBeneficioDasFériasToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.consultarBeneficioDasFériasToolStripMenuItem.Text = "Folha de pagamento";
@@ -313,56 +428,30 @@
             this.calcularValeTransporteToolStripMenuItem.Name = "calcularValeTransporteToolStripMenuItem";
             this.calcularValeTransporteToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.calcularValeTransporteToolStripMenuItem.Text = "Calcular vale transporte";
-            this.calcularValeTransporteToolStripMenuItem.Click += new System.EventHandler(this.calcularValeTransporteToolStripMenuItem_Click);
             // 
             // calcularValeAlimentaçãoToolStripMenuItem
             // 
             this.calcularValeAlimentaçãoToolStripMenuItem.Name = "calcularValeAlimentaçãoToolStripMenuItem";
             this.calcularValeAlimentaçãoToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.calcularValeAlimentaçãoToolStripMenuItem.Text = "Calcular vale alimentação";
-            this.calcularValeAlimentaçãoToolStripMenuItem.Click += new System.EventHandler(this.calcularValeAlimentaçãoToolStripMenuItem_Click);
             // 
             // calcularAdiantamentoQuinzenalToolStripMenuItem
             // 
             this.calcularAdiantamentoQuinzenalToolStripMenuItem.Name = "calcularAdiantamentoQuinzenalToolStripMenuItem";
             this.calcularAdiantamentoQuinzenalToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.calcularAdiantamentoQuinzenalToolStripMenuItem.Text = "Calcular adiantamento quinzenal";
-            this.calcularAdiantamentoQuinzenalToolStripMenuItem.Click += new System.EventHandler(this.calcularAdiantamentoQuinzenalToolStripMenuItem_Click);
             // 
             // calcularConvênioOdontológicoToolStripMenuItem
             // 
             this.calcularConvênioOdontológicoToolStripMenuItem.Name = "calcularConvênioOdontológicoToolStripMenuItem";
             this.calcularConvênioOdontológicoToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.calcularConvênioOdontológicoToolStripMenuItem.Text = "Calcular convênio odontológico";
-            this.calcularConvênioOdontológicoToolStripMenuItem.Click += new System.EventHandler(this.calcularConvênioOdontológicoToolStripMenuItem_Click);
             // 
             // calcularConvênioMédicoToolStripMenuItem
             // 
             this.calcularConvênioMédicoToolStripMenuItem.Name = "calcularConvênioMédicoToolStripMenuItem";
             this.calcularConvênioMédicoToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.calcularConvênioMédicoToolStripMenuItem.Text = "Calcular convênio médico";
-            this.calcularConvênioMédicoToolStripMenuItem.Click += new System.EventHandler(this.calcularConvênioMédicoToolStripMenuItem_Click);
-            // 
-            // calcularDependentesToolStripMenuItem
-            // 
-            this.calcularDependentesToolStripMenuItem.Name = "calcularDependentesToolStripMenuItem";
-            this.calcularDependentesToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.calcularDependentesToolStripMenuItem.Text = "Calcular dependente";
-            this.calcularDependentesToolStripMenuItem.Click += new System.EventHandler(this.calcularDependentesToolStripMenuItem_Click);
-            // 
-            // calcularPensãoToolStripMenuItem
-            // 
-            this.calcularPensãoToolStripMenuItem.Name = "calcularPensãoToolStripMenuItem";
-            this.calcularPensãoToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.calcularPensãoToolStripMenuItem.Text = "Calcular pensão";
-            this.calcularPensãoToolStripMenuItem.Click += new System.EventHandler(this.calcularPensãoToolStripMenuItem_Click);
-            // 
-            // calcularFGTSToolStripMenuItem
-            // 
-            this.calcularFGTSToolStripMenuItem.Name = "calcularFGTSToolStripMenuItem";
-            this.calcularFGTSToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.calcularFGTSToolStripMenuItem.Text = "Calcular FGTS";
-            this.calcularFGTSToolStripMenuItem.Click += new System.EventHandler(this.calcularFGTSToolStripMenuItem_Click);
             // 
             // gerarReciboDeFériasToolStripMenuItem1
             // 
@@ -402,37 +491,26 @@
             this.agendarFériasToolStripMenuItem.Name = "agendarFériasToolStripMenuItem";
             this.agendarFériasToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.agendarFériasToolStripMenuItem.Text = "Agendar férias";
-            this.agendarFériasToolStripMenuItem.Click += new System.EventHandler(this.agendarFériasToolStripMenuItem_Click);
             // 
             // períodoCompletoToolStripMenuItem
             // 
             this.períodoCompletoToolStripMenuItem.Name = "períodoCompletoToolStripMenuItem";
             this.períodoCompletoToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.períodoCompletoToolStripMenuItem.Text = "Período completo";
-            this.períodoCompletoToolStripMenuItem.Click += new System.EventHandler(this.períodoCompletoToolStripMenuItem_Click);
             // 
             // doisPeríodosToolStripMenuItem
             // 
             this.doisPeríodosToolStripMenuItem.Name = "doisPeríodosToolStripMenuItem";
             this.doisPeríodosToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.doisPeríodosToolStripMenuItem.Text = "Dois períodos";
-            this.doisPeríodosToolStripMenuItem.Click += new System.EventHandler(this.doisPeríodosToolStripMenuItem_Click);
             // 
             // trêsPeríodosToolStripMenuItem
             // 
             this.trêsPeríodosToolStripMenuItem.Name = "trêsPeríodosToolStripMenuItem";
             this.trêsPeríodosToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.trêsPeríodosToolStripMenuItem.Text = "Três períodos";
-            this.trêsPeríodosToolStripMenuItem.Click += new System.EventHandler(this.trêsPeríodosToolStripMenuItem_Click);
             // 
-            // calcularINSSToolStripMenuItem
-            // 
-            this.calcularINSSToolStripMenuItem.Name = "calcularINSSToolStripMenuItem";
-            this.calcularINSSToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.calcularINSSToolStripMenuItem.Text = "Calcular INSS";
-            this.calcularINSSToolStripMenuItem.Click += new System.EventHandler(this.calcularINSSToolStripMenuItem_Click);
-            // 
-            // InterfacePrincipal
+            // Form_ConvenioMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -440,13 +518,17 @@
             this.ClientSize = new System.Drawing.Size(984, 681);
             this.ControlBox = false;
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.gpbConvenioMedico);
+            this.Controls.Add(this.btnAvancar);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "InterfacePrincipal";
+            this.Name = "Form_ConvenioMedico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InterfacePrincipal";
+            this.Text = "Form_ConvenioMedico";
+            this.gpbConvenioMedico.ResumeLayout(false);
+            this.gpbConvenioMedico.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -456,6 +538,16 @@
 
         #endregion
 
+        private System.Windows.Forms.Button btnAvancar;
+        private System.Windows.Forms.GroupBox gpbConvenioMedico;
+        private System.Windows.Forms.Label lblRetorno;
+        private System.Windows.Forms.Label lblConvenioMedico;
+        private System.Windows.Forms.Label lblSalarioBase;
+        private System.Windows.Forms.TextBox txtRetorno;
+        private System.Windows.Forms.TextBox txtSalarioBase;
+        private System.Windows.Forms.Button btnLimpar;
+        private System.Windows.Forms.Button btnCalcular;
+        private System.Windows.Forms.ComboBox cmbLista;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem arquivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem novoArquivoToolStripMenuItem;
@@ -486,6 +578,11 @@
         private System.Windows.Forms.ToolStripMenuItem consultarBeneficioDasFériasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gerarNovaFolhaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visualizarFolhaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calcularValeTransporteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calcularValeAlimentaçãoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calcularAdiantamentoQuinzenalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calcularConvênioOdontológicoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calcularConvênioMédicoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gerarReciboDeFériasToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem gerarNovoReciboDeFériasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visualizarReciboDeFériasToolStripMenuItem;
@@ -494,14 +591,5 @@
         private System.Windows.Forms.ToolStripMenuItem períodoCompletoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doisPeríodosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trêsPeríodosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularValeTransporteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularValeAlimentaçãoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularAdiantamentoQuinzenalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularConvênioOdontológicoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularConvênioMédicoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularDependentesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularPensãoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularFGTSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calcularINSSToolStripMenuItem;
     }
 }

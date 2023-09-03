@@ -30,14 +30,14 @@
         {
             this.btnAvancar = new System.Windows.Forms.Button();
             this.gpbConvenioOdontologico = new System.Windows.Forms.GroupBox();
-            this.lblSalarioBase = new System.Windows.Forms.Label();
-            this.lblValor = new System.Windows.Forms.Label();
-            this.txtSalarioBase = new System.Windows.Forms.TextBox();
-            this.btnCalcular = new System.Windows.Forms.Button();
-            this.btnLimpar = new System.Windows.Forms.Button();
-            this.lblRetorno = new System.Windows.Forms.Label();
-            this.txtRetorno = new System.Windows.Forms.TextBox();
             this.cmbLista = new System.Windows.Forms.ComboBox();
+            this.txtRetorno = new System.Windows.Forms.TextBox();
+            this.lblRetorno = new System.Windows.Forms.Label();
+            this.btnLimpar = new System.Windows.Forms.Button();
+            this.btnCalcular = new System.Windows.Forms.Button();
+            this.txtSalarioBase = new System.Windows.Forms.TextBox();
+            this.lblConvenioOdontologico = new System.Windows.Forms.Label();
+            this.lblSalarioBase = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novoArquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,7 +105,7 @@
             this.gpbConvenioOdontologico.Controls.Add(this.btnLimpar);
             this.gpbConvenioOdontologico.Controls.Add(this.btnCalcular);
             this.gpbConvenioOdontologico.Controls.Add(this.txtSalarioBase);
-            this.gpbConvenioOdontologico.Controls.Add(this.lblValor);
+            this.gpbConvenioOdontologico.Controls.Add(this.lblConvenioOdontologico);
             this.gpbConvenioOdontologico.Controls.Add(this.lblSalarioBase);
             this.gpbConvenioOdontologico.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.gpbConvenioOdontologico.Location = new System.Drawing.Point(12, 45);
@@ -115,46 +115,33 @@
             this.gpbConvenioOdontologico.TabStop = false;
             this.gpbConvenioOdontologico.Text = "Convênio odontológico";
             // 
-            // lblSalarioBase
+            // cmbLista
             // 
-            this.lblSalarioBase.AutoSize = true;
-            this.lblSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblSalarioBase.Location = new System.Drawing.Point(6, 34);
-            this.lblSalarioBase.Name = "lblSalarioBase";
-            this.lblSalarioBase.Size = new System.Drawing.Size(76, 15);
-            this.lblSalarioBase.TabIndex = 0;
-            this.lblSalarioBase.Text = "Salário base";
+            this.cmbLista.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.cmbLista.FormattingEnabled = true;
+            this.cmbLista.Location = new System.Drawing.Point(144, 59);
+            this.cmbLista.Name = "cmbLista";
+            this.cmbLista.Size = new System.Drawing.Size(121, 21);
+            this.cmbLista.TabIndex = 8;
+            this.cmbLista.Text = "Selecione um plano";
             // 
-            // lblValor
+            // txtRetorno
             // 
-            this.lblValor.AutoSize = true;
-            this.lblValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblValor.Location = new System.Drawing.Point(6, 64);
-            this.lblValor.Name = "lblValor";
-            this.lblValor.Size = new System.Drawing.Size(132, 15);
-            this.lblValor.TabIndex = 1;
-            this.lblValor.Text = "Convenio odontológico";
+            this.txtRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtRetorno.Location = new System.Drawing.Point(190, 138);
+            this.txtRetorno.Name = "txtRetorno";
+            this.txtRetorno.Size = new System.Drawing.Size(112, 20);
+            this.txtRetorno.TabIndex = 7;
             // 
-            // txtSalarioBase
+            // lblRetorno
             // 
-            this.txtSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtSalarioBase.Location = new System.Drawing.Point(91, 31);
-            this.txtSalarioBase.Name = "txtSalarioBase";
-            this.txtSalarioBase.Size = new System.Drawing.Size(100, 20);
-            this.txtSalarioBase.TabIndex = 2;
-            // 
-            // btnCalcular
-            // 
-            this.btnCalcular.BackColor = System.Drawing.Color.LightBlue;
-            this.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCalcular.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.btnCalcular.Location = new System.Drawing.Point(9, 97);
-            this.btnCalcular.Name = "btnCalcular";
-            this.btnCalcular.Size = new System.Drawing.Size(75, 30);
-            this.btnCalcular.TabIndex = 4;
-            this.btnCalcular.Text = "Calcular";
-            this.btnCalcular.UseVisualStyleBackColor = false;
-            this.btnCalcular.Click += new System.EventHandler(this.btnCalcular_Click);
+            this.lblRetorno.AutoSize = true;
+            this.lblRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblRetorno.Location = new System.Drawing.Point(6, 141);
+            this.lblRetorno.Name = "lblRetorno";
+            this.lblRetorno.Size = new System.Drawing.Size(178, 15);
+            this.lblRetorno.TabIndex = 6;
+            this.lblRetorno.Text = "Valor do convenio odontológico";
             // 
             // btnLimpar
             // 
@@ -169,33 +156,46 @@
             this.btnLimpar.UseVisualStyleBackColor = false;
             this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
-            // lblRetorno
+            // btnCalcular
             // 
-            this.lblRetorno.AutoSize = true;
-            this.lblRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblRetorno.Location = new System.Drawing.Point(6, 141);
-            this.lblRetorno.Name = "lblRetorno";
-            this.lblRetorno.Size = new System.Drawing.Size(178, 15);
-            this.lblRetorno.TabIndex = 6;
-            this.lblRetorno.Text = "Valor do convenio odontológico";
+            this.btnCalcular.BackColor = System.Drawing.Color.LightBlue;
+            this.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCalcular.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.btnCalcular.Location = new System.Drawing.Point(9, 97);
+            this.btnCalcular.Name = "btnCalcular";
+            this.btnCalcular.Size = new System.Drawing.Size(75, 30);
+            this.btnCalcular.TabIndex = 4;
+            this.btnCalcular.Text = "Calcular";
+            this.btnCalcular.UseVisualStyleBackColor = false;
+            this.btnCalcular.Click += new System.EventHandler(this.btnCalcular_Click);
             // 
-            // txtRetorno
+            // txtSalarioBase
             // 
-            this.txtRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtRetorno.Location = new System.Drawing.Point(190, 138);
-            this.txtRetorno.Name = "txtRetorno";
-            this.txtRetorno.Size = new System.Drawing.Size(112, 20);
-            this.txtRetorno.TabIndex = 7;
+            this.txtSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtSalarioBase.Location = new System.Drawing.Point(88, 33);
+            this.txtSalarioBase.Name = "txtSalarioBase";
+            this.txtSalarioBase.Size = new System.Drawing.Size(100, 20);
+            this.txtSalarioBase.TabIndex = 2;
             // 
-            // cmbLista
+            // lblConvenioOdontologico
             // 
-            this.cmbLista.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.cmbLista.FormattingEnabled = true;
-            this.cmbLista.Location = new System.Drawing.Point(144, 59);
-            this.cmbLista.Name = "cmbLista";
-            this.cmbLista.Size = new System.Drawing.Size(121, 21);
-            this.cmbLista.TabIndex = 8;
-            this.cmbLista.Text = "Selecione um plano";
+            this.lblConvenioOdontologico.AutoSize = true;
+            this.lblConvenioOdontologico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblConvenioOdontologico.Location = new System.Drawing.Point(6, 64);
+            this.lblConvenioOdontologico.Name = "lblConvenioOdontologico";
+            this.lblConvenioOdontologico.Size = new System.Drawing.Size(132, 15);
+            this.lblConvenioOdontologico.TabIndex = 1;
+            this.lblConvenioOdontologico.Text = "Convenio odontológico";
+            // 
+            // lblSalarioBase
+            // 
+            this.lblSalarioBase.AutoSize = true;
+            this.lblSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblSalarioBase.Location = new System.Drawing.Point(6, 34);
+            this.lblSalarioBase.Name = "lblSalarioBase";
+            this.lblSalarioBase.Size = new System.Drawing.Size(76, 15);
+            this.lblSalarioBase.TabIndex = 0;
+            this.lblSalarioBase.Text = "Salário base";
             // 
             // menuStrip1
             // 
@@ -222,25 +222,25 @@
             // novoArquivoToolStripMenuItem
             // 
             this.novoArquivoToolStripMenuItem.Name = "novoArquivoToolStripMenuItem";
-            this.novoArquivoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.novoArquivoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.novoArquivoToolStripMenuItem.Text = "Abrir arquivo";
             // 
             // novoArquivoToolStripMenuItem1
             // 
             this.novoArquivoToolStripMenuItem1.Name = "novoArquivoToolStripMenuItem1";
-            this.novoArquivoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.novoArquivoToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.novoArquivoToolStripMenuItem1.Text = "Novo arquivo";
             // 
             // fecharArquivoToolStripMenuItem
             // 
             this.fecharArquivoToolStripMenuItem.Name = "fecharArquivoToolStripMenuItem";
-            this.fecharArquivoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fecharArquivoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.fecharArquivoToolStripMenuItem.Text = "Fechar arquivo";
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
@@ -541,7 +541,7 @@
         private System.Windows.Forms.Button btnAvancar;
         private System.Windows.Forms.GroupBox gpbConvenioOdontologico;
         private System.Windows.Forms.TextBox txtSalarioBase;
-        private System.Windows.Forms.Label lblValor;
+        private System.Windows.Forms.Label lblConvenioOdontologico;
         private System.Windows.Forms.Label lblSalarioBase;
         private System.Windows.Forms.TextBox txtRetorno;
         private System.Windows.Forms.Label lblRetorno;

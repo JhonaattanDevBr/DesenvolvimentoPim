@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace InterfacesDoSistemaDesktop
 {
-    public partial class Form_ConvenioOdontologico : Form
+    public partial class Form_ConvenioMedico : Form
     {
         // Provavelment nessa tela não vou precisar fazer calculo apenas fazer uma consulta no banco de dados e buscar qual o convenio do funcionario
         // e exibir em tela a o convenio e qual o valor cobrado pelo convenio.
         // A tela tera de ser repensada quando eu fizer a conexao com o BD já que não havera calculo.
-        public Form_ConvenioOdontologico()
+        public Form_ConvenioMedico()
         {
             InitializeComponent();
         }

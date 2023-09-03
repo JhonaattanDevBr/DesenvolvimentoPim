@@ -52,6 +52,42 @@
     <Compile Include="Form_AdiantamentoQuinzenal.Designer.cs">
       <DependentUpon>Form_AdiantamentoQuinzenal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_ConvenioMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ConvenioMedico.Designer.cs">
+      <DependentUpon>Form_ConvenioMedico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ConvenioOdontologico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ConvenioOdontologico.Designer.cs">
+      <DependentUpon>Form_ConvenioOdontologico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Dependentes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Dependentes.Designer.cs">
+      <DependentUpon>Form_Dependentes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Fgts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Fgts.Designer.cs">
+      <DependentUpon>Form_Fgts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Inss.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Inss.Designer.cs">
+      <DependentUpon>Form_Inss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Pensao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Pensao.Designer.cs">
+      <DependentUpon>Form_Pensao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_PeriodoCompleto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,8 +134,26 @@
     <EmbeddedResource Include="Form_AdiantamentoQuinzenal.resx">
       <DependentUpon>Form_AdiantamentoQuinzenal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_ConvenioMedico.resx">
+      <DependentUpon>Form_ConvenioMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ConvenioOdontologico.resx">
+      <DependentUpon>Form_ConvenioOdontologico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Dependentes.resx">
+      <DependentUpon>Form_Dependentes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_DoisPeriodos.resx">
       <DependentUpon>Form_DoisPeriodos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Fgts.resx">
+      <DependentUpon>Form_Fgts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Inss.resx">
+      <DependentUpon>Form_Inss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Pensao.resx">
+      <DependentUpon>Form_Pensao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_PeriodoCompleto.resx">
       <DependentUpon>Form_PeriodoCompleto.cs</DependentUpon>

@@ -18,3 +18,9 @@ C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaD
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.csproj.CopyComplete
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_ValeAlimentacao.resources
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_AdiantamentoQuinzenal.resources
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_ConvenioMedico.resources
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_ConvenioOdontologico.resources
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_Dependentes.resources
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_Pensao.resources
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_Fgts.resources
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_Inss.resources

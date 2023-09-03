@@ -78,17 +78,12 @@ namespace FolhaDePagamento
             }
         } 
 
-        public double CalcularInss()
+        public double CalcularInss(double salarioBase)
         {
-            double salarioBruto = SalarioBase;
-            
-            Console.WriteLine("- Precione qualquer tecla para calcular o desconto do INSS.");
-            Console.ReadKey();
-            Console.WriteLine();
-            DescontoDoInss = FormulaDoInss(salarioBruto);
-            Console.WriteLine();
-            Console.WriteLine($"- O valor do desconto em folha de contribuição do INSS é de: R$ {DescontoDoInss:f2}");
-            return DescontoDoInss;
+            double valorDoInss;
+            valorDoInss = FormulaDoInss(salarioBase);
+            DescontoDoInss = valorDoInss;
+            return valorDoInss;
         } 
 
         public double FormulaDoInss(double salario)
@@ -98,35 +93,31 @@ namespace FolhaDePagamento
             double valorPadraoFaixa2 = 112.62;
             double valorPadraoFaixa3 = 154.28;
             double valorPadraoFaixa4 = 511.06;
+
             if (salario <= 1320.00)
             {
-                Console.WriteLine("- O salário se estabelece na primeira faixa da tabela. Desconto do INSS realizado sobre 7,5% ");
                 ValorDeDescontoDoInss = salario * 0.075;
             }
             else if (salario <= 2571.29)
             {
-                Console.WriteLine("- O salário se estabelece na segunda faixa da tabela. Desconto do INSS realizado sobre 9,0% ");
                 restante = salario - 1320.00;
                 faixa2 = restante * 0.09;
                 ValorDeDescontoDoInss = valorPadraoFaixa1 + faixa2;
             }
             else if (salario <= 3856.94)
             {
-                Console.WriteLine("- O salário se estabelece na terceira faixa da tabela. Desconto do INSS realizado sobre 12,00% ");
                 restante = salario - 2571.29;
                 faixa3 = restante * 0.12;
                 ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + faixa3;
             }
             else if (salario <= 7507.49)
             {
-                Console.WriteLine("- O salário se estabelece na quarta faixa da tabela. Desconto do INSS realizado sobre 14,00% ");
                 restante = salario - 3856.94;
                 faixa4 = restante * 0.14;
                 ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + valorPadraoFaixa3 + faixa4;
             }
             else
             {
-                Console.WriteLine("- O salaário excede o teto do INSS, Desconto sobre 14,0% ");
                 ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + valorPadraoFaixa3 + valorPadraoFaixa4;
             }
             return ValorDeDescontoDoInss;
@@ -491,20 +482,12 @@ namespace FolhaDePagamento
             return ValorDoAdicionalNoturno;
         } 
 
-        public double CalcularConvenioMedico()
+        public double CalcularConvenioMedico(double salario, double convenio)
         {
             double valorDoConvenioMedico;
-
-            //Console.WriteLine("- Selecione qual a empresa que fornece o plano de saúde: "); Só vou utilizar isso depois que ficar o BD com as empresas e seus valores.
-            // Vou precisar fazer um acesso ao BD e fazer uma pesquisa das empresas e buscar o valor cobrado por ela, depois armazenar na variavel abaixo.
-            Console.Write("- Informe o valor cobrado pela empresa que fornece o serviço: R$ ");
-            valorDoConvenioMedico = double.Parse(Console.ReadLine());
+            valorDoConvenioMedico = salario - convenio;
             DescontoDoConvenioMedico = valorDoConvenioMedico;
-            Console.WriteLine();
-
-            Console.WriteLine($"- O valor do convenio médico descontado do funcionarios é de: R$ {valorDoConvenioMedico:f2}");
-            Console.ReadKey();
-            return DescontoDoConvenioMedico;
+            return valorDoConvenioMedico;
         }  
 
         public double CalcularConvenioOdontologico(double salario, double convenio)
@@ -515,36 +498,21 @@ namespace FolhaDePagamento
             return valorDoConvenioOdontologico;
         } 
 
-        public double CalcularDependencia()
+        public double CalcularDependencia(int quantidadeDeDependentes)
         {
-            double dependente = 189.59;
-            int quantidadeDeDependentes; 
-
-            Console.Write("- Informe a quantidade de dependentes: R$ ");
-            quantidadeDeDependentes = int.Parse(Console.ReadLine());
-            DescontoTotalDeDependentes = (double) quantidadeDeDependentes * dependente;
-
-            Console.WriteLine($"- O valor total a ser descontado de dependentes é de: R$ {DescontoTotalDeDependentes:f2}");
-            Console.ReadKey();
-            return DescontoTotalDeDependentes;
+            double valorTotalDeDependente, valorPorDependente = 189.59;
+            valorTotalDeDependente = (double) quantidadeDeDependentes * valorPorDependente;
+            DescontoTotalDeDependentes = valorTotalDeDependente;
+            return valorTotalDeDependente;
         } 
 
-        public double CalcularPensao()
+        public double CalcularPensao(int porcentagemFixada)
         {
-            int porcentagemFixada;
             double porcentagemFixadaConvertida, salarioMinimo = 1320.00, valorDaPensao;
-           
-            Console.Write("- Informe a porcentagem de pensão fixada judicialmente: ");
-            porcentagemFixada = int.Parse(Console.ReadLine());
-
             porcentagemFixadaConvertida = (double) porcentagemFixada / 100.0;
             valorDaPensao = salarioMinimo * porcentagemFixadaConvertida;
-
-            Console.Write($"- O Desconto a ser retirado de pensão é de: R$ {valorDaPensao:f2}");
-            Console.ReadKey();
-            Console.WriteLine();
             DescontoTotalDePensao = valorDaPensao;
-            return DescontoTotalDePensao;
+            return valorDaPensao;
         } 
 
         public double CalcularAtrasos()
@@ -850,19 +818,12 @@ namespace FolhaDePagamento
             return pagamentoUnicoDoDecimoTerceiro;
         }
         
-        public double CalcularFgts()
+        public double CalcularFgts(double salario)
         {
-            double salarioBruto = SalarioBase;
-
-            Console.WriteLine("---Calcular o FGTS---");
-            Console.WriteLine();
-
-            //Console.Write("- Informe o salário bruto do funcionario: R$ ");
-            //salarioBruto = double.Parse(Console.ReadLine());
-            Fgts = salarioBruto * 0.08;
-            Console.WriteLine($"- O valor do FGTS a ser depositado é de: R$ {Fgts:f2}");
-            Console.ReadKey();
-            return Fgts;
+            double fgts;
+            fgts = salario * 0.08;
+            Fgts = fgts;
+            return fgts;
         }
         /*
         public double GerarFolhaDePagamento()
