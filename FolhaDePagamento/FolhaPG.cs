@@ -58,11 +58,11 @@ namespace FolhaDePagamento
             catch (Exception ex)
             {
                 // Depois vou incluir uma msg de retorno com erro. 
-                throw ex;
+                throw new Exception("Falha ao calcular o vale transporte."+ ex);
             }
         } 
 
-        public double CalcularValeAlimentacao(double salario, double valorDoVale, int diasUteis, int percentual)
+        public double CalcularValeAlimentacao(double valorDoVale, int diasUteis, int percentual)
         {  
             double porcentagem, descontoDoVale;
             try
@@ -74,7 +74,7 @@ namespace FolhaDePagamento
             }
             catch (Exception ex)
             {
-                throw;
+                throw new Exception("Falha ao calcular o vale alimentação." + ex);
             }
         } 
 
@@ -206,19 +206,12 @@ namespace FolhaDePagamento
             return valorDeDescontoDoIrrf;
         }
 
-        public double CalcularAdiantamentoQuinzenal()
+        public double CalcularAdiantamentoQuinzenal(double salarioBruto)
         {
-            double salarioBruto;
-            double porcentagem = 0.4;
-
-            //Console.Write("- Informe o Salario bruto: R$ ");
-            //salarioBruto = double.Parse(Console.ReadLine());
-            //Console.WriteLine();
-            salarioBruto = SalarioBase;
-            AdiantamentoQuinzenal = salarioBruto * porcentagem;
-            Console.WriteLine($"- Valor do Salário bruto: R$ {salarioBruto:f2}");
-            Console.WriteLine($"- Valor do Adiantamento: R$ {AdiantamentoQuinzenal:f2}");
-            return AdiantamentoQuinzenal;
+            double adiantamento, porcentagem = 0.4;
+            adiantamento = salarioBruto * porcentagem;
+            AdiantamentoQuinzenal = adiantamento;
+            return adiantamento;
         } 
 
         public double CalcularHoraExtra()
@@ -514,20 +507,12 @@ namespace FolhaDePagamento
             return DescontoDoConvenioMedico;
         }  
 
-        public double CalcularConvenioOdontologico()
+        public double CalcularConvenioOdontologico(double salario, double convenio)
         {
             double valorDoConvenioOdontologico;
-
-            //Console.WriteLine("- Selecione qual a empresa que fornece o plano odontológico: "); Só vou utilizar isso depois que ficar o BD com as empresas e seus valores.
-            // Vou precisar fazer um acesso ao BD e fazer uma pesquisa das empresas e buscar o valor cobrado por ela, depois armazenar na variavel abaixo.
-            Console.Write("- Informe o valor cobrado pela empresa que fornece o serviço: R$ ");
-            valorDoConvenioOdontologico = double.Parse(Console.ReadLine());
+            valorDoConvenioOdontologico = salario - convenio;
             DescontoDoConvenioOdontologico = valorDoConvenioOdontologico;
-            Console.WriteLine();
-
-            Console.WriteLine($"- O valor do convenio odontológico descontado do funcionarios é de: R$ {valorDoConvenioOdontologico:f2}");
-            Console.ReadKey();
-            return DescontoDoConvenioOdontologico;
+            return valorDoConvenioOdontologico;
         } 
 
         public double CalcularDependencia()

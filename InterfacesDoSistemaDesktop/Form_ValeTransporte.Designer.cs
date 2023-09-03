@@ -77,6 +77,8 @@
             this.lblPassagem = new System.Windows.Forms.Label();
             this.lblSalarioBase = new System.Windows.Forms.Label();
             this.btnAvancar = new System.Windows.Forms.Button();
+            this.lblValor = new System.Windows.Forms.Label();
+            this.btnLimpar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -88,7 +90,7 @@
             this.módulosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(984, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -364,6 +366,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBox1.Controls.Add(this.btnLimpar);
+            this.groupBox1.Controls.Add(this.lblValor);
             this.groupBox1.Controls.Add(this.lblPercentual);
             this.groupBox1.Controls.Add(this.txtRetorno);
             this.groupBox1.Controls.Add(this.btnCalcular);
@@ -374,9 +378,9 @@
             this.groupBox1.Controls.Add(this.lblPassagem);
             this.groupBox1.Controls.Add(this.lblSalarioBase);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.Location = new System.Drawing.Point(12, 42);
+            this.groupBox1.Location = new System.Drawing.Point(12, 45);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(776, 265);
+            this.groupBox1.Size = new System.Drawing.Size(960, 586);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Vale transporte";
@@ -385,7 +389,7 @@
             // 
             this.lblPercentual.AutoSize = true;
             this.lblPercentual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblPercentual.Location = new System.Drawing.Point(6, 80);
+            this.lblPercentual.Location = new System.Drawing.Point(6, 63);
             this.lblPercentual.Name = "lblPercentual";
             this.lblPercentual.Size = new System.Drawing.Size(104, 15);
             this.lblPercentual.TabIndex = 8;
@@ -394,9 +398,9 @@
             // txtRetorno
             // 
             this.txtRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtRetorno.Location = new System.Drawing.Point(12, 231);
+            this.txtRetorno.Location = new System.Drawing.Point(151, 208);
             this.txtRetorno.Name = "txtRetorno";
-            this.txtRetorno.Size = new System.Drawing.Size(406, 20);
+            this.txtRetorno.Size = new System.Drawing.Size(92, 20);
             this.txtRetorno.TabIndex = 7;
             // 
             // btnCalcular
@@ -404,9 +408,9 @@
             this.btnCalcular.BackColor = System.Drawing.Color.LightBlue;
             this.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCalcular.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.btnCalcular.Location = new System.Drawing.Point(12, 184);
+            this.btnCalcular.Location = new System.Drawing.Point(12, 167);
             this.btnCalcular.Name = "btnCalcular";
-            this.btnCalcular.Size = new System.Drawing.Size(75, 23);
+            this.btnCalcular.Size = new System.Drawing.Size(75, 30);
             this.btnCalcular.TabIndex = 6;
             this.btnCalcular.Text = "Calcular";
             this.btnCalcular.UseVisualStyleBackColor = false;
@@ -415,15 +419,16 @@
             // txtDias
             // 
             this.txtDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtDias.Location = new System.Drawing.Point(76, 138);
+            this.txtDias.Location = new System.Drawing.Point(73, 123);
             this.txtDias.Name = "txtDias";
             this.txtDias.Size = new System.Drawing.Size(56, 20);
             this.txtDias.TabIndex = 5;
+            this.txtDias.TextChanged += new System.EventHandler(this.txtDias_TextChanged);
             // 
             // txtPassagem
             // 
             this.txtPassagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtPassagem.Location = new System.Drawing.Point(241, 103);
+            this.txtPassagem.Location = new System.Drawing.Point(238, 88);
             this.txtPassagem.Name = "txtPassagem";
             this.txtPassagem.Size = new System.Drawing.Size(100, 20);
             this.txtPassagem.TabIndex = 4;
@@ -431,7 +436,7 @@
             // txtSalarioBase
             // 
             this.txtSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtSalarioBase.Location = new System.Drawing.Point(89, 46);
+            this.txtSalarioBase.Location = new System.Drawing.Point(89, 31);
             this.txtSalarioBase.Name = "txtSalarioBase";
             this.txtSalarioBase.Size = new System.Drawing.Size(56, 20);
             this.txtSalarioBase.TabIndex = 3;
@@ -440,7 +445,7 @@
             // 
             this.lblDiasUteis.AutoSize = true;
             this.lblDiasUteis.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblDiasUteis.Location = new System.Drawing.Point(9, 143);
+            this.lblDiasUteis.Location = new System.Drawing.Point(6, 126);
             this.lblDiasUteis.Name = "lblDiasUteis";
             this.lblDiasUteis.Size = new System.Drawing.Size(61, 15);
             this.lblDiasUteis.TabIndex = 2;
@@ -450,7 +455,7 @@
             // 
             this.lblPassagem.AutoSize = true;
             this.lblPassagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblPassagem.Location = new System.Drawing.Point(6, 108);
+            this.lblPassagem.Location = new System.Drawing.Point(6, 91);
             this.lblPassagem.Name = "lblPassagem";
             this.lblPassagem.Size = new System.Drawing.Size(226, 15);
             this.lblPassagem.TabIndex = 1;
@@ -460,7 +465,7 @@
             // 
             this.lblSalarioBase.AutoSize = true;
             this.lblSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblSalarioBase.Location = new System.Drawing.Point(6, 51);
+            this.lblSalarioBase.Location = new System.Drawing.Point(6, 34);
             this.lblSalarioBase.Name = "lblSalarioBase";
             this.lblSalarioBase.Size = new System.Drawing.Size(77, 15);
             this.lblSalarioBase.TabIndex = 0;
@@ -471,26 +476,52 @@
             this.btnAvancar.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnAvancar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAvancar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.btnAvancar.Location = new System.Drawing.Point(713, 415);
+            this.btnAvancar.Location = new System.Drawing.Point(895, 637);
             this.btnAvancar.Name = "btnAvancar";
-            this.btnAvancar.Size = new System.Drawing.Size(75, 23);
+            this.btnAvancar.Size = new System.Drawing.Size(75, 30);
             this.btnAvancar.TabIndex = 4;
             this.btnAvancar.Text = "Avançar";
             this.btnAvancar.UseVisualStyleBackColor = false;
+            // 
+            // lblValor
+            // 
+            this.lblValor.AutoSize = true;
+            this.lblValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblValor.Location = new System.Drawing.Point(10, 211);
+            this.lblValor.Name = "lblValor";
+            this.lblValor.Size = new System.Drawing.Size(135, 15);
+            this.lblValor.TabIndex = 9;
+            this.lblValor.Text = "Valor do vale transporte";
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.BackColor = System.Drawing.Color.LightBlue;
+            this.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLimpar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.btnLimpar.Location = new System.Drawing.Point(93, 167);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(75, 30);
+            this.btnLimpar.TabIndex = 10;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = false;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // Form_ValeTransporte
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SkyBlue;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(984, 681);
             this.ControlBox = false;
             this.Controls.Add(this.btnAvancar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_ValeTransporte";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_ValeTransporte";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -552,5 +583,7 @@
         private System.Windows.Forms.TextBox txtRetorno;
         private System.Windows.Forms.Button btnAvancar;
         private System.Windows.Forms.Label lblPercentual;
+        private System.Windows.Forms.Label lblValor;
+        private System.Windows.Forms.Button btnLimpar;
     }
 }

@@ -87,7 +87,7 @@
             this.módulosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(984, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -371,9 +371,9 @@
             this.gpbPeriodoCompleto.Controls.Add(this.lblVenda);
             this.gpbPeriodoCompleto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.gpbPeriodoCompleto.ForeColor = System.Drawing.Color.Black;
-            this.gpbPeriodoCompleto.Location = new System.Drawing.Point(12, 40);
+            this.gpbPeriodoCompleto.Location = new System.Drawing.Point(12, 45);
             this.gpbPeriodoCompleto.Name = "gpbPeriodoCompleto";
-            this.gpbPeriodoCompleto.Size = new System.Drawing.Size(776, 281);
+            this.gpbPeriodoCompleto.Size = new System.Drawing.Size(960, 586);
             this.gpbPeriodoCompleto.TabIndex = 3;
             this.gpbPeriodoCompleto.TabStop = false;
             this.gpbPeriodoCompleto.Text = "Férias em período completo";
@@ -383,9 +383,9 @@
             this.btnAgendar.BackColor = System.Drawing.Color.LightBlue;
             this.btnAgendar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAgendar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.btnAgendar.Location = new System.Drawing.Point(10, 235);
+            this.btnAgendar.Location = new System.Drawing.Point(9, 127);
             this.btnAgendar.Name = "btnAgendar";
-            this.btnAgendar.Size = new System.Drawing.Size(87, 30);
+            this.btnAgendar.Size = new System.Drawing.Size(75, 30);
             this.btnAgendar.TabIndex = 7;
             this.btnAgendar.Text = "Agendar";
             this.btnAgendar.UseVisualStyleBackColor = false;
@@ -407,7 +407,7 @@
             "Outubro",
             "Novembro",
             "Dezembro"});
-            this.cmbSelecao.Location = new System.Drawing.Point(322, 105);
+            this.cmbSelecao.Location = new System.Drawing.Point(321, 91);
             this.cmbSelecao.Name = "cmbSelecao";
             this.cmbSelecao.Size = new System.Drawing.Size(114, 21);
             this.cmbSelecao.TabIndex = 6;
@@ -418,7 +418,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.label2.Location = new System.Drawing.Point(7, 108);
+            this.label2.Location = new System.Drawing.Point(6, 94);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(309, 15);
             this.label2.TabIndex = 5;
@@ -427,18 +427,19 @@
             // txtQuantidade
             // 
             this.txtQuantidade.Enabled = false;
-            this.txtQuantidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtQuantidade.Location = new System.Drawing.Point(179, 70);
+            this.txtQuantidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtQuantidade.Location = new System.Drawing.Point(178, 56);
             this.txtQuantidade.Name = "txtQuantidade";
-            this.txtQuantidade.Size = new System.Drawing.Size(36, 23);
+            this.txtQuantidade.Size = new System.Drawing.Size(36, 20);
             this.txtQuantidade.TabIndex = 4;
+            this.txtQuantidade.TextChanged += new System.EventHandler(this.txtQuantidade_TextChanged);
             // 
             // lblQuantidade
             // 
             this.lblQuantidade.AutoSize = true;
             this.lblQuantidade.Enabled = false;
             this.lblQuantidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblQuantidade.Location = new System.Drawing.Point(7, 75);
+            this.lblQuantidade.Location = new System.Drawing.Point(6, 61);
             this.lblQuantidade.Name = "lblQuantidade";
             this.lblQuantidade.Size = new System.Drawing.Size(166, 15);
             this.lblQuantidade.TabIndex = 3;
@@ -448,7 +449,7 @@
             // 
             this.rdbNao.AutoSize = true;
             this.rdbNao.Checked = true;
-            this.rdbNao.Location = new System.Drawing.Point(309, 34);
+            this.rdbNao.Location = new System.Drawing.Point(307, 30);
             this.rdbNao.Name = "rdbNao";
             this.rdbNao.Size = new System.Drawing.Size(55, 21);
             this.rdbNao.TabIndex = 2;
@@ -459,7 +460,7 @@
             // rdbSim
             // 
             this.rdbSim.AutoSize = true;
-            this.rdbSim.Location = new System.Drawing.Point(251, 34);
+            this.rdbSim.Location = new System.Drawing.Point(249, 30);
             this.rdbSim.Name = "rdbSim";
             this.rdbSim.Size = new System.Drawing.Size(52, 21);
             this.rdbSim.TabIndex = 1;
@@ -471,7 +472,7 @@
             // 
             this.lblVenda.AutoSize = true;
             this.lblVenda.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblVenda.Location = new System.Drawing.Point(7, 37);
+            this.lblVenda.Location = new System.Drawing.Point(6, 34);
             this.lblVenda.Name = "lblVenda";
             this.lblVenda.Size = new System.Drawing.Size(237, 15);
             this.lblVenda.TabIndex = 0;
@@ -481,9 +482,9 @@
             // 
             this.btnConcluir.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnConcluir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnConcluir.Location = new System.Drawing.Point(701, 408);
+            this.btnConcluir.Location = new System.Drawing.Point(895, 637);
             this.btnConcluir.Name = "btnConcluir";
-            this.btnConcluir.Size = new System.Drawing.Size(87, 30);
+            this.btnConcluir.Size = new System.Drawing.Size(75, 30);
             this.btnConcluir.TabIndex = 4;
             this.btnConcluir.Text = "Concluir";
             this.btnConcluir.UseVisualStyleBackColor = false;
@@ -494,14 +495,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SkyBlue;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(984, 681);
             this.ControlBox = false;
             this.Controls.Add(this.btnConcluir);
             this.Controls.Add(this.gpbPeriodoCompleto);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_PeriodoCompleto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormularioPeriodoCompleto";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

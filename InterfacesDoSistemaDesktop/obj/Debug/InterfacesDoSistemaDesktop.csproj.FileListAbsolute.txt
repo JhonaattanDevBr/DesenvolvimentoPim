@@ -17,3 +17,4 @@ C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaD
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_ValeTransporte.resources
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.csproj.CopyComplete
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_ValeAlimentacao.resources
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_AdiantamentoQuinzenal.resources

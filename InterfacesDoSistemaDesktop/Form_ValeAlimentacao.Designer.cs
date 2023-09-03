@@ -69,17 +69,17 @@
             this.doisPeríodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trêsPeríodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gpbValeAlimentacao = new System.Windows.Forms.GroupBox();
-            this.lblSalarioBase = new System.Windows.Forms.Label();
-            this.lblValeAlimentacao = new System.Windows.Forms.Label();
-            this.lblDias = new System.Windows.Forms.Label();
-            this.lblPercentual = new System.Windows.Forms.Label();
-            this.txtSalarioBase = new System.Windows.Forms.TextBox();
-            this.txtValeAlimentacao = new System.Windows.Forms.TextBox();
-            this.txtDias = new System.Windows.Forms.TextBox();
-            this.txtPercentual = new System.Windows.Forms.TextBox();
-            this.txtRetorno = new System.Windows.Forms.TextBox();
             this.btnCalculcar = new System.Windows.Forms.Button();
+            this.txtRetorno = new System.Windows.Forms.TextBox();
+            this.txtPercentual = new System.Windows.Forms.TextBox();
+            this.txtDias = new System.Windows.Forms.TextBox();
+            this.txtValeAlimentacao = new System.Windows.Forms.TextBox();
+            this.lblPercentual = new System.Windows.Forms.Label();
+            this.lblDias = new System.Windows.Forms.Label();
+            this.lblValeAlimentacao = new System.Windows.Forms.Label();
             this.btnAvancar = new System.Windows.Forms.Button();
+            this.btnLimpar = new System.Windows.Forms.Button();
+            this.lblValor = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.gpbValeAlimentacao.SuspendLayout();
             this.SuspendLayout();
@@ -91,7 +91,7 @@
             this.módulosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(984, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -127,7 +127,7 @@
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
@@ -379,142 +379,151 @@
             // gpbValeAlimentacao
             // 
             this.gpbValeAlimentacao.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.gpbValeAlimentacao.Controls.Add(this.lblValor);
+            this.gpbValeAlimentacao.Controls.Add(this.btnLimpar);
             this.gpbValeAlimentacao.Controls.Add(this.btnCalculcar);
             this.gpbValeAlimentacao.Controls.Add(this.txtRetorno);
             this.gpbValeAlimentacao.Controls.Add(this.txtPercentual);
             this.gpbValeAlimentacao.Controls.Add(this.txtDias);
             this.gpbValeAlimentacao.Controls.Add(this.txtValeAlimentacao);
-            this.gpbValeAlimentacao.Controls.Add(this.txtSalarioBase);
             this.gpbValeAlimentacao.Controls.Add(this.lblPercentual);
             this.gpbValeAlimentacao.Controls.Add(this.lblDias);
             this.gpbValeAlimentacao.Controls.Add(this.lblValeAlimentacao);
-            this.gpbValeAlimentacao.Controls.Add(this.lblSalarioBase);
             this.gpbValeAlimentacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.gpbValeAlimentacao.Location = new System.Drawing.Point(12, 45);
             this.gpbValeAlimentacao.Name = "gpbValeAlimentacao";
-            this.gpbValeAlimentacao.Size = new System.Drawing.Size(776, 258);
+            this.gpbValeAlimentacao.Size = new System.Drawing.Size(960, 586);
             this.gpbValeAlimentacao.TabIndex = 3;
             this.gpbValeAlimentacao.TabStop = false;
             this.gpbValeAlimentacao.Text = "Vale Alimentação";
-            // 
-            // lblSalarioBase
-            // 
-            this.lblSalarioBase.AutoSize = true;
-            this.lblSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblSalarioBase.Location = new System.Drawing.Point(6, 37);
-            this.lblSalarioBase.Name = "lblSalarioBase";
-            this.lblSalarioBase.Size = new System.Drawing.Size(76, 15);
-            this.lblSalarioBase.TabIndex = 0;
-            this.lblSalarioBase.Text = "Salário base";
-            // 
-            // lblValeAlimentacao
-            // 
-            this.lblValeAlimentacao.AutoSize = true;
-            this.lblValeAlimentacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblValeAlimentacao.Location = new System.Drawing.Point(6, 69);
-            this.lblValeAlimentacao.Name = "lblValeAlimentacao";
-            this.lblValeAlimentacao.Size = new System.Drawing.Size(229, 15);
-            this.lblValeAlimentacao.TabIndex = 1;
-            this.lblValeAlimentacao.Text = "Valor do vale refeição/alimentação diario";
-            // 
-            // lblDias
-            // 
-            this.lblDias.AutoSize = true;
-            this.lblDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblDias.Location = new System.Drawing.Point(6, 102);
-            this.lblDias.Name = "lblDias";
-            this.lblDias.Size = new System.Drawing.Size(61, 15);
-            this.lblDias.TabIndex = 2;
-            this.lblDias.Text = "Dias uteis";
-            // 
-            // lblPercentual
-            // 
-            this.lblPercentual.AutoSize = true;
-            this.lblPercentual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblPercentual.Location = new System.Drawing.Point(6, 138);
-            this.lblPercentual.Name = "lblPercentual";
-            this.lblPercentual.Size = new System.Drawing.Size(66, 15);
-            this.lblPercentual.TabIndex = 3;
-            this.lblPercentual.Text = "Percentual";
-            // 
-            // txtSalarioBase
-            // 
-            this.txtSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtSalarioBase.Location = new System.Drawing.Point(88, 34);
-            this.txtSalarioBase.Name = "txtSalarioBase";
-            this.txtSalarioBase.Size = new System.Drawing.Size(100, 20);
-            this.txtSalarioBase.TabIndex = 4;
-            // 
-            // txtValeAlimentacao
-            // 
-            this.txtValeAlimentacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtValeAlimentacao.Location = new System.Drawing.Point(241, 66);
-            this.txtValeAlimentacao.Name = "txtValeAlimentacao";
-            this.txtValeAlimentacao.Size = new System.Drawing.Size(100, 20);
-            this.txtValeAlimentacao.TabIndex = 5;
-            // 
-            // txtDias
-            // 
-            this.txtDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtDias.Location = new System.Drawing.Point(73, 99);
-            this.txtDias.Name = "txtDias";
-            this.txtDias.Size = new System.Drawing.Size(56, 20);
-            this.txtDias.TabIndex = 6;
-            // 
-            // txtPercentual
-            // 
-            this.txtPercentual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtPercentual.Location = new System.Drawing.Point(78, 135);
-            this.txtPercentual.Name = "txtPercentual";
-            this.txtPercentual.Size = new System.Drawing.Size(56, 20);
-            this.txtPercentual.TabIndex = 7;
-            this.txtPercentual.TextChanged += new System.EventHandler(this.txtPercentual_TextChanged);
-            // 
-            // txtRetorno
-            // 
-            this.txtRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtRetorno.Location = new System.Drawing.Point(9, 223);
-            this.txtRetorno.Name = "txtRetorno";
-            this.txtRetorno.Size = new System.Drawing.Size(428, 20);
-            this.txtRetorno.TabIndex = 8;
             // 
             // btnCalculcar
             // 
             this.btnCalculcar.BackColor = System.Drawing.Color.LightBlue;
             this.btnCalculcar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCalculcar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.btnCalculcar.Location = new System.Drawing.Point(9, 184);
+            this.btnCalculcar.Location = new System.Drawing.Point(9, 138);
             this.btnCalculcar.Name = "btnCalculcar";
-            this.btnCalculcar.Size = new System.Drawing.Size(75, 23);
+            this.btnCalculcar.Size = new System.Drawing.Size(75, 30);
             this.btnCalculcar.TabIndex = 9;
             this.btnCalculcar.Text = "Calcular";
             this.btnCalculcar.UseVisualStyleBackColor = false;
             this.btnCalculcar.Click += new System.EventHandler(this.btnCalculcar_Click);
             // 
+            // txtRetorno
+            // 
+            this.txtRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtRetorno.Location = new System.Drawing.Point(160, 177);
+            this.txtRetorno.Name = "txtRetorno";
+            this.txtRetorno.Size = new System.Drawing.Size(105, 20);
+            this.txtRetorno.TabIndex = 8;
+            // 
+            // txtPercentual
+            // 
+            this.txtPercentual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtPercentual.Location = new System.Drawing.Point(78, 100);
+            this.txtPercentual.Name = "txtPercentual";
+            this.txtPercentual.Size = new System.Drawing.Size(56, 20);
+            this.txtPercentual.TabIndex = 7;
+            this.txtPercentual.TextChanged += new System.EventHandler(this.txtPercentual_TextChanged);
+            // 
+            // txtDias
+            // 
+            this.txtDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtDias.Location = new System.Drawing.Point(73, 64);
+            this.txtDias.Name = "txtDias";
+            this.txtDias.Size = new System.Drawing.Size(56, 20);
+            this.txtDias.TabIndex = 6;
+            this.txtDias.TextChanged += new System.EventHandler(this.txtDias_TextChanged);
+            // 
+            // txtValeAlimentacao
+            // 
+            this.txtValeAlimentacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.txtValeAlimentacao.Location = new System.Drawing.Point(241, 31);
+            this.txtValeAlimentacao.Name = "txtValeAlimentacao";
+            this.txtValeAlimentacao.Size = new System.Drawing.Size(100, 20);
+            this.txtValeAlimentacao.TabIndex = 5;
+            // 
+            // lblPercentual
+            // 
+            this.lblPercentual.AutoSize = true;
+            this.lblPercentual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblPercentual.Location = new System.Drawing.Point(6, 103);
+            this.lblPercentual.Name = "lblPercentual";
+            this.lblPercentual.Size = new System.Drawing.Size(66, 15);
+            this.lblPercentual.TabIndex = 3;
+            this.lblPercentual.Text = "Percentual";
+            // 
+            // lblDias
+            // 
+            this.lblDias.AutoSize = true;
+            this.lblDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblDias.Location = new System.Drawing.Point(6, 67);
+            this.lblDias.Name = "lblDias";
+            this.lblDias.Size = new System.Drawing.Size(61, 15);
+            this.lblDias.TabIndex = 2;
+            this.lblDias.Text = "Dias uteis";
+            // 
+            // lblValeAlimentacao
+            // 
+            this.lblValeAlimentacao.AutoSize = true;
+            this.lblValeAlimentacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblValeAlimentacao.Location = new System.Drawing.Point(6, 34);
+            this.lblValeAlimentacao.Name = "lblValeAlimentacao";
+            this.lblValeAlimentacao.Size = new System.Drawing.Size(229, 15);
+            this.lblValeAlimentacao.TabIndex = 1;
+            this.lblValeAlimentacao.Text = "Valor do vale refeição/alimentação diario";
+            // 
             // btnAvancar
             // 
             this.btnAvancar.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnAvancar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAvancar.Location = new System.Drawing.Point(712, 415);
+            this.btnAvancar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.btnAvancar.Location = new System.Drawing.Point(895, 637);
             this.btnAvancar.Name = "btnAvancar";
-            this.btnAvancar.Size = new System.Drawing.Size(75, 23);
+            this.btnAvancar.Size = new System.Drawing.Size(75, 30);
             this.btnAvancar.TabIndex = 4;
             this.btnAvancar.Text = "Avançar";
             this.btnAvancar.UseVisualStyleBackColor = false;
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.BackColor = System.Drawing.Color.LightBlue;
+            this.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLimpar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.btnLimpar.Location = new System.Drawing.Point(90, 138);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(75, 30);
+            this.btnLimpar.TabIndex = 10;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = false;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
+            // 
+            // lblValor
+            // 
+            this.lblValor.AutoSize = true;
+            this.lblValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.lblValor.Location = new System.Drawing.Point(6, 180);
+            this.lblValor.Name = "lblValor";
+            this.lblValor.Size = new System.Drawing.Size(148, 15);
+            this.lblValor.TabIndex = 11;
+            this.lblValor.Text = "Valor do vale alimentação";
             // 
             // Form_ValeAlimentacao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SkyBlue;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(984, 681);
             this.ControlBox = false;
             this.Controls.Add(this.btnAvancar);
             this.Controls.Add(this.gpbValeAlimentacao);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_ValeAlimentacao";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_ValeAlimentacao";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -568,7 +577,6 @@
         private System.Windows.Forms.ToolStripMenuItem doisPeríodosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trêsPeríodosToolStripMenuItem;
         private System.Windows.Forms.GroupBox gpbValeAlimentacao;
-        private System.Windows.Forms.Label lblSalarioBase;
         private System.Windows.Forms.Label lblDias;
         private System.Windows.Forms.Label lblValeAlimentacao;
         private System.Windows.Forms.Label lblPercentual;
@@ -577,7 +585,8 @@
         private System.Windows.Forms.TextBox txtPercentual;
         private System.Windows.Forms.TextBox txtDias;
         private System.Windows.Forms.TextBox txtValeAlimentacao;
-        private System.Windows.Forms.TextBox txtSalarioBase;
         private System.Windows.Forms.Button btnAvancar;
+        private System.Windows.Forms.Button btnLimpar;
+        private System.Windows.Forms.Label lblValor;
     }
 }

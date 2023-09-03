@@ -33,8 +33,8 @@ namespace InterfacesDoSistemaDesktop
 
         private void períodoCompletoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form_PeriodoCompleto ObjFormPeriodoCompleto = new Form_PeriodoCompleto();
-            ObjFormPeriodoCompleto.Show();
+            Form_PeriodoCompleto form_PeriodoCompleto = new Form_PeriodoCompleto();
+            form_PeriodoCompleto.Show();
         }
 
         private void doisPeríodosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,14 +50,26 @@ namespace InterfacesDoSistemaDesktop
 
         private void calcularValeTransporteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form_ValeTransporte Obj_FormValeTransporte = new Form_ValeTransporte();
-            Obj_FormValeTransporte.Show();
+            Form_ValeTransporte form_ValeTransporte = new Form_ValeTransporte();
+            form_ValeTransporte.Show();
         }
 
         private void calcularValeAlimentaçãoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form Obj_FormValeAlimentacao = new Form_ValeAlimentacao();
-            Obj_FormValeAlimentacao.Show();
+            Form form_ValeAlimentacao = new Form_ValeAlimentacao();
+            form_ValeAlimentacao.Show();
+        }
+
+        private void calcularAdiantamentoQuinzenalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_AdiantamentoQuinzenal form_AdiantamentoQuinzenal = new Form_AdiantamentoQuinzenal();
+            form_AdiantamentoQuinzenal.Show();
+        }
+
+        private void calcularConvênioOdontológicoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_ConvenioOdontologico form_ConvenioOdontologico = new Form_ConvenioOdontologico();
+            form_ConvenioOdontologico.Show();
         }
     }
 }

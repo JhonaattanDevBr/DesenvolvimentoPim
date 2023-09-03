@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form_AdiantamentoQuinzenal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_AdiantamentoQuinzenal.Designer.cs">
+      <DependentUpon>Form_AdiantamentoQuinzenal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_PeriodoCompleto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form_AdiantamentoQuinzenal.resx">
+      <DependentUpon>Form_AdiantamentoQuinzenal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_DoisPeriodos.resx">
       <DependentUpon>Form_DoisPeriodos.cs</DependentUpon>
     </EmbeddedResource>
