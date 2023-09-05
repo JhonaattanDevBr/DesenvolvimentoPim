@@ -32,6 +32,7 @@ namespace FolhaDePagamento
         private double DescontoDeFaltasInjustificadas { get; set; }
         private double ValorDoDecimoTerceiro { get; set; }
         private double Fgts { get; set; }
+        public string MensagemIRRF { get; set; }
 
 
         public double ContabilizarValeTransporte(double salario, double passagem, int dias)
@@ -43,7 +44,6 @@ namespace FolhaDePagamento
                 porcentagem = (double) percentual / 100;
                 valorPorcentagem = salario * porcentagem;
                 valorPassagem = passagem * (double) dias;
-
                 if (valorPorcentagem < valorPassagem)
                 {
                     DescontoDoValeTransporte = valorPorcentagem;
@@ -80,10 +80,17 @@ namespace FolhaDePagamento
 
         public double CalcularInss(double salarioBase)
         {
-            double valorDoInss;
-            valorDoInss = FormulaDoInss(salarioBase);
-            DescontoDoInss = valorDoInss;
-            return valorDoInss;
+            try
+            {
+                double valorDoInss;
+                valorDoInss = FormulaDoInss(salarioBase);
+                DescontoDoInss = valorDoInss;
+                return valorDoInss;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao realizar a operação!" + ex); ;
+            }
         } 
 
         public double FormulaDoInss(double salario)
@@ -93,55 +100,58 @@ namespace FolhaDePagamento
             double valorPadraoFaixa2 = 112.62;
             double valorPadraoFaixa3 = 154.28;
             double valorPadraoFaixa4 = 511.06;
-
-            if (salario <= 1320.00)
+            try
             {
-                ValorDeDescontoDoInss = salario * 0.075;
+                if (salario <= 1320.00)
+                {
+                    ValorDeDescontoDoInss = salario * 0.075;
+                }
+                else if (salario <= 2571.29)
+                {
+                    restante = salario - 1320.00;
+                    faixa2 = restante * 0.09;
+                    ValorDeDescontoDoInss = valorPadraoFaixa1 + faixa2;
+                }
+                else if (salario <= 3856.94)
+                {
+                    restante = salario - 2571.29;
+                    faixa3 = restante * 0.12;
+                    ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + faixa3;
+                }
+                else if (salario <= 7507.49)
+                {
+                    restante = salario - 3856.94;
+                    faixa4 = restante * 0.14;
+                    ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + valorPadraoFaixa3 + faixa4;
+                }
+                else
+                {
+                    ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + valorPadraoFaixa3 + valorPadraoFaixa4;
+                }
+                return ValorDeDescontoDoInss;
             }
-            else if (salario <= 2571.29)
+            catch (Exception ex)
             {
-                restante = salario - 1320.00;
-                faixa2 = restante * 0.09;
-                ValorDeDescontoDoInss = valorPadraoFaixa1 + faixa2;
+                throw new Exception("Falha ao realizar a operação!" + ex);
             }
-            else if (salario <= 3856.94)
-            {
-                restante = salario - 2571.29;
-                faixa3 = restante * 0.12;
-                ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + faixa3;
-            }
-            else if (salario <= 7507.49)
-            {
-                restante = salario - 3856.94;
-                faixa4 = restante * 0.14;
-                ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + valorPadraoFaixa3 + faixa4;
-            }
-            else
-            {
-                ValorDeDescontoDoInss = valorPadraoFaixa1 + valorPadraoFaixa2 + valorPadraoFaixa3 + valorPadraoFaixa4;
-            }
-            return ValorDeDescontoDoInss;
         }
 
-        public double CalcularIrrf()
+        public double CalcularIrrf(double salarioBase)
         {
-            double salarioBruto = SalarioBase;
             double valorDoInss = DescontoDoInss;
             double valorDaPensao = DescontoTotalDePensao;
             double valorDeDependente = DescontoTotalDeDependentes;
-
-            Console.WriteLine("- Precione qualquer tecla para calcular o desconto do IRRF.");
-            Console.ReadKey();
-            Console.WriteLine();
-            DescontoDoIrrf = FormulaDoIrrf(salarioBruto, valorDoInss, valorDaPensao, valorDeDependente);
-            if(DescontoDoIrrf != 0)
+            double valorDoIrrf;
+            try
             {
-                Console.WriteLine($"- O valor do desconto em folha de contribuição do IRRF é de: R$ {DescontoDoIrrf:f2}");
+                valorDoIrrf = FormulaDoIrrf(salarioBase, valorDoInss, valorDaPensao, valorDeDependente);
+                DescontoDoIrrf = valorDoIrrf;
+                return valorDoIrrf;
             }
-            else
+            catch (Exception ex)
             {
+                throw new Exception("Falha ao realizar a operação!" + ex);
             }
-            return DescontoDoIrrf;
         } 
 
         public double FormulaDoIrrf(double salario, double inss, double pensao, double dependente)
@@ -152,49 +162,83 @@ namespace FolhaDePagamento
             double parcela4 = 651.73;
             double parcela5 = 884.96;
             double valorSimplificado = 528.00;
+            try
+            {
+                deducoesLegais = salario - inss - pensao - dependente;
+                descontoSimplificado = salario - valorSimplificado;
 
-            deducoesLegais = salario - inss - pensao - dependente;
-            descontoSimplificado = salario - valorSimplificado;
-
-            if(deducoesLegais > descontoSimplificado)
-            {
-                baseDeCalculoDoIrrfDefinitivo = deducoesLegais;
+                if (deducoesLegais > descontoSimplificado)
+                {
+                    baseDeCalculoDoIrrfDefinitivo = deducoesLegais;
+                    if (baseDeCalculoDoIrrfDefinitivo <= 2112.00)
+                    {
+                        MensagemIRRF = "Calculo realizado sobre deduções legais.";
+                        valorDeDescontoDoIrrf = 0;
+                    }
+                    else if (baseDeCalculoDoIrrfDefinitivo <= 2826.65)
+                    {
+                        percentual = 7.50 / 100;
+                        valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela2;
+                        MensagemIRRF = "Calculo realizado sobre deduções legais.";
+                    }
+                    else if (baseDeCalculoDoIrrfDefinitivo <= 3751.05)
+                    {
+                        percentual = 15.00 / 100;
+                        valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela3;
+                        MensagemIRRF = "Calculo realizado sobre deduções legais.";
+                    }
+                    else if (baseDeCalculoDoIrrfDefinitivo <= 4664.68)
+                    {
+                        percentual = 22.50 / 100;
+                        valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela4;
+                        MensagemIRRF = "Calculo realizado sobre deduções legais.";
+                    }
+                    else
+                    {
+                        percentual = 27.50 / 100;
+                        valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela5;
+                        MensagemIRRF = "Calculo realizado sobre deduções legais.";
+                    }
+                }
+                else
+                {
+                    baseDeCalculoDoIrrfDefinitivo = descontoSimplificado;
+                    if (baseDeCalculoDoIrrfDefinitivo <= 2112.00)
+                    {
+                        valorDeDescontoDoIrrf = 0;
+                        MensagemIRRF = "Calculo realizado sobre o desconto simplificado.";
+                    }
+                    else if (baseDeCalculoDoIrrfDefinitivo <= 2826.65)
+                    {
+                        percentual = 7.50 / 100;
+                        valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela2;
+                        MensagemIRRF = "Calculo realizado sobre o desconto simplificado.";
+                    }
+                    else if (baseDeCalculoDoIrrfDefinitivo <= 3751.05)
+                    {
+                        percentual = 15.00 / 100;
+                        valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela3;
+                        MensagemIRRF = "Calculo realizado sobre o desconto simplificado.";
+                    }
+                    else if (baseDeCalculoDoIrrfDefinitivo <= 4664.68)
+                    {
+                        percentual = 22.50 / 100;
+                        valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela4;
+                        MensagemIRRF = "Calculo realizado sobre o desconto simplificado.";
+                    }
+                    else
+                    {
+                        percentual = 27.50 / 100;
+                        valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela5;
+                        MensagemIRRF = "Calculo realizado sobre o desconto simplificado.";
+                    }
+                }
+                return valorDeDescontoDoIrrf;
             }
-            else
+            catch (Exception ex)
             {
-                baseDeCalculoDoIrrfDefinitivo = descontoSimplificado;
+                throw new Exception("Falha ao realizar a operação." + ex);
             }
-            
-            if (baseDeCalculoDoIrrfDefinitivo <= 2112.00)
-            {
-                Console.WriteLine("- A base de calculo se estabelece na segunda faixa. Funcionário está isento do desconto de IRRF.");
-                valorDeDescontoDoIrrf = 0;
-            }
-            else if (baseDeCalculoDoIrrfDefinitivo <= 2826.65)
-            {
-                Console.WriteLine("- A base de calculo se estabelece na segunda faixa. Desconto do IRRF realizado sobre 7,5%");
-                percentual = 7.50 / 100;
-                valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela2;
-            }
-            else if (baseDeCalculoDoIrrfDefinitivo <= 3751.05)
-            {
-                Console.WriteLine("- A base de calculo se estabelece na terceira faixa. Desconto do IRRF realizado sobre 15,00%%");
-                percentual = 15.00 / 100;
-                valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela3;
-            }
-            else if (baseDeCalculoDoIrrfDefinitivo <= 4664.68)
-            {
-                Console.WriteLine("- A base de calculo se estabelece na terceira faixa. Desconto do IRRF realizado sobre 22,50%");
-                percentual = 22.50 / 100;
-                valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela4;
-            }
-            else
-            {
-                Console.WriteLine("- A base de calculo se estabelece na quarta faixa. Desconto do IRRF realizado sobre 27,50%");
-                percentual = 27.50 / 100;
-                valorDeDescontoDoIrrf = (baseDeCalculoDoIrrfDefinitivo * percentual) - parcela5;
-            }
-            return valorDeDescontoDoIrrf;
         }
 
         public double CalcularAdiantamentoQuinzenal(double salarioBruto)

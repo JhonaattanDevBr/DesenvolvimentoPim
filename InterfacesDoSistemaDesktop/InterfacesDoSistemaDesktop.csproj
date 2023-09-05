@@ -82,6 +82,12 @@
     <Compile Include="Form_Inss.Designer.cs">
       <DependentUpon>Form_Inss.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Irrf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Irrf.Designer.cs">
+      <DependentUpon>Form_Irrf.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Pensao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Inss.resx">
       <DependentUpon>Form_Inss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Irrf.resx">
+      <DependentUpon>Form_Irrf.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Pensao.resx">
       <DependentUpon>Form_Pensao.cs</DependentUpon>

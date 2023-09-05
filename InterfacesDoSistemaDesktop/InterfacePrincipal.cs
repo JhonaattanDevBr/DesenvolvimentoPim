@@ -101,5 +101,11 @@ namespace InterfacesDoSistemaDesktop
             Form_Inss form_Inss = new Form_Inss();
             form_Inss.Show();
         }
+
+        private void calcularIRRFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_Irrf form_Irrf = new Form_Irrf();
+            form_Irrf.Show();
+        }
     }
 }
