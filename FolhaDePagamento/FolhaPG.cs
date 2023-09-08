@@ -30,7 +30,6 @@ namespace FolhaDePagamento
         private double TotalDeAtrasos { get; set; }
         private double FaltasInjustificadasComDsr { get; set; }
         private double DescontoDeFaltasInjustificadas { get; set; }
-        private double ValorDoDecimoTerceiro { get; set; }
         private double Fgts { get; set; }
         public string MensagemIRRF { get; set; }
 
@@ -247,98 +246,64 @@ namespace FolhaDePagamento
             adiantamento = salarioBruto * porcentagem;
             AdiantamentoQuinzenal = adiantamento;
             return adiantamento;
-        } 
+        }
 
-        public double CalcularHoraExtra()
+        public double ConversorDeMinutosEmHoras(int quantidadeDehorasFechadas, int quantidadeDeMinutos)
         {
-            double valorHora, valorDaHoraExtra, valorTotalDaHoraExtra, indicadorDsr, percentualDoDsr, valorDoDsr;
-            int converter, porcentagem, diasUteis, repousosFeriados;
-            double hora = 0, horaConvertida = 0;
-            double salarioBruto = SalarioBase;
-
-            do {
-                Console.WriteLine("- Horas com minutos não são calculadas pois é necessario converte-las em horas.");
-                Console.WriteLine("- É necesario fazer converção de minutos em horas ?");
-                Console.WriteLine();
-                Console.WriteLine("- Para SIM dígite [1]");
-                Console.WriteLine("- Para NÃO dígite [2]");
-                Console.Write("- Converter...: ");
-                converter = int.Parse(Console.ReadLine());
-                Console.WriteLine();
-
-                if (converter == 1)
+            double totalDeMinutos, totalDeHoras;
+            try
+            {
+                do
                 {
-                    horaConvertida = ConversorDeMinutosEmHoras();
-                    Console.WriteLine();
-                    Console.WriteLine("- Minutos convertidos em horas!");
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                }
-                else if (converter == 2)
-                {
-                    Console.WriteLine("- Proseguindo para a próxima etapa.");
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                    Console.WriteLine();
-                }
-            }while(converter != 1 && converter != 2);
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-            Console.WriteLine();
+                    if (quantidadeDeMinutos <= 0 || quantidadeDeMinutos > 60)
+                    {
+                        // Aqui eu vou mostrar na tela uma mensagem dizendo q o valor não pode ser > 60.
+                    }
+                } while (quantidadeDeMinutos <= 0 || quantidadeDeMinutos > 60);
 
-            //Console.Write("- Informe o salário bruto do funcionário: R$ ");
-           // salarioBruto = double.Parse(Console.ReadLine());
-           if(horaConvertida == 0)
-            {
-                Console.Write("- Informe a quantidade de horas realizadas: ");
-                hora = double.Parse(Console.ReadLine());
+                totalDeMinutos = (double) quantidadeDeMinutos / 60.0;
+                totalDeHoras = (double) quantidadeDehorasFechadas + totalDeMinutos;
+                TotalDeHorasConvertidas = totalDeHoras;
+                return totalDeHoras;
             }
-           else
+            catch (Exception)
             {
-                hora = horaConvertida;
-            }
-            Console.Write("- Informe a porcentagem incedida sobre as horas extras: ");
-            porcentagem = int.Parse(Console.ReadLine());
-            Console.WriteLine();
-            valorHora = salarioBruto / 220;
-            porcentagem = porcentagem / 100;
-            valorDaHoraExtra = valorHora + (valorHora * (double) porcentagem);
-            valorTotalDaHoraExtra = hora * valorDaHoraExtra;
-            Console.WriteLine("- Agora é preciso calcular o DSR sobre as horas extras.");
-            Console.WriteLine();
-            Console.Write("- Informe a quantidade de dias uteis do mes: ");
-            diasUteis = int.Parse(Console.ReadLine());
-            Console.Write("- Informe a quantidade de dias de repouso e feriados do mes: ");
-            repousosFeriados = int.Parse(Console.ReadLine());
-            Console.WriteLine();
-            if(horaConvertida == 0)
-            {
-                indicadorDsr = (double)repousosFeriados / diasUteis;
-                percentualDoDsr = indicadorDsr * porcentagem;
-                valorDoDsr = valorDaHoraExtra * percentualDoDsr;
-                valorTotalDaHoraExtra = hora * (valorDaHoraExtra + valorDoDsr);
-            }
-            else
-            {
-                indicadorDsr = (double)repousosFeriados / diasUteis;
-                percentualDoDsr = indicadorDsr * porcentagem;
-                valorDoDsr = valorDaHoraExtra * percentualDoDsr;
-                valorTotalDaHoraExtra = horaConvertida * (valorDaHoraExtra + valorDoDsr);
-            }
-            Console.WriteLine($"- Valor da hora normal: R$ {valorHora:f2}");
-            Console.WriteLine($"- Valor da hora extra: R$ {valorDaHoraExtra:f2}");
-            Console.WriteLine($"- Valor do DSR incedido sobre as horas extras: R$ {valorDoDsr:f2}");
-            Console.WriteLine($"- Valor total da hora extra incedida sobre o DSR: R$ {valorTotalDaHoraExtra:f2}");
 
-            TotalDeHorasExtras = valorTotalDaHoraExtra;
-            return TotalDeHorasExtras;
+                throw new Exception("Erro ao realizar a operação!");
+            }
+           
+        }
 
+        private double CalcularDsr(int diasUteis, int descansosFeriados, double valor)
+        {
+            try
+            {
+                double valorDoDsr;
+                valorDoDsr = (valor / (double)diasUteis) * descansosFeriados;
+                return valorDoDsr;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro ao realizar a operação!");
+            }
+            
+        }
+
+        public double CalcularHoraExtra(double salario, double porcentagem, int hora)
+        {
+            double valorDaHoraNormal, valorDeUmaHoraExtra, valorTotalDaHoraExtra;
+            try
+            {
+                valorDaHoraNormal = salario / 220;
+                valorDeUmaHoraExtra = valorDaHoraNormal * porcentagem;
+                valorTotalDaHoraExtra = hora * valorDeUmaHoraExtra;
+                TotalDeHorasExtras = valorTotalDaHoraExtra;
+                return valorTotalDaHoraExtra;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro ao realizar a operação!");
+            }
         } 
 
         public double CalcularPericulosidadeInsalubridade()
@@ -478,7 +443,7 @@ namespace FolhaDePagamento
 
                 if (converter == 1)
                 {
-                    horaConvertida = ConversorDeMinutosEmHoras();
+                    //   horaConvertida = ConversorDeMinutosEmHoras(); Só comentei pra parar de dar erro
                     Console.WriteLine();
                     Console.WriteLine("- Minutos convertidos em horas!");
                     Console.WriteLine("- Dígite qualquer coisa para continuar.");
@@ -614,35 +579,6 @@ namespace FolhaDePagamento
             return TotalDeAtrasos;
         } 
 
-        private double ConversorDeMinutosEmHoras()
-        {
-            int quantidadeDehorasFechadas, quantidadeDeMinutos;
-            double totalDeMinutos;
-
-            Console.Write("- Informe a quantidade de horas fechadas: ");
-            quantidadeDehorasFechadas = int.Parse(Console.ReadLine());
-
-            do
-            {
-                Console.Write("- Informe a quantidade de minutos: ");
-                quantidadeDeMinutos = int.Parse(Console.ReadLine());
-                if (quantidadeDeMinutos <= 0 || quantidadeDeMinutos > 60)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("- Error! Não é possivel entrar com valores abaixo de [0] pois não se configuram em horas.");
-                    Console.WriteLine("- Error! Não é possível entrar com valores acima de [60] pois se configura como uma hora fechada.");
-                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ ENTRE COM UM VALOR VÁLIDO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                    Console.WriteLine();
-                }
-            } while (quantidadeDeMinutos <= 0 || quantidadeDeMinutos > 60);
-
-            totalDeMinutos = (double)quantidadeDeMinutos / 60.0;
-            TotalDeHorasConvertidas = (double) quantidadeDehorasFechadas + totalDeMinutos;
-            Console.WriteLine();
-            Console.WriteLine($"- Total de Horas: {TotalDeHorasConvertidas:f2}");
-            return TotalDeHorasConvertidas;
-        }
-
         private double AtrasoComum()
         {
             double salarioBruto = SalarioBase, horasEmAtraso, horasConvertidas = 0;
@@ -661,7 +597,7 @@ namespace FolhaDePagamento
 
                 if (converter == 1)
                 {
-                    horasConvertidas = this.ConversorDeMinutosEmHoras();
+                   // horasConvertidas = this.ConversorDeMinutosEmHoras(); Só comentei pra parar de dar erro
                     Console.WriteLine();
                     Console.WriteLine("- Proseguindo para a próxima etapa.");
                     Console.WriteLine("- Dígite qualquer coisa para continuar.");
@@ -764,104 +700,6 @@ namespace FolhaDePagamento
             return FaltasInjustificadasComDsr;
         } 
 
-        private double CalcularDecimoTerceiro()
-        {
-            double decimoTerceiroBruto;
-            double salarioBruto = SalarioBase;
-            int mesesTrabalhados;
-
-            Console.Write("- Informe quantos meses do ano o funcionário trabalhou: ");
-            mesesTrabalhados = int.Parse(Console.ReadLine());
-            decimoTerceiroBruto = (salarioBruto / 12) * (double) mesesTrabalhados;
-            return decimoTerceiroBruto;
-        }
-
-        public double CalcularFormulasDoDecimoTerceiro() 
-        {
-            int tipoDePagamento;
-            double valorDoPagamento = 0;
-
-            do {
-                Console.WriteLine("- Informe o tipo de pagamento do décimo terceiro deve ser realizado.");
-                Console.WriteLine();
-                Console.WriteLine("- Para pagamento do valor completo de forma única dígite [1]");
-                Console.WriteLine("- Para pagamento da primeira parcela dígite [2]");
-                Console.WriteLine("- Para pagamento da segunda parcela dígite [3]");
-                Console.Write("- Tipo de pagamento...: ");
-                tipoDePagamento = int.Parse(Console.ReadLine());
-                Console.WriteLine();
-                switch (tipoDePagamento)
-                {
-                    case 1:
-                        valorDoPagamento = CalcularPagamentoUnicoDoDecimoTerceiro();
-                        Console.WriteLine($"- Valor a receber de décimo terceiro é de: R$ {valorDoPagamento:f2}");
-                        break;
-
-                    case 2:
-                        valorDoPagamento = CalcularPrimeiraParcelaDoDecimoTerceiro();
-                        Console.WriteLine($"- O valor da primeira parcelado décimo terceiro coresponde a: R$ {valorDoPagamento:f2}");
-                        break;
-
-                    case 3:
-                        valorDoPagamento = CalcularSegundaParcelaDoDecimoTerceiro();
-                        Console.WriteLine($"- O valor da segunda parcelado décimo terceiro coresponde a: R$ {valorDoPagamento:f2}");
-                        break;
-
-                    default:
-                        Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
-                        Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                        Console.ReadKey();
-                        Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                        Console.WriteLine();
-                        break;
-                }
-            } while (tipoDePagamento != 1 &&  tipoDePagamento != 2 && tipoDePagamento != 3);
-            ValorDoDecimoTerceiro = valorDoPagamento;
-            return ValorDoDecimoTerceiro;
-        }
-
-        private double CalcularPrimeiraParcelaDoDecimoTerceiro()
-        {
-            double salarioBrutoDoDecimoTerceiro = CalcularDecimoTerceiro();
-            double PrimeiraParcelaDecimoTerceiro;
-           
-            //Console.Write("- Informe quantos meses do ano o funcionário trabalhou: ");
-            //mesesTrabalhados = int.Parse(Console.ReadLine());
-            PrimeiraParcelaDecimoTerceiro = salarioBrutoDoDecimoTerceiro / 2;
-            Console.WriteLine();
-            return PrimeiraParcelaDecimoTerceiro;
-        }
-
-        private double CalcularSegundaParcelaDoDecimoTerceiro()
-        {
-            double salarioBrutoDoDecimoTerceiro, valorDaSegundaParcelaDoDecimo, inss, irrf;
-            double pensao = DescontoTotalDePensao;
-            double dependente = DescontoTotalDeDependentes;
-
-            salarioBrutoDoDecimoTerceiro = CalcularDecimoTerceiro();
-            Console.WriteLine();
-            inss = FormulaDoInss(salarioBrutoDoDecimoTerceiro);
-            irrf = FormulaDoIrrf(salarioBrutoDoDecimoTerceiro, inss, pensao, dependente);
-            valorDaSegundaParcelaDoDecimo = (salarioBrutoDoDecimoTerceiro / 2) - inss - irrf;
-            Console.WriteLine();
-            return valorDaSegundaParcelaDoDecimo;
-        }
-
-        private double CalcularPagamentoUnicoDoDecimoTerceiro()
-        {
-            double salarioBrutoDoDecimoTerceiro, pagamentoUnicoDoDecimoTerceiro, inss, irrf;
-            double pensao = DescontoTotalDePensao;
-            double dependente = DescontoTotalDeDependentes;
-
-            salarioBrutoDoDecimoTerceiro = CalcularDecimoTerceiro();
-            Console.WriteLine();
-            inss = FormulaDoInss(salarioBrutoDoDecimoTerceiro);
-            irrf = FormulaDoIrrf(salarioBrutoDoDecimoTerceiro, inss, pensao, dependente);
-            pagamentoUnicoDoDecimoTerceiro = salarioBrutoDoDecimoTerceiro - inss - irrf;
-            Console.WriteLine();
-            return pagamentoUnicoDoDecimoTerceiro;
-        }
-        
         public double CalcularFgts(double salario)
         {
             double fgts;

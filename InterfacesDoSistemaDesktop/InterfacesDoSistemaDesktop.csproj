@@ -76,6 +76,12 @@
     <Compile Include="Form_Fgts.Designer.cs">
       <DependentUpon>Form_Fgts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_HorasExtras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_HorasExtras.Designer.cs">
+      <DependentUpon>Form_HorasExtras.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Inss.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Fgts.resx">
       <DependentUpon>Form_Fgts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_HorasExtras.resx">
+      <DependentUpon>Form_HorasExtras.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Inss.resx">
       <DependentUpon>Form_Inss.cs</DependentUpon>

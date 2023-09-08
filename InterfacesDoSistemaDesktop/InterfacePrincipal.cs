@@ -107,5 +107,11 @@ namespace InterfacesDoSistemaDesktop
             Form_Irrf form_Irrf = new Form_Irrf();
             form_Irrf.Show();
         }
+
+        private void calcularHorasExtrasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_HorasExtras form_HorasExtras = new Form_HorasExtras();
+            form_HorasExtras.Show();
+        }
     }
 }
