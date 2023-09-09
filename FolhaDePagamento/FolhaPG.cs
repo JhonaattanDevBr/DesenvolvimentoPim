@@ -306,123 +306,67 @@ namespace FolhaDePagamento
             }
         } 
 
-        public double CalcularPericulosidadeInsalubridade()
+        public double CalcularPericulosidadeInsalubridade(double salario, int grau, string beneficio)
         {
-            double valorDaPorcentagem, salarioBruto = SalarioBase;
-            int beneficio;
-
-           // Console.WriteLine();
-            //Console.Write("- Informe o salário bruto do funcionario: ");
-            //salarioBruto = double.Parse(Console.ReadLine());
-            //Console.WriteLine();
-            do
+            double valorDaPorcentagem, valorDePericulosidade, valorDeInsalubridade, valorDoAcrescimo = 0;
+            try
             {
-                Console.WriteLine("- Informe qual o tipo de benefício do funcionário.");
-                Console.WriteLine();
-                Console.WriteLine("- Dígite [1] para Periculosidade.");
-                Console.WriteLine("- Dígite [2] para Insalubridade.");
-                Console.Write("- Benefício..: ");
-                beneficio = int.Parse(Console.ReadLine());
-                Console.WriteLine();
-
                 switch (beneficio)
                 {
-                    case 1:
-                        Console.WriteLine("---Cálculo de Periculosidade---");
-                        Console.WriteLine();
-
-                        valorDaPorcentagem = salarioBruto * 0.3;
-                        ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem + salarioBruto;
-                        Console.WriteLine($"- Valor de acréscimo devido a periculosidade é de 30% que corresponde a: R$ {valorDaPorcentagem:f2}");
-                        Console.ReadKey();
+                    case "periculosidade": // Aqui eu estou calculando a periculosidade.
+                        valorDaPorcentagem = salario * 0.3;
+                        valorDePericulosidade = valorDaPorcentagem + salario;
+                        valorDoAcrescimo = valorDePericulosidade;
+                        ValorTotalDePericulosidadeInsalubridade = valorDePericulosidade;
                         break;
 
-                    case 2:
-                            Console.WriteLine("---Cálculo da Insalubridade---");
-                            Console.WriteLine();
-                            int grau, escolha;
-                            double salarioMinimo = 1320.00, valorDeCalculo = 0, percentual = 0;
-
-                        do {
-                            Console.WriteLine("- ATENÇÂO: O cálculo de insalubridade é aplicado sobre o sálario mínimo, exceto em acordo entre o funcionário e o empregador.");
-                            Console.WriteLine("- Sendo assim, para prosseguir selecione.");
-                            Console.WriteLine();
-                            Console.WriteLine("- Para salário mínimo dígite [1]");
-                            Console.WriteLine("- Para salário base dígite [2]");
-                            Console.Write("- Escolha...: ");
-                            escolha = int.Parse(Console.ReadLine());
-                            Console.WriteLine();
-
-                            if (escolha == 1)
+                    case "insalubridade": // Aqui eu estou calculando a insalubridade.
+                        double salarioMinimo = 1320.00;
+                        try
+                        {
+                            do
                             {
-                                valorDeCalculo = salarioMinimo;
-                            }
-                            else if (escolha == 2)
-                            {
-                                valorDeCalculo = salarioBruto;
-                            }
-                            else
-                            {
-                                Console.WriteLine("- ERRO! Opção inválida, selecione entre [1] ou [2].");
-                                Console.WriteLine("- Dígite qualquer coisa para retornar.");
-                                Console.ReadKey();
-                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                                Console.WriteLine();
-                            }
-                        } while(escolha != 1 && escolha != 2);
-
-                        do { 
-                            Console.WriteLine("- Informe qual o grau de insalubridade sobre o qual o funcionario exerce sua função.");
-                            Console.WriteLine();
-                            Console.WriteLine("- Dígite [1] para leve/10%.");
-                            Console.WriteLine("- Dígite [2] para médio/20%");
-                            Console.WriteLine("- Dígite [3] para gráve/40%");
-                            Console.Write("- Grau...: ");
-                            grau = int.Parse(Console.ReadLine());
-                            Console.WriteLine();
-
-                            if (grau == 1)
-                            {
-                                percentual = valorDeCalculo * 0.1;
-                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 10% correspodente a: R$ {percentual:f2}");
-                                ValorTotalDePericulosidadeInsalubridade = percentual;
-                                Console.ReadKey();
-                            }
-                            else if (grau == 2)
-                            {
-                                percentual = valorDeCalculo * 0.2;
-                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 20% correspodente a: R$ {percentual:f2}");
-                                ValorTotalDePericulosidadeInsalubridade = percentual;
-                                Console.ReadKey();
-                            }
-                            else if (grau == 3)
-                            {
-                                percentual = valorDeCalculo * 0.4;
-                                Console.WriteLine($"- Valor de acréscimo devido a insalubridade de 40% correspodente a: R$ {percentual:f2}");
-                                ValorTotalDePericulosidadeInsalubridade = percentual;
-                                Console.ReadKey();
-                            }
-                            else
-                            {
-                                Console.WriteLine("- ERRO! Opção inválida, selecione entre [1], [2] ou [3].");
-                                Console.WriteLine("- Dígite qualquer coisa para retornar.");
-                                Console.ReadKey();
-                                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                                Console.WriteLine();
-                            }
-                        }while (grau != 1 && grau != 2 && grau != 3);
+                                if (grau == 10)
+                                {
+                                    valorDeInsalubridade = salarioMinimo * 0.1;
+                                    ValorTotalDePericulosidadeInsalubridade = valorDeInsalubridade;
+                                    valorDoAcrescimo = valorDeInsalubridade;
+                                }
+                                else if (grau == 20)
+                                {
+                                    valorDeInsalubridade = salarioMinimo * 0.2;
+                                    ValorTotalDePericulosidadeInsalubridade = valorDeInsalubridade;
+                                    valorDoAcrescimo = valorDeInsalubridade;
+                                }
+                                else if (grau == 40)
+                                {
+                                    valorDeInsalubridade = salarioMinimo * 0.4;
+                                    ValorTotalDePericulosidadeInsalubridade = valorDeInsalubridade;
+                                    valorDoAcrescimo = valorDeInsalubridade;
+                                }
+                                else
+                                {
+                                    // Preciso ver como devolver um erro se cair aqui
+                                }
+                            } while (grau != 10 && grau != 20 && grau != 40);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception("Erro ao realizar a operação." + ex);
+                        }
+                       
                         break;
 
                     default:
-                        Console.WriteLine("- ERRO! Opção inválida, selecione entre [1] ou [2].");
-                        Console.WriteLine("- Dígite qualquer coisa para retornar.");
-                        Console.ReadKey();
-                        Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                        Console.WriteLine();
+                        // Preciso ver como devolver um erro se cair aqui
                         break;
                 }
-            } while (beneficio != 1 && beneficio != 2);
-            return ValorTotalDePericulosidadeInsalubridade;
+                return valorDoAcrescimo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao realizar a operação." + ex);
+            }
         } 
 
         public double CalcularAdicionalNoturno()
@@ -637,8 +581,10 @@ namespace FolhaDePagamento
             Console.WriteLine($"- O valor de desconto devido a tempo de atrasos é de: R$ {DescontoDeAtrasos:f2}");
             Console.WriteLine($"- Total de horas em atraso: {horasEmAtraso:f2}");
             return DescontoDeAtrasos;
-        } 
+        }
 
+        // Não preciso deste método pois sempre que o funcionario tem uma falta injustificada ele perde o DSR da semana em que faltou.
+        // Quando a falta é justificada deve haver o abono do dia em que ocorreu a falta, (não é descontado o dia)
         private double FaltaInjustificada()
         {
             double salarioBruto = SalarioBase;
@@ -652,7 +598,7 @@ namespace FolhaDePagamento
             Console.WriteLine();
             Console.WriteLine($"- O valor de desconto devido a faltas injustificadas é de: R$ {DescontoDeFaltasInjustificadas:f2}");
             return DescontoDeFaltasInjustificadas;
-        } 
+        }  
 
         private double FaltaInjustificadaComDsr()
         {

@@ -113,5 +113,11 @@ namespace InterfacesDoSistemaDesktop
             Form_HorasExtras form_HorasExtras = new Form_HorasExtras();
             form_HorasExtras.Show();
         }
+
+        private void calcularPericulosidadeEInsalubridadeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_Periculosidade_Insalubridade form_Periculosidade_Insalubridade = new Form_Periculosidade_Insalubridade();
+            form_Periculosidade_Insalubridade.Show();
+        }
     }
 }

@@ -26,3 +26,4 @@ C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaD
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_Inss.resources
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_Irrf.resources
 C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_HorasExtras.resources
+C:\Users\Jho\Documents\Facudade ADS\Sistemas Final do Curso\Desktop\SistemaParaDesktop\InterfacesDoSistemaDesktop\obj\Debug\InterfacesDoSistemaDesktop.Form_Periculosidade_Insalubridade.resources

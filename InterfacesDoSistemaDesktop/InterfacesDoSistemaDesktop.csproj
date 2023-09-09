@@ -100,6 +100,12 @@
     <Compile Include="Form_Pensao.Designer.cs">
       <DependentUpon>Form_Pensao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Periculosidade_Insalubridade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Periculosidade_Insalubridade.Designer.cs">
+      <DependentUpon>Form_Periculosidade_Insalubridade.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_PeriodoCompleto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Pensao.resx">
       <DependentUpon>Form_Pensao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Periculosidade_Insalubridade.resx">
+      <DependentUpon>Form_Periculosidade_Insalubridade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_PeriodoCompleto.resx">
       <DependentUpon>Form_PeriodoCompleto.cs</DependentUpon>
