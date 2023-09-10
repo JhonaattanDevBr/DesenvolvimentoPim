@@ -1,6 +1,6 @@
 ﻿namespace InterfacesDoSistemaDesktop
 {
-    partial class Form_HorasExtras
+    partial class Form_InterfacePrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -28,31 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAvancar = new System.Windows.Forms.Button();
-            this.gpbHorasExtras = new System.Windows.Forms.GroupBox();
-            this.gpbPorcentagem = new System.Windows.Forms.GroupBox();
-            this.rdbCem = new System.Windows.Forms.RadioButton();
-            this.rdbCinquenta = new System.Windows.Forms.RadioButton();
-            this.lblPorcentagem = new System.Windows.Forms.Label();
-            this.btnLimpar = new System.Windows.Forms.Button();
-            this.btnCalcular = new System.Windows.Forms.Button();
-            this.lblRetorno = new System.Windows.Forms.Label();
-            this.txtRetorno = new System.Windows.Forms.TextBox();
-            this.txtTotalHoras = new System.Windows.Forms.TextBox();
-            this.lblTotalHoras = new System.Windows.Forms.Label();
-            this.gpbConversor = new System.Windows.Forms.GroupBox();
-            this.btnConverter = new System.Windows.Forms.Button();
-            this.lblTotalHorasConvertidas = new System.Windows.Forms.Label();
-            this.txtTotalHorasConvertidas = new System.Windows.Forms.TextBox();
-            this.txtMinutos = new System.Windows.Forms.TextBox();
-            this.txtHorasFechadas = new System.Windows.Forms.TextBox();
-            this.lblMinutos = new System.Windows.Forms.Label();
-            this.lblHorasFechadas = new System.Windows.Forms.Label();
-            this.lblConverter = new System.Windows.Forms.Label();
-            this.rdbNao = new System.Windows.Forms.RadioButton();
-            this.rdbSim = new System.Windows.Forms.RadioButton();
-            this.txtSalarioBase = new System.Windows.Forms.TextBox();
-            this.lblSalarioBase = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novoArquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,6 +69,8 @@
             this.calcularINSSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calcularIRRFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calcularHorasExtrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calcularPericulosidadeEInsalubridadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calcularAdicionalNoturnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gerarReciboDeFériasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gerarNovoReciboDeFériasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizarReciboDeFériasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,297 +79,9 @@
             this.períodoCompletoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doisPeríodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trêsPeríodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gpbHorasExtras.SuspendLayout();
-            this.gpbPorcentagem.SuspendLayout();
-            this.gpbConversor.SuspendLayout();
+            this.calcularAtrasosEFaltasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnAvancar
-            // 
-            this.btnAvancar.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnAvancar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAvancar.Location = new System.Drawing.Point(895, 637);
-            this.btnAvancar.Name = "btnAvancar";
-            this.btnAvancar.Size = new System.Drawing.Size(75, 30);
-            this.btnAvancar.TabIndex = 0;
-            this.btnAvancar.Text = "Avançar";
-            this.btnAvancar.UseVisualStyleBackColor = false;
-            // 
-            // gpbHorasExtras
-            // 
-            this.gpbHorasExtras.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.gpbHorasExtras.Controls.Add(this.gpbPorcentagem);
-            this.gpbHorasExtras.Controls.Add(this.btnLimpar);
-            this.gpbHorasExtras.Controls.Add(this.btnCalcular);
-            this.gpbHorasExtras.Controls.Add(this.lblRetorno);
-            this.gpbHorasExtras.Controls.Add(this.txtRetorno);
-            this.gpbHorasExtras.Controls.Add(this.txtTotalHoras);
-            this.gpbHorasExtras.Controls.Add(this.lblTotalHoras);
-            this.gpbHorasExtras.Controls.Add(this.gpbConversor);
-            this.gpbHorasExtras.Controls.Add(this.lblConverter);
-            this.gpbHorasExtras.Controls.Add(this.rdbNao);
-            this.gpbHorasExtras.Controls.Add(this.rdbSim);
-            this.gpbHorasExtras.Controls.Add(this.txtSalarioBase);
-            this.gpbHorasExtras.Controls.Add(this.lblSalarioBase);
-            this.gpbHorasExtras.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.gpbHorasExtras.Location = new System.Drawing.Point(12, 45);
-            this.gpbHorasExtras.Name = "gpbHorasExtras";
-            this.gpbHorasExtras.Size = new System.Drawing.Size(960, 586);
-            this.gpbHorasExtras.TabIndex = 1;
-            this.gpbHorasExtras.TabStop = false;
-            this.gpbHorasExtras.Text = "Horas extras";
-            // 
-            // gpbPorcentagem
-            // 
-            this.gpbPorcentagem.BackColor = System.Drawing.Color.SteelBlue;
-            this.gpbPorcentagem.Controls.Add(this.rdbCem);
-            this.gpbPorcentagem.Controls.Add(this.rdbCinquenta);
-            this.gpbPorcentagem.Controls.Add(this.lblPorcentagem);
-            this.gpbPorcentagem.Location = new System.Drawing.Point(430, 22);
-            this.gpbPorcentagem.Name = "gpbPorcentagem";
-            this.gpbPorcentagem.Size = new System.Drawing.Size(378, 84);
-            this.gpbPorcentagem.TabIndex = 19;
-            this.gpbPorcentagem.TabStop = false;
-            this.gpbPorcentagem.Text = "Porcentagem de horas extras";
-            // 
-            // rdbCem
-            // 
-            this.rdbCem.AutoSize = true;
-            this.rdbCem.Location = new System.Drawing.Point(72, 54);
-            this.rdbCem.Name = "rdbCem";
-            this.rdbCem.Size = new System.Drawing.Size(66, 21);
-            this.rdbCem.TabIndex = 11;
-            this.rdbCem.Text = "100%";
-            this.rdbCem.UseVisualStyleBackColor = true;
-            // 
-            // rdbCinquenta
-            // 
-            this.rdbCinquenta.AutoSize = true;
-            this.rdbCinquenta.Checked = true;
-            this.rdbCinquenta.Location = new System.Drawing.Point(9, 54);
-            this.rdbCinquenta.Name = "rdbCinquenta";
-            this.rdbCinquenta.Size = new System.Drawing.Size(57, 21);
-            this.rdbCinquenta.TabIndex = 10;
-            this.rdbCinquenta.TabStop = true;
-            this.rdbCinquenta.Text = "50%";
-            this.rdbCinquenta.UseVisualStyleBackColor = true;
-            this.rdbCinquenta.CheckedChanged += new System.EventHandler(this.rdbCinquenta_CheckedChanged);
-            // 
-            // lblPorcentagem
-            // 
-            this.lblPorcentagem.AutoSize = true;
-            this.lblPorcentagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblPorcentagem.Location = new System.Drawing.Point(6, 25);
-            this.lblPorcentagem.Name = "lblPorcentagem";
-            this.lblPorcentagem.Size = new System.Drawing.Size(351, 15);
-            this.lblPorcentagem.TabIndex = 9;
-            this.lblPorcentagem.Text = "Sobre qual porcentagem devem ser calculadas as horas extras";
-            // 
-            // btnLimpar
-            // 
-            this.btnLimpar.BackColor = System.Drawing.Color.LightBlue;
-            this.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLimpar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.btnLimpar.Location = new System.Drawing.Point(90, 155);
-            this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Size = new System.Drawing.Size(75, 30);
-            this.btnLimpar.TabIndex = 14;
-            this.btnLimpar.Text = "Limpar";
-            this.btnLimpar.UseVisualStyleBackColor = false;
-            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
-            // 
-            // btnCalcular
-            // 
-            this.btnCalcular.BackColor = System.Drawing.Color.LightBlue;
-            this.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCalcular.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.btnCalcular.Location = new System.Drawing.Point(9, 155);
-            this.btnCalcular.Name = "btnCalcular";
-            this.btnCalcular.Size = new System.Drawing.Size(75, 30);
-            this.btnCalcular.TabIndex = 13;
-            this.btnCalcular.Text = "Calcular";
-            this.btnCalcular.UseVisualStyleBackColor = false;
-            this.btnCalcular.Click += new System.EventHandler(this.btnCalcular_Click);
-            // 
-            // lblRetorno
-            // 
-            this.lblRetorno.AutoSize = true;
-            this.lblRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblRetorno.Location = new System.Drawing.Point(6, 126);
-            this.lblRetorno.Name = "lblRetorno";
-            this.lblRetorno.Size = new System.Drawing.Size(203, 15);
-            this.lblRetorno.TabIndex = 12;
-            this.lblRetorno.Text = "Valor total a receber de horas extras";
-            // 
-            // txtRetorno
-            // 
-            this.txtRetorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtRetorno.Location = new System.Drawing.Point(213, 121);
-            this.txtRetorno.Name = "txtRetorno";
-            this.txtRetorno.Size = new System.Drawing.Size(100, 20);
-            this.txtRetorno.TabIndex = 11;
-            // 
-            // txtTotalHoras
-            // 
-            this.txtTotalHoras.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtTotalHoras.Location = new System.Drawing.Point(97, 94);
-            this.txtTotalHoras.Name = "txtTotalHoras";
-            this.txtTotalHoras.Size = new System.Drawing.Size(100, 20);
-            this.txtTotalHoras.TabIndex = 7;
-            // 
-            // lblTotalHoras
-            // 
-            this.lblTotalHoras.AutoSize = true;
-            this.lblTotalHoras.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblTotalHoras.Location = new System.Drawing.Point(6, 96);
-            this.lblTotalHoras.Name = "lblTotalHoras";
-            this.lblTotalHoras.Size = new System.Drawing.Size(85, 15);
-            this.lblTotalHoras.TabIndex = 6;
-            this.lblTotalHoras.Text = "Total de horas";
-            // 
-            // gpbConversor
-            // 
-            this.gpbConversor.BackColor = System.Drawing.Color.SteelBlue;
-            this.gpbConversor.Controls.Add(this.btnConverter);
-            this.gpbConversor.Controls.Add(this.lblTotalHorasConvertidas);
-            this.gpbConversor.Controls.Add(this.txtTotalHorasConvertidas);
-            this.gpbConversor.Controls.Add(this.txtMinutos);
-            this.gpbConversor.Controls.Add(this.txtHorasFechadas);
-            this.gpbConversor.Controls.Add(this.lblMinutos);
-            this.gpbConversor.Controls.Add(this.lblHorasFechadas);
-            this.gpbConversor.Location = new System.Drawing.Point(430, 121);
-            this.gpbConversor.Name = "gpbConversor";
-            this.gpbConversor.Size = new System.Drawing.Size(378, 98);
-            this.gpbConversor.TabIndex = 5;
-            this.gpbConversor.TabStop = false;
-            this.gpbConversor.Text = "Conversor de minutos em horas";
-            this.gpbConversor.Visible = false;
-            // 
-            // btnConverter
-            // 
-            this.btnConverter.BackColor = System.Drawing.Color.LightBlue;
-            this.btnConverter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnConverter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.btnConverter.Location = new System.Drawing.Point(297, 62);
-            this.btnConverter.Name = "btnConverter";
-            this.btnConverter.Size = new System.Drawing.Size(75, 30);
-            this.btnConverter.TabIndex = 6;
-            this.btnConverter.Text = "Converter";
-            this.btnConverter.UseVisualStyleBackColor = false;
-            this.btnConverter.Visible = false;
-            this.btnConverter.Click += new System.EventHandler(this.btnConverter_Click);
-            // 
-            // lblTotalHorasConvertidas
-            // 
-            this.lblTotalHorasConvertidas.AutoSize = true;
-            this.lblTotalHorasConvertidas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblTotalHorasConvertidas.Location = new System.Drawing.Point(6, 63);
-            this.lblTotalHorasConvertidas.Name = "lblTotalHorasConvertidas";
-            this.lblTotalHorasConvertidas.Size = new System.Drawing.Size(150, 15);
-            this.lblTotalHorasConvertidas.TabIndex = 5;
-            this.lblTotalHorasConvertidas.Text = "Total de horas convertidas";
-            this.lblTotalHorasConvertidas.Visible = false;
-            // 
-            // txtTotalHorasConvertidas
-            // 
-            this.txtTotalHorasConvertidas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtTotalHorasConvertidas.Location = new System.Drawing.Point(162, 60);
-            this.txtTotalHorasConvertidas.Name = "txtTotalHorasConvertidas";
-            this.txtTotalHorasConvertidas.Size = new System.Drawing.Size(100, 20);
-            this.txtTotalHorasConvertidas.TabIndex = 4;
-            this.txtTotalHorasConvertidas.Visible = false;
-            // 
-            // txtMinutos
-            // 
-            this.txtMinutos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtMinutos.Location = new System.Drawing.Point(268, 29);
-            this.txtMinutos.Name = "txtMinutos";
-            this.txtMinutos.Size = new System.Drawing.Size(100, 20);
-            this.txtMinutos.TabIndex = 3;
-            this.txtMinutos.Visible = false;
-            // 
-            // txtHorasFechadas
-            // 
-            this.txtHorasFechadas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtHorasFechadas.Location = new System.Drawing.Point(105, 29);
-            this.txtHorasFechadas.Name = "txtHorasFechadas";
-            this.txtHorasFechadas.Size = new System.Drawing.Size(100, 20);
-            this.txtHorasFechadas.TabIndex = 2;
-            this.txtHorasFechadas.Visible = false;
-            // 
-            // lblMinutos
-            // 
-            this.lblMinutos.AutoSize = true;
-            this.lblMinutos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblMinutos.Location = new System.Drawing.Point(211, 31);
-            this.lblMinutos.Name = "lblMinutos";
-            this.lblMinutos.Size = new System.Drawing.Size(51, 15);
-            this.lblMinutos.TabIndex = 1;
-            this.lblMinutos.Text = "Mínutos";
-            this.lblMinutos.Visible = false;
-            // 
-            // lblHorasFechadas
-            // 
-            this.lblHorasFechadas.AutoSize = true;
-            this.lblHorasFechadas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblHorasFechadas.Location = new System.Drawing.Point(6, 31);
-            this.lblHorasFechadas.Name = "lblHorasFechadas";
-            this.lblHorasFechadas.Size = new System.Drawing.Size(93, 15);
-            this.lblHorasFechadas.TabIndex = 0;
-            this.lblHorasFechadas.Text = "Horas fechadas";
-            this.lblHorasFechadas.Visible = false;
-            // 
-            // lblConverter
-            // 
-            this.lblConverter.AutoSize = true;
-            this.lblConverter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblConverter.Location = new System.Drawing.Point(6, 63);
-            this.lblConverter.Name = "lblConverter";
-            this.lblConverter.Size = new System.Drawing.Size(168, 15);
-            this.lblConverter.TabIndex = 4;
-            this.lblConverter.Text = "Converter horas em minutos?";
-            // 
-            // rdbNao
-            // 
-            this.rdbNao.AutoSize = true;
-            this.rdbNao.Checked = true;
-            this.rdbNao.Location = new System.Drawing.Point(238, 59);
-            this.rdbNao.Name = "rdbNao";
-            this.rdbNao.Size = new System.Drawing.Size(55, 21);
-            this.rdbNao.TabIndex = 3;
-            this.rdbNao.TabStop = true;
-            this.rdbNao.Text = "Não";
-            this.rdbNao.UseVisualStyleBackColor = true;
-            // 
-            // rdbSim
-            // 
-            this.rdbSim.AutoSize = true;
-            this.rdbSim.Location = new System.Drawing.Point(180, 59);
-            this.rdbSim.Name = "rdbSim";
-            this.rdbSim.Size = new System.Drawing.Size(52, 21);
-            this.rdbSim.TabIndex = 2;
-            this.rdbSim.Text = "Sim";
-            this.rdbSim.UseVisualStyleBackColor = true;
-            this.rdbSim.CheckedChanged += new System.EventHandler(this.rdbSim_CheckedChanged);
-            // 
-            // txtSalarioBase
-            // 
-            this.txtSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.txtSalarioBase.Location = new System.Drawing.Point(88, 31);
-            this.txtSalarioBase.Name = "txtSalarioBase";
-            this.txtSalarioBase.Size = new System.Drawing.Size(100, 20);
-            this.txtSalarioBase.TabIndex = 1;
-            // 
-            // lblSalarioBase
-            // 
-            this.lblSalarioBase.AutoSize = true;
-            this.lblSalarioBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.lblSalarioBase.Location = new System.Drawing.Point(6, 34);
-            this.lblSalarioBase.Name = "lblSalarioBase";
-            this.lblSalarioBase.Size = new System.Drawing.Size(76, 15);
-            this.lblSalarioBase.TabIndex = 0;
-            this.lblSalarioBase.Text = "Salário base";
             // 
             // menuStrip1
             // 
@@ -402,7 +91,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 24);
-            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // arquivoToolStripMenuItem
@@ -609,7 +298,10 @@
             this.calcularFGTSToolStripMenuItem,
             this.calcularINSSToolStripMenuItem,
             this.calcularIRRFToolStripMenuItem,
-            this.calcularHorasExtrasToolStripMenuItem});
+            this.calcularHorasExtrasToolStripMenuItem,
+            this.calcularPericulosidadeEInsalubridadeToolStripMenuItem,
+            this.calcularAdicionalNoturnoToolStripMenuItem,
+            this.calcularAtrasosEFaltasToolStripMenuItem});
             this.consultarBeneficioDasFériasToolStripMenuItem.Name = "consultarBeneficioDasFériasToolStripMenuItem";
             this.consultarBeneficioDasFériasToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.consultarBeneficioDasFériasToolStripMenuItem.Text = "Folha de pagamento";
@@ -617,80 +309,105 @@
             // gerarNovaFolhaToolStripMenuItem
             // 
             this.gerarNovaFolhaToolStripMenuItem.Name = "gerarNovaFolhaToolStripMenuItem";
-            this.gerarNovaFolhaToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.gerarNovaFolhaToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.gerarNovaFolhaToolStripMenuItem.Text = "Gerar nova folha";
             // 
             // visualizarFolhaToolStripMenuItem
             // 
             this.visualizarFolhaToolStripMenuItem.Name = "visualizarFolhaToolStripMenuItem";
-            this.visualizarFolhaToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.visualizarFolhaToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.visualizarFolhaToolStripMenuItem.Text = "Visualizar folha";
             // 
             // calcularValeTransporteToolStripMenuItem
             // 
             this.calcularValeTransporteToolStripMenuItem.Name = "calcularValeTransporteToolStripMenuItem";
-            this.calcularValeTransporteToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularValeTransporteToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularValeTransporteToolStripMenuItem.Text = "Calcular vale transporte";
+            this.calcularValeTransporteToolStripMenuItem.Click += new System.EventHandler(this.calcularValeTransporteToolStripMenuItem_Click);
             // 
             // calcularValeAlimentaçãoToolStripMenuItem
             // 
             this.calcularValeAlimentaçãoToolStripMenuItem.Name = "calcularValeAlimentaçãoToolStripMenuItem";
-            this.calcularValeAlimentaçãoToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularValeAlimentaçãoToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularValeAlimentaçãoToolStripMenuItem.Text = "Calcular vale alimentação";
+            this.calcularValeAlimentaçãoToolStripMenuItem.Click += new System.EventHandler(this.calcularValeAlimentaçãoToolStripMenuItem_Click);
             // 
             // calcularAdiantamentoQuinzenalToolStripMenuItem
             // 
             this.calcularAdiantamentoQuinzenalToolStripMenuItem.Name = "calcularAdiantamentoQuinzenalToolStripMenuItem";
-            this.calcularAdiantamentoQuinzenalToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularAdiantamentoQuinzenalToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularAdiantamentoQuinzenalToolStripMenuItem.Text = "Calcular adiantamento quinzenal";
+            this.calcularAdiantamentoQuinzenalToolStripMenuItem.Click += new System.EventHandler(this.calcularAdiantamentoQuinzenalToolStripMenuItem_Click);
             // 
             // calcularConvênioOdontológicoToolStripMenuItem
             // 
             this.calcularConvênioOdontológicoToolStripMenuItem.Name = "calcularConvênioOdontológicoToolStripMenuItem";
-            this.calcularConvênioOdontológicoToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularConvênioOdontológicoToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularConvênioOdontológicoToolStripMenuItem.Text = "Calcular convênio odontológico";
+            this.calcularConvênioOdontológicoToolStripMenuItem.Click += new System.EventHandler(this.calcularConvênioOdontológicoToolStripMenuItem_Click);
             // 
             // calcularConvênioMédicoToolStripMenuItem
             // 
             this.calcularConvênioMédicoToolStripMenuItem.Name = "calcularConvênioMédicoToolStripMenuItem";
-            this.calcularConvênioMédicoToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularConvênioMédicoToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularConvênioMédicoToolStripMenuItem.Text = "Calcular convênio médico";
+            this.calcularConvênioMédicoToolStripMenuItem.Click += new System.EventHandler(this.calcularConvênioMédicoToolStripMenuItem_Click);
             // 
             // calcularDependentesToolStripMenuItem
             // 
             this.calcularDependentesToolStripMenuItem.Name = "calcularDependentesToolStripMenuItem";
-            this.calcularDependentesToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularDependentesToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularDependentesToolStripMenuItem.Text = "Calcular dependente";
+            this.calcularDependentesToolStripMenuItem.Click += new System.EventHandler(this.calcularDependentesToolStripMenuItem_Click);
             // 
             // calcularPensãoToolStripMenuItem
             // 
             this.calcularPensãoToolStripMenuItem.Name = "calcularPensãoToolStripMenuItem";
-            this.calcularPensãoToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularPensãoToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularPensãoToolStripMenuItem.Text = "Calcular pensão";
+            this.calcularPensãoToolStripMenuItem.Click += new System.EventHandler(this.calcularPensãoToolStripMenuItem_Click);
             // 
             // calcularFGTSToolStripMenuItem
             // 
             this.calcularFGTSToolStripMenuItem.Name = "calcularFGTSToolStripMenuItem";
-            this.calcularFGTSToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularFGTSToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularFGTSToolStripMenuItem.Text = "Calcular FGTS";
+            this.calcularFGTSToolStripMenuItem.Click += new System.EventHandler(this.calcularFGTSToolStripMenuItem_Click);
             // 
             // calcularINSSToolStripMenuItem
             // 
             this.calcularINSSToolStripMenuItem.Name = "calcularINSSToolStripMenuItem";
-            this.calcularINSSToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularINSSToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularINSSToolStripMenuItem.Text = "Calcular INSS";
+            this.calcularINSSToolStripMenuItem.Click += new System.EventHandler(this.calcularINSSToolStripMenuItem_Click);
             // 
             // calcularIRRFToolStripMenuItem
             // 
             this.calcularIRRFToolStripMenuItem.Name = "calcularIRRFToolStripMenuItem";
-            this.calcularIRRFToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularIRRFToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularIRRFToolStripMenuItem.Text = "Calcular IRRF";
+            this.calcularIRRFToolStripMenuItem.Click += new System.EventHandler(this.calcularIRRFToolStripMenuItem_Click);
             // 
             // calcularHorasExtrasToolStripMenuItem
             // 
             this.calcularHorasExtrasToolStripMenuItem.Name = "calcularHorasExtrasToolStripMenuItem";
-            this.calcularHorasExtrasToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.calcularHorasExtrasToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.calcularHorasExtrasToolStripMenuItem.Text = "Calcular horas extras";
+            this.calcularHorasExtrasToolStripMenuItem.Click += new System.EventHandler(this.calcularHorasExtrasToolStripMenuItem_Click);
+            // 
+            // calcularPericulosidadeEInsalubridadeToolStripMenuItem
+            // 
+            this.calcularPericulosidadeEInsalubridadeToolStripMenuItem.Name = "calcularPericulosidadeEInsalubridadeToolStripMenuItem";
+            this.calcularPericulosidadeEInsalubridadeToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.calcularPericulosidadeEInsalubridadeToolStripMenuItem.Text = "Calcular periculosidade e insalubridade";
+            this.calcularPericulosidadeEInsalubridadeToolStripMenuItem.Click += new System.EventHandler(this.calcularPericulosidadeEInsalubridadeToolStripMenuItem_Click);
+            // 
+            // calcularAdicionalNoturnoToolStripMenuItem
+            // 
+            this.calcularAdicionalNoturnoToolStripMenuItem.Name = "calcularAdicionalNoturnoToolStripMenuItem";
+            this.calcularAdicionalNoturnoToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.calcularAdicionalNoturnoToolStripMenuItem.Text = "Calcular adicional noturno";
+            this.calcularAdicionalNoturnoToolStripMenuItem.Click += new System.EventHandler(this.calcularAdicionalNoturnoToolStripMenuItem_Click);
             // 
             // gerarReciboDeFériasToolStripMenuItem1
             // 
@@ -730,26 +447,37 @@
             this.agendarFériasToolStripMenuItem.Name = "agendarFériasToolStripMenuItem";
             this.agendarFériasToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.agendarFériasToolStripMenuItem.Text = "Agendar férias";
+            this.agendarFériasToolStripMenuItem.Click += new System.EventHandler(this.agendarFériasToolStripMenuItem_Click);
             // 
             // períodoCompletoToolStripMenuItem
             // 
             this.períodoCompletoToolStripMenuItem.Name = "períodoCompletoToolStripMenuItem";
             this.períodoCompletoToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.períodoCompletoToolStripMenuItem.Text = "Período completo";
+            this.períodoCompletoToolStripMenuItem.Click += new System.EventHandler(this.períodoCompletoToolStripMenuItem_Click);
             // 
             // doisPeríodosToolStripMenuItem
             // 
             this.doisPeríodosToolStripMenuItem.Name = "doisPeríodosToolStripMenuItem";
             this.doisPeríodosToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.doisPeríodosToolStripMenuItem.Text = "Dois períodos";
+            this.doisPeríodosToolStripMenuItem.Click += new System.EventHandler(this.doisPeríodosToolStripMenuItem_Click);
             // 
             // trêsPeríodosToolStripMenuItem
             // 
             this.trêsPeríodosToolStripMenuItem.Name = "trêsPeríodosToolStripMenuItem";
             this.trêsPeríodosToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.trêsPeríodosToolStripMenuItem.Text = "Três períodos";
+            this.trêsPeríodosToolStripMenuItem.Click += new System.EventHandler(this.trêsPeríodosToolStripMenuItem_Click);
             // 
-            // Form_HorasExtras
+            // calcularAtrasosEFaltasToolStripMenuItem
+            // 
+            this.calcularAtrasosEFaltasToolStripMenuItem.Name = "calcularAtrasosEFaltasToolStripMenuItem";
+            this.calcularAtrasosEFaltasToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.calcularAtrasosEFaltasToolStripMenuItem.Text = "Calcular atrasos e faltas";
+            this.calcularAtrasosEFaltasToolStripMenuItem.Click += new System.EventHandler(this.calcularAtrasosEFaltasToolStripMenuItem_Click);
+            // 
+            // Form_InterfacePrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -757,21 +485,13 @@
             this.ClientSize = new System.Drawing.Size(984, 681);
             this.ControlBox = false;
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.gpbHorasExtras);
-            this.Controls.Add(this.btnAvancar);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_HorasExtras";
+            this.Name = "Form_InterfacePrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form_HorasExtras";
-            this.gpbHorasExtras.ResumeLayout(false);
-            this.gpbHorasExtras.PerformLayout();
-            this.gpbPorcentagem.ResumeLayout(false);
-            this.gpbPorcentagem.PerformLayout();
-            this.gpbConversor.ResumeLayout(false);
-            this.gpbConversor.PerformLayout();
+            this.Text = "InterfacePrincipal";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -781,27 +501,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnAvancar;
-        private System.Windows.Forms.GroupBox gpbHorasExtras;
-        private System.Windows.Forms.Label lblConverter;
-        private System.Windows.Forms.RadioButton rdbNao;
-        private System.Windows.Forms.RadioButton rdbSim;
-        private System.Windows.Forms.TextBox txtSalarioBase;
-        private System.Windows.Forms.Label lblSalarioBase;
-        private System.Windows.Forms.GroupBox gpbConversor;
-        private System.Windows.Forms.TextBox txtMinutos;
-        private System.Windows.Forms.TextBox txtHorasFechadas;
-        private System.Windows.Forms.Label lblMinutos;
-        private System.Windows.Forms.Label lblHorasFechadas;
-        private System.Windows.Forms.Label lblTotalHorasConvertidas;
-        private System.Windows.Forms.TextBox txtTotalHorasConvertidas;
-        private System.Windows.Forms.TextBox txtTotalHoras;
-        private System.Windows.Forms.Label lblTotalHoras;
-        private System.Windows.Forms.Label lblPorcentagem;
-        private System.Windows.Forms.Label lblRetorno;
-        private System.Windows.Forms.TextBox txtRetorno;
-        private System.Windows.Forms.Button btnLimpar;
-        private System.Windows.Forms.Button btnCalcular;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem arquivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem novoArquivoToolStripMenuItem;
@@ -832,6 +531,14 @@
         private System.Windows.Forms.ToolStripMenuItem consultarBeneficioDasFériasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gerarNovaFolhaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visualizarFolhaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gerarReciboDeFériasToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem gerarNovoReciboDeFériasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem visualizarReciboDeFériasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultarBenefícioDeFériasToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem agendarFériasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem períodoCompletoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem doisPeríodosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trêsPeríodosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calcularValeTransporteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calcularValeAlimentaçãoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calcularAdiantamentoQuinzenalToolStripMenuItem;
@@ -843,17 +550,8 @@
         private System.Windows.Forms.ToolStripMenuItem calcularINSSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calcularIRRFToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calcularHorasExtrasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gerarReciboDeFériasToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem gerarNovoReciboDeFériasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem visualizarReciboDeFériasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consultarBenefícioDeFériasToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem agendarFériasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem períodoCompletoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem doisPeríodosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem trêsPeríodosToolStripMenuItem;
-        private System.Windows.Forms.GroupBox gpbPorcentagem;
-        private System.Windows.Forms.RadioButton rdbCem;
-        private System.Windows.Forms.RadioButton rdbCinquenta;
-        private System.Windows.Forms.Button btnConverter;
+        private System.Windows.Forms.ToolStripMenuItem calcularPericulosidadeEInsalubridadeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calcularAdicionalNoturnoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calcularAtrasosEFaltasToolStripMenuItem;
     }
 }

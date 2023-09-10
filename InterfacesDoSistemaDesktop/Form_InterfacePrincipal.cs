@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace InterfacesDoSistemaDesktop
 {
-    public partial class InterfacePrincipal : Form
+    public partial class Form_InterfacePrincipal : Form
     {
-        public InterfacePrincipal()
+        public Form_InterfacePrincipal()
         {
             InitializeComponent();
         }
@@ -118,6 +118,22 @@ namespace InterfacesDoSistemaDesktop
         {
             Form_Periculosidade_Insalubridade form_Periculosidade_Insalubridade = new Form_Periculosidade_Insalubridade();
             form_Periculosidade_Insalubridade.Show();
+        }
+
+        private void calcularAdicionalNoturnoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_AdicionalNotruno form_AdicionalNotruno = new Form_AdicionalNotruno();
+            form_AdicionalNotruno.Show();
+        }
+
+        private void calcularAtrasosEFaltasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Form_InterfaceAtrasos form_InterfaceAtrasos = new Form_InterfaceAtrasos(); vou testar as interfaces de atrasos e faltas nesse botão mas depois vou acionar esse metodo de novo 
+            //form_InterfaceAtrasos.Show();
+            //Form_Atrasos form_Atrasos = new Form_Atrasos();
+            //form_Atrasos.Show();
+            Form_FaltasInjustificadas form_FaltasInjustificadas = new Form_FaltasInjustificadas();
+            form_FaltasInjustificadas.Show();
         }
     }
 }

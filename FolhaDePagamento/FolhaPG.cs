@@ -27,8 +27,6 @@ namespace FolhaDePagamento
         private double DescontoTotalDePensao { get; set; }
         private double DescontoDeAtrasos { get; set; }
         private double TotalDeHorasConvertidas { get; set; }
-        private double TotalDeAtrasos { get; set; }
-        private double FaltasInjustificadasComDsr { get; set; }
         private double DescontoDeFaltasInjustificadas { get; set; }
         private double Fgts { get; set; }
         public string MensagemIRRF { get; set; }
@@ -274,12 +272,12 @@ namespace FolhaDePagamento
            
         }
 
-        private double CalcularDsr(int diasUteis, int descansosFeriados, double valor)
+        private double CalcularDsrSobreHorasExtras(double valor, int diasUteis, int descansosFeriados)
         {
             try
             {
                 double valorDoDsr;
-                valorDoDsr = (valor / (double)diasUteis) * descansosFeriados;
+                valorDoDsr = (valor / (double) diasUteis) * descansosFeriados;
                 return valorDoDsr;
             }
             catch (Exception)
@@ -291,6 +289,7 @@ namespace FolhaDePagamento
 
         public double CalcularHoraExtra(double salario, double porcentagem, int hora)
         {
+            // Preciso colocar o DSR sobre horas extras nesse método
             double valorDaHoraNormal, valorDeUmaHoraExtra, valorTotalDaHoraExtra;
             try
             {
@@ -308,16 +307,15 @@ namespace FolhaDePagamento
 
         public double CalcularPericulosidadeInsalubridade(double salario, int grau, string beneficio)
         {
-            double valorDaPorcentagem, valorDePericulosidade, valorDeInsalubridade, valorDoAcrescimo = 0;
+            double valorDaPorcentagem, valorDeInsalubridade, valorDoAcrescimo = 0;
             try
             {
                 switch (beneficio)
                 {
                     case "periculosidade": // Aqui eu estou calculando a periculosidade.
                         valorDaPorcentagem = salario * 0.3;
-                        valorDePericulosidade = valorDaPorcentagem + salario;
-                        valorDoAcrescimo = valorDePericulosidade;
-                        ValorTotalDePericulosidadeInsalubridade = valorDePericulosidade;
+                        valorDoAcrescimo = valorDaPorcentagem;
+                        ValorTotalDePericulosidadeInsalubridade = valorDaPorcentagem;
                         break;
 
                     case "insalubridade": // Aqui eu estou calculando a insalubridade.
@@ -369,70 +367,22 @@ namespace FolhaDePagamento
             }
         } 
 
-        public double CalcularAdicionalNoturno()
+        public double CalcularAdicionalNoturno(double salario, double horas)
         {
-            double salarioBruto = SalarioBase, valorDaHoraNormal, valorDoAdicionalNoturnoHora, acrescimo, horaConvertida = 0, quantidadeDeHoras;
-            int converter;
-
-            do
+            double valorHoraNormal, valorHoraAdicionalNoturno, acrescimo, adicionalNoturno;
+            try
             {
-                Console.WriteLine("- Horas com minutos não são calculadas, é necessario converter os minutos em horas.");
-                Console.WriteLine("- Deseja realizar a converção de minutos em horas ?");
-                Console.WriteLine();
-                Console.WriteLine("- Para SIM dígite [1]");
-                Console.WriteLine("- Para NÃO dígite [2]");
-                Console.Write("- Converter...: ");
-                converter = int.Parse(Console.ReadLine());
-                Console.WriteLine();
-
-                if (converter == 1)
-                {
-                    //   horaConvertida = ConversorDeMinutosEmHoras(); Só comentei pra parar de dar erro
-                    Console.WriteLine();
-                    Console.WriteLine("- Minutos convertidos em horas!");
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                }
-                else if (converter == 2)
-                {
-                    Console.WriteLine("- Proseguindo para a próxima etapa.");
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                    Console.WriteLine();
-                }
-            } while (converter != 1 && converter != 2);
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-            Console.WriteLine();
-
-            Console.WriteLine("- Agora vamos calcular o adcional noturno do funcionário.");
-            Console.WriteLine();
-            //Console.Write("- Informe o salário bruto do funcionário: R$ ");
-            //salarioBruto = double.Parse(Console.ReadLine());
-            valorDaHoraNormal = salarioBruto / (double) 220;
-            acrescimo = valorDaHoraNormal * 0.2;
-            valorDoAdicionalNoturnoHora = valorDaHoraNormal + acrescimo;
-            if (horaConvertida == 0)
-            {
-                Console.Write("- Informe a quantidade de horas trabalhadas como adicional noturno: ");
-                quantidadeDeHoras = double.Parse(Console.ReadLine());
-                ValorDoAdicionalNoturno = quantidadeDeHoras * valorDoAdicionalNoturnoHora;
-                Console.WriteLine();
+                valorHoraNormal = salario / (double)220;
+                acrescimo = valorHoraNormal * 0.2;
+                valorHoraAdicionalNoturno = valorHoraNormal + acrescimo;
+                adicionalNoturno = horas * valorHoraAdicionalNoturno;
+                ValorDoAdicionalNoturno = adicionalNoturno;
+                return adicionalNoturno;
             }
-            else
+            catch (Exception)
             {
-                quantidadeDeHoras = horaConvertida;
-                ValorDoAdicionalNoturno = quantidadeDeHoras * valorDoAdicionalNoturnoHora;
+                throw;
             }
-            Console.WriteLine($"- O valor hora de adicional noturno do funcionário é de: R$ {valorDoAdicionalNoturnoHora:f2}");
-            Console.WriteLine($"- O valor total que o funcionário ira receber de adicional noturno é: R$ {ValorDoAdicionalNoturno:f2}");
-            return ValorDoAdicionalNoturno;
         } 
 
         public double CalcularConvenioMedico(double salario, double convenio)
@@ -468,182 +418,46 @@ namespace FolhaDePagamento
             return valorDaPensao;
         } 
 
-        public double CalcularAtrasos()
+        public double CalcularAtraso(double salario, double horasDescontadas, int jornada)
         {
-            int tipoDeDesconto;
-
-            do
+            double descontoDeAtraso;
+            try
             {
-                Console.WriteLine("- Selecione qual o tipo de atraso deseja calcular.");
-                Console.WriteLine();
-                Console.WriteLine("- Para desconto de atraso comum dígite............................[1]");
-                Console.WriteLine("- Para desconto de falta injustifícada ao trabalho dígite.........[2]");
-                Console.WriteLine("- Para desconto de falta ao trabalho com DSR dígite...............[3]");
-                Console.WriteLine("- Para sair dígite................................................[4]");
-                Console.Write("- Tipo de desconto...: ");
-                tipoDeDesconto = int.Parse(Console.ReadLine());
-                Console.WriteLine();
-
-                switch (tipoDeDesconto)
-                {
-                    case 1:
-                        Console.WriteLine("---Atraso Comum---");
-                        Console.WriteLine();
-                        TotalDeAtrasos = this.AtrasoComum();
-                        Console.ReadKey();
-                        break;
-
-                    case 2:
-                        Console.WriteLine("---Falta ao Trabalho Injustifícada---");
-                        Console.WriteLine();
-                        TotalDeAtrasos = this.FaltaInjustificada();
-                        Console.ReadKey();
-                        break;
-
-                    case 3:
-                        Console.WriteLine("---Falta ao Tabalho com DSR---");
-                        Console.WriteLine();
-                        TotalDeAtrasos = this.FaltaInjustificadaComDsr();
-                        Console.ReadKey();
-                        break;
-
-                    case 4:
-                        Console.WriteLine("---Saindo---");
-                        break;
-
-                    default:
-                        Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
-                        Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                        Console.ReadKey();
-                        Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                        Console.WriteLine();
-                        break;
-                }
-            } while (tipoDeDesconto != 1 &&  tipoDeDesconto != 2 && tipoDeDesconto != 3 && tipoDeDesconto != 4);
-            return TotalDeAtrasos;
-        } 
-
-        private double AtrasoComum()
-        {
-            double salarioBruto = SalarioBase, horasEmAtraso, horasConvertidas = 0;
-            int jornada, converter;
-
-            do
-            {
-                Console.WriteLine("- Horas com minutos não são calculadas, é necessario converter os minutos em horas.");
-                Console.WriteLine("- Deseja realizar a converção de minutos em horas ?");
-                Console.WriteLine();
-                Console.WriteLine("- Para SIM dígite [1]");
-                Console.WriteLine("- Para NÃO dígite [2]");
-                Console.Write("- Converter...: ");
-                converter = int.Parse(Console.ReadLine());
-                Console.WriteLine();
-
-                if (converter == 1)
-                {
-                   // horasConvertidas = this.ConversorDeMinutosEmHoras(); Só comentei pra parar de dar erro
-                    Console.WriteLine();
-                    Console.WriteLine("- Proseguindo para a próxima etapa.");
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                }
-                else if (converter == 2)
-                {
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Console.WriteLine("- Error, Opção invalida, selecione entre as opções.");
-                    Console.WriteLine("- Dígite qualquer coisa para continuar.");
-                    Console.ReadKey();
-                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ REFAÇA A OPERAÇÃO ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                    Console.WriteLine();
-                }
-            } while (converter != 1 && converter != 2);
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-            Console.WriteLine();
-            //Console.Write("- Informe o salario bruto do funcionario: R$ ");
-            //salarioBruto = double.Parse(Console.ReadLine());
-            if (horasConvertidas == 0)
-            {
-                Console.Write("- Informe a quantidade de atrasos em horas: ");
-                horasEmAtraso = double.Parse(Console.ReadLine());
+                descontoDeAtraso = (salario * horasDescontadas) / (double) jornada;
+                DescontoDeAtrasos = descontoDeAtraso;
+                return descontoDeAtraso;
             }
-            else
+            catch (Exception)
             {
-                horasEmAtraso = horasConvertidas;
+                throw;
             }
-            Console.Write("- Informe as horas da jornada de trabalho: ");
-            jornada = int.Parse(Console.ReadLine());
-            DescontoDeAtrasos = (salarioBruto * horasEmAtraso) / (double)jornada;
-            Console.WriteLine();
-            Console.WriteLine($"- O valor de desconto devido a tempo de atrasos é de: R$ {DescontoDeAtrasos:f2}");
-            Console.WriteLine($"- Total de horas em atraso: {horasEmAtraso:f2}");
-            return DescontoDeAtrasos;
         }
 
-        // Não preciso deste método pois sempre que o funcionario tem uma falta injustificada ele perde o DSR da semana em que faltou.
-        // Quando a falta é justificada deve haver o abono do dia em que ocorreu a falta, (não é descontado o dia)
-        private double FaltaInjustificada()
+        public double CalcularFaltaInjustificada(double salario, int faltas, int dsr, string mensagem, int diasUteis, int DiasNaoUteis)
         {
-            double salarioBruto = SalarioBase;
-            int faltas;
-
-            //Console.Write("- Informe o salário bruto do funcionario: R$ ");
-            //salarioBruto = double.Parse(Console.ReadLine());
-            Console.Write("- Informe a quantidade de faltas do funcionario: ");
-            faltas = int.Parse(Console.ReadLine());
-            DescontoDeFaltasInjustificadas = (salarioBruto * (double) faltas) / (double) 30;
-            Console.WriteLine();
-            Console.WriteLine($"- O valor de desconto devido a faltas injustificadas é de: R$ {DescontoDeFaltasInjustificadas:f2}");
-            return DescontoDeFaltasInjustificadas;
-        }  
-
-        private double FaltaInjustificadaComDsr()
-        {
-            double salarioBruto = SalarioBase, valorDoDsr, horaExtra, valorDoReflexo;
-            int faltas, dsr, reflexoDoDsr, diasUteis, dsrDoMes;
-
-            //Console.WriteLine("- Primeiro vamos calcular o valor do dsr do funcionario.");
-            //Console.WriteLine();
-           // Console.Write("- Informe o salário bruto do funcionario: ");
-            //salarioBruto = double.Parse(Console.ReadLine());
-            valorDoDsr = salarioBruto / 30;
-            Console.WriteLine();
-            Console.WriteLine($"- O valor do DSR do funcionario é de: R$ {valorDoDsr:f2}");
-            Console.WriteLine("----------------------------------------------------------------");
-            Console.WriteLine();
-
-            Console.WriteLine("- Primeiro, vamos calcular o desconto por falta ao trabalho com DSR.");
-            Console.WriteLine();
-            Console.Write("- Informe a quantidade de faltas do funcionario: ");
-            faltas = int.Parse(Console.ReadLine());
-            Console.Write("- informe a quantidade de DSR´s que deve ser descontado: ");
-            dsr = int.Parse(Console.ReadLine());
-            FaltasInjustificadasComDsr = ((salarioBruto * (double) faltas) / (double) 30) + ((double) dsr * valorDoDsr) ;
-            Console.WriteLine();
-            Console.WriteLine($"- O valor total de desconto de faltas + DSR é de: R$ {FaltasInjustificadasComDsr:f2}");
-            
-            horaExtra = TotalDeHorasExtras;
-            if (horaExtra != 0)
+            double valorDoDia, descontoPorFaltas, descontoDoDsr, totalDeDesconto, reflexoDoDsr;
+            try
             {
-                Console.WriteLine();
-                Console.WriteLine("- Este funcionario realizou horas extras, o reflexo do DSR deverá ser calculado.");
-                Console.WriteLine();
-                Console.Write("- Informe a quantidade de dias uteis do mes: ");
-                diasUteis = int.Parse(Console.ReadLine());
-                Console.Write("- Informe a quantidade de DSR do mes: ");
-                dsrDoMes = int.Parse(Console.ReadLine());
-                valorDoReflexo = (horaExtra / (double)diasUteis) * (double)dsrDoMes;
-                FaltasInjustificadasComDsr += valorDoReflexo;
-                Console.WriteLine();
-                Console.WriteLine($"- O valor do reflexo é de: R$ {valorDoReflexo:f2}");
-                Console.WriteLine($"- O valor a ser descontado por falta ao trabalho + DSR + reflexo do DSR é de: R$ {FaltasInjustificadasComDsr:f2}");
+                valorDoDia = salario / 30;
+                descontoPorFaltas = faltas * valorDoDia;
+                descontoDoDsr = dsr * valorDoDia;
+                totalDeDesconto = descontoPorFaltas + descontoDoDsr;
+
+                if (mensagem == "Sim")
+                {
+                    double horaExtra = TotalDeHorasExtras;
+                    reflexoDoDsr = CalcularDsrSobreHorasExtras(horaExtra, diasUteis, DiasNaoUteis);
+                    totalDeDesconto = totalDeDesconto + reflexoDoDsr;
+                }
+                DescontoDeFaltasInjustificadas = totalDeDesconto;
+                return totalDeDesconto;
             }
-            else 
-            {}
-            return FaltasInjustificadasComDsr;
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         } 
 
         public double CalcularFgts(double salario)

@@ -45,7 +45,6 @@ namespace InterfacesDoSistemaDesktop
             {
                 throw new Exception("Erro ao realizar a operação");
             }
-            
         }
 
         private void btnCalcularInsalubridade_Click(object sender, EventArgs e)
@@ -89,7 +88,6 @@ namespace InterfacesDoSistemaDesktop
             {
                 throw new Exception("Erro ao realizar a operação");
             }
-            
         }
 
         private void btnCalcularPericulosidade_Click(object sender, EventArgs e)
